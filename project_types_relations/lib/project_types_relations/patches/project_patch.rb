@@ -1,3 +1,4 @@
+
 # Redmine plugin for xmera:isms called Project Types Relations Plugin
 #
 # Copyright (C) 2017-18 Liane Hampe <liane.hampe@xmera.de>
@@ -15,12 +16,34 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+require_dependency 'project'
 
-class CreateProjectsRelations < ActiveRecord::Migration
-  def change
-    create_table :projects_relations do |t|
-      t.integer :project_id, :default => 0, :null => false
-      t.integer :related_project, :default => 0, :null => true
+module ProjectTypesRelations
+  module Patches
+    module ProjectPatch
+      def self.included(base)
+        base.extend(ClassMethods)  
+        base.send(:include, InstanceMethods)    
+        base.class_eval do
+          unloadable
+    
+          # Associations
+          has_many :projects_relations, foreign_key: :project_id, dependent: :destroy  
+        end
+      end
+    
+      module ClassMethods 
+      end
+      
+      module InstanceMethods
+      end
     end
+  end
+end
+
+# Apply patch
+Rails.configuration.to_prepare do
+  unless Project.included_modules.include?(ProjectTypesRelations::Patches::ProjectPatch)
+    Project.send(:include, ProjectTypesRelations::Patches::ProjectPatch)
   end
 end

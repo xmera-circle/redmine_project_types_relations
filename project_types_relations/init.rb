@@ -1,20 +1,29 @@
+# Redmine plugin for xmera:isms called Project Types Relations Plugin
+#
+# Copyright (C) 2017-18 Liane Hampe <liane.hampe@xmera.de>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+
 require 'redmine'
 
-# Patches to the Redmine core or dependent plugins
-require 'project_type_patch'
-require 'project_types_controller_patch'
+# Refers to the plugins list of requirements
+require_dependency File.dirname(__FILE__) + '/lib/project_types_relations.rb'
 require File.expand_path(File.dirname(__FILE__) + '/app/helpers/projects_relations_helper')
-require 'projects_relations_projects_controller_patch'
-require 'projects_project_type_patch'
-require 'projects_relations_project_patch'
 
 ActionDispatch::Callbacks.to_prepare do
-  ProjectType.send :include, ProjectTypePatch unless ProjectType.included_modules.include? ProjectTypePatch
-  ProjectTypesController.send :include, ProjectTypesControllerPatch unless ProjectTypesController.included_modules.include? ProjectTypesControllerPatch
   ProjectsController.send :helper, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
-  ProjectsController.send :prepend, ProjectsRelationsProjectsControllerPatch unless ProjectsController.included_modules.include? ProjectsRelationsProjectsControllerPatch
-  ProjectsProjectType.send :include, ProjectsProjectTypePatch unless ProjectsProjectType.included_modules.include? ProjectsProjectTypePatch
-  Project.send :include, ProjectsRelationsProjectPatch unless Project.included_modules.include? ProjectsRelationsProjectPatch
 end
 
 # Plugin registration
@@ -36,7 +45,4 @@ Redmine::Plugin.register :project_types_relations do
     raise "Please install Project Types Plugin"
   end
 end
-
-require_dependency 'project_relations_hook_listener'
-require_dependency 'project_types_relations/hooks/view_projects_form_hook_listener'
 

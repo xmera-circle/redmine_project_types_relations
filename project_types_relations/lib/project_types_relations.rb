@@ -16,11 +16,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-class CreateProjectsRelations < ActiveRecord::Migration
-  def change
-    create_table :projects_relations do |t|
-      t.integer :project_id, :default => 0, :null => false
-      t.integer :related_project, :default => 0, :null => true
-    end
-  end
-end
+# Project Types Relations Libraries
+
+# Plugins patches
+require 'project_types_relations/patches/project_patch'
+require 'project_types_relations/patches/project_type_patch'
+require 'project_types_relations/patches/projects_project_type_patch'
+require 'project_types_relations/patches/projects_controller_patch'
+require 'project_types_relations/patches/project_types_controller_patch'
+
+# Plugins hook listener
+require 'project_types_relations/hooks/view_projects_form_hook_listener'
+require 'project_types_relations/hooks/view_projects_show_right_hook_listener'

@@ -16,11 +16,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-class CreateProjectsRelations < ActiveRecord::Migration
-  def change
-    create_table :projects_relations do |t|
-      t.integer :project_id, :default => 0, :null => false
-      t.integer :related_project, :default => 0, :null => true
-    end
-  end
+class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
+  render_on :view_projects_show_right, :partial => "projects_relations/project_overview" 
 end
