@@ -7,19 +7,24 @@ unloadable
 include ProjectsRelationsHelper
 
 def update
-    if @project.update(project_params)
-      unless params[:projects_relation].nil? || @project.projects_project_type.previous_changes.present?
-       @projects_relations = ProjectsRelation.where(project_id: @project.id)
-       create_multi_related_projects(@projects_relations, projects_relation_params)
-      end
-       respond_to do |format|
+   @project.safe_attributes = params[:project]
+   if @project.save
+     if params[:project][:projects_project_type_attributes]
+       @project.update(project_params) 
+       @project.project_types_default_values
+     end
+     unless params[:projects_relation].nil? || @project.projects_project_type.previous_changes.present?
+      @projects_relations = ProjectsRelation.where(project_id: @project.id)
+      create_multi_related_projects(@projects_relations, projects_relation_params)
+     end
+     respond_to do |format|
        format.html {
         flash[:notice] = l(:notice_successful_update)
         redirect_to settings_project_path(@project)
        }
        format.api  { render_api_ok }
-    end
-  else
+     end
+   else
     respond_to do |format|
        format.html {
         settings
