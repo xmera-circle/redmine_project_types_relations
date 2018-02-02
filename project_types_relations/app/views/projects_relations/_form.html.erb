@@ -1,7 +1,9 @@
+<% unless @project.new_record?%>
+
 <%= error_messages_for 'projects_relation' %>
 
 <div class="box tabular">
-	<%= f.fields_for :projects_relation do |type| %>
+	<%= form.fields_for :projects_relation do |type| %>
 		<p> 
 			<% if !related_projects_choice_set(@project.id).nil? %>
 			<%= related_projects_multiselect(@project.id, related_projects_choice_set(@project.id).collect { |t|  [t.name, t.id] },:label_projects_relation)%> 
@@ -11,3 +13,4 @@
 		</p>
 	<% end %>
 </div>
+<% end %>

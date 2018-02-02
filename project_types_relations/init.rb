@@ -38,4 +38,5 @@ Redmine::Plugin.register :project_types_relations do
 end
 
 require_dependency 'project_relations_hook_listener'
+require_dependency 'project_types_relations/hooks/view_projects_form_hook_listener'
 
