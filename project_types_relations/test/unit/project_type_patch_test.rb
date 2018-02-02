@@ -1,6 +1,6 @@
 require File.expand_path('../../test_helper', __FILE__)
 
-class ProjectTypePatchTest < ActionController::TestCase
+class ProjectTypePatchTest < ActiveSupport::TestCase
 
  fixtures :projects, :members, :member_roles, :roles, :users
 
