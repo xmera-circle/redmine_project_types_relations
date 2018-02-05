@@ -1,0 +1,1372 @@
+Inspecting 23 files
+WCCCCCCCCCWWCWCWWCCC.CW
+
+Offenses:
+
+init.rb:23:81: C: Metrics/LineLength: Line is too long. [91/80]
+require File.expand_path(File.dirname(__FILE__) + '/app/helpers/projects_relations_helper')
+                                                                                ^^^^^^^^^^^
+init.rb:26:81: C: Metrics/LineLength: Line is too long. [134/80]
+  ProjectsController.send :helper, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+init.rb:33:81: C: Metrics/LineLength: Line is too long. [85/80]
+  description 'This is a plugin for setting project types in relation to each other.'
+                                                                                ^^^^^
+init.rb:37:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+init.rb:41:81: C: Metrics/LineLength: Line is too long. [86/80]
+  # Plugin dependencies - Note: Take care of the alphabetical loading order of plugins
+                                                                                ^^^^^^
+init.rb:43:45: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    requires_redmine_plugin :project_types, :version_or_higher => '0.1.0'
+                                            ^^^^^^^^^^^^^^^^^^^^^
+init.rb:44:37: W: Lint/UselessAssignment: Useless assignment to variable - e.
+  rescue Redmine::PluginNotFound => e
+                                    ^
+init.rb:45:11: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    raise "Please install Project Types Plugin"
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+init.rb:48:1: C: Layout/TrailingBlankLines: 1 trailing blank lines detected.
+db/migrate/20170117122954_add_relation_column_to_project_types.rb:19:1: C: Style/Documentation: Missing top-level class documentation comment.
+class AddRelationColumnToProjectTypes < ActiveRecord::Migration
+^^^^^
+db/migrate/20170117122954_add_relation_column_to_project_types.rb:23:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+db/migrate/20170118115044_add_index_to_projects_relations.rb:19:1: C: Style/Documentation: Missing top-level class documentation comment.
+class AddIndexToProjectsRelations < ActiveRecord::Migration
+^^^^^
+db/migrate/20170117122955_create_projects_relations.rb:19:1: C: Style/Documentation: Missing top-level class documentation comment.
+class CreateProjectsRelations < ActiveRecord::Migration
+^^^^^
+db/migrate/20170117122955_create_projects_relations.rb:22:30: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      t.integer :project_id, :default => 0, :null => false
+                             ^^^^^^^^^^^
+db/migrate/20170117122955_create_projects_relations.rb:22:45: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      t.integer :project_id, :default => 0, :null => false
+                                            ^^^^^^^^
+db/migrate/20170117122955_create_projects_relations.rb:23:35: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      t.integer :related_project, :default => 0, :null => true
+                                  ^^^^^^^^^^^
+db/migrate/20170117122955_create_projects_relations.rb:23:50: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+      t.integer :related_project, :default => 0, :null => true
+                                                 ^^^^^^^^
+lib/project_types_relations.rb:31:81: C: Metrics/LineLength: Line is too long. [84/80]
+require 'project_types_relations/hooks/view_project_types_form_middle_hook_listener'
+                                                                                ^^^^
+lib/project_types_relations.rb:32:81: C: Metrics/LineLength: Line is too long. [85/80]
+require 'project_types_relations/hooks/view_project_types_table_header_hook_listener'
+                                                                                ^^^^^
+lib/project_types_relations.rb:33:81: C: Metrics/LineLength: Line is too long. [83/80]
+require 'project_types_relations/hooks/view_project_types_table_data_hook_listener'
+                                                                                ^^^
+lib/project_types_relations/hooks/view_projects_show_right_hook_listener.rb:19:1: C: Style/Documentation: Missing top-level class documentation comment.
+class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
+^^^^^
+lib/project_types_relations/hooks/view_projects_show_right_hook_listener.rb:20:40: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+  render_on :view_projects_show_right, :partial => "projects/assigned_projects" 
+                                       ^^^^^^^^^^^
+lib/project_types_relations/hooks/view_projects_show_right_hook_listener.rb:20:52: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  render_on :view_projects_show_right, :partial => "projects/assigned_projects" 
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/hooks/view_projects_show_right_hook_listener.rb:20:80: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  render_on :view_projects_show_right, :partial => "projects/assigned_projects" 
+                                                                               ^
+lib/project_types_relations/hooks/view_projects_show_right_hook_listener.rb:21:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+lib/project_types_relations/hooks/view_project_types_form_middle_hook_listener.rb:21:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    render_on :view_project_types_form_middle, 
+^^^^
+lib/project_types_relations/hooks/view_project_types_form_middle_hook_listener.rb:21:47: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    render_on :view_project_types_form_middle, 
+                                              ^
+lib/project_types_relations/hooks/view_project_types_form_middle_hook_listener.rb:23:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+lib/project_types_relations/hooks/view_project_types_table_header_hook_listener.rb:21:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    render_on :view_project_types_table_header, 
+^^^^
+lib/project_types_relations/hooks/view_project_types_table_header_hook_listener.rb:21:48: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    render_on :view_project_types_table_header, 
+                                               ^
+lib/project_types_relations/hooks/view_project_types_table_header_hook_listener.rb:23:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+lib/project_types_relations/hooks/view_project_types_table_data_hook_listener.rb:21:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    render_on :view_project_types_table_data, 
+^^^^
+lib/project_types_relations/hooks/view_project_types_table_data_hook_listener.rb:21:46: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    render_on :view_project_types_table_data, 
+                                             ^
+lib/project_types_relations/hooks/view_project_types_table_data_hook_listener.rb:23:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+lib/project_types_relations/hooks/view_projects_form_hook_listener.rb:21:1: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+    render_on :view_projects_form, 
+^^^^
+lib/project_types_relations/hooks/view_projects_form_hook_listener.rb:21:35: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    render_on :view_projects_form, 
+                                  ^
+lib/project_types_relations/hooks/view_projects_form_hook_listener.rb:23:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+lib/project_types_relations/patches/projects_controller_patch.rb:20:81: C: Metrics/LineLength: Line is too long. [100/80]
+require "#{Redmine::Plugin.directory}/project_types_relations/app/helpers/projects_relations_helper"
+                                                                                ^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:22:1: C: Layout/EmptyLines: Extra blank line detected.
+lib/project_types_relations/patches/projects_controller_patch.rb:25:5: C: Style/Documentation: Missing top-level module documentation comment.
+    module ProjectsControllerPatch
+    ^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:26:5: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+    unloadable
+    
+lib/project_types_relations/patches/projects_controller_patch.rb:28:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_controller_patch.rb:29:5: C: Metrics/AbcSize: Assignment Branch Condition size for update is too high. [33.38/15]
+    def update ...
+    ^^^^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:29:5: C: Metrics/MethodLength: Method has too many lines. [26/10]
+    def update ...
+    ^^^^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:30:5: C: Layout/IndentationWidth: Use 2 (not 3) spaces for indentation.
+       @project.safe_attributes = params[:project]
+    ^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:33:43: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+           @project.update(project_params) 
+                                          ^
+lib/project_types_relations/patches/projects_controller_patch.rb:36:81: C: Metrics/LineLength: Line is too long. [107/80]
+         unless params[:projects_relation].nil? || @project.projects_project_type.previous_changes.present?
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:37:10: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+          @projects_relations = ProjectsRelation.where(project_id: @project.id)
+         ^
+lib/project_types_relations/patches/projects_controller_patch.rb:38:81: C: Metrics/LineLength: Line is too long. [86/80]
+          create_multi_related_projects(@projects_relations, projects_relation_params)
+                                                                                ^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:41:24: C: Style/BlockDelimiters: Avoid using {...} for multi-line blocks.
+           format.html {
+                       ^
+lib/project_types_relations/patches/projects_controller_patch.rb:42:12: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+            flash[:notice] = l(:notice_successful_update)
+           ^
+lib/project_types_relations/patches/projects_controller_patch.rb:48:8: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+        respond_to do |format|
+       ^
+lib/project_types_relations/patches/projects_controller_patch.rb:49:9: C: Layout/IndentationWidth: Use 2 (not 3) spaces for indentation.
+           format.html {
+        ^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:49:24: C: Style/BlockDelimiters: Avoid using {...} for multi-line blocks.
+           format.html {
+                       ^
+lib/project_types_relations/patches/projects_controller_patch.rb:50:12: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+            settings
+           ^
+lib/project_types_relations/patches/projects_controller_patch.rb:51:20: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+            render :action => 'settings'
+                   ^^^^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:53:22: C: Layout/ExtraSpacing: Unnecessary spacing detected.
+           format.api  { render_validation_errors(@project) }
+                     ^
+lib/project_types_relations/patches/projects_controller_patch.rb:55:7: W: Lint/EndAlignment: end at 55, 6 is not aligned with if at 31, 7.
+      end
+      ^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:57:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_controller_patch.rb:58:5: C: Layout/AccessModifierIndentation: Indent access modifiers like private.
+    private
+    ^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:59:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_controller_patch.rb:60:6: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+     def projects_relation_params ...
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:61:63: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+       params.require(:projects_relation).permit(:project_id, :related_project => [])
+                                                              ^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:61:81: C: Metrics/LineLength: Line is too long. [85/80]
+       params.require(:projects_relation).permit(:project_id, :related_project => [])
+                                                                                ^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:63:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_controller_patch.rb:70:81: C: Metrics/LineLength: Line is too long. [110/80]
+  unless ProjectsController.included_modules.include?(ProjectTypesRelations::Patches::ProjectsControllerPatch)
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_controller_patch.rb:71:81: C: Metrics/LineLength: Line is too long. [94/80]
+    ProjectsController.send(:prepend, ProjectTypesRelations::Patches::ProjectsControllerPatch)
+                                                                                ^^^^^^^^^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:23:5: C: Style/Documentation: Missing top-level module documentation comment.
+    module ProjectTypePatch 
+    ^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:23:28: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    module ProjectTypePatch 
+                           ^
+lib/project_types_relations/patches/project_type_patch.rb:26:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_type_patch.rb:28:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_type_patch.rb:31:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_type_patch.rb:33:34: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+          validates :related_to, :uniqueness => true, :allow_blank => true, :allow_nil => true
+                                 ^^^^^^^^^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:33:55: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+          validates :related_to, :uniqueness => true, :allow_blank => true, :allow_nil => true
+                                                      ^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:33:77: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+          validates :related_to, :uniqueness => true, :allow_blank => true, :allow_nil => true
+                                                                            ^^^^^^^^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:33:81: C: Metrics/LineLength: Line is too long. [94/80]
+          validates :related_to, :uniqueness => true, :allow_blank => true, :allow_nil => true
+                                                                                ^^^^^^^^^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:34:40: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+          validate :validate_relation, :on => :update
+                                       ^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:35:45: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+          validate :validate_is_project_type     
+                                            ^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:37:8: W: Lint/DefEndAlignment: end at 37, 7 is not aligned with def at 24, 6.
+       end
+       ^^^
+lib/project_types_relations/patches/project_type_patch.rb:38:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_type_patch.rb:39:7: C: Style/Documentation: Missing top-level module documentation comment.
+      module ClassMethods 
+      ^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:39:26: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      module ClassMethods 
+                         ^
+lib/project_types_relations/patches/project_type_patch.rb:41:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_type_patch.rb:42:7: C: Style/Documentation: Missing top-level module documentation comment.
+      module InstanceMethods
+      ^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:44:11: C: Style/GuardClause: Use a guard clause instead of wrapping the code inside a conditional expression.
+          if id == related_to
+          ^^
+lib/project_types_relations/patches/project_type_patch.rb:48:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_type_patch.rb:50:11: C: Style/GuardClause: Use a guard clause instead of wrapping the code inside a conditional expression.
+          unless related_to.nil? || related_to.blank?
+          ^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:55:12: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        end     
+           ^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:56:10: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      end  
+         ^^
+lib/project_types_relations/patches/project_type_patch.rb:63:81: C: Metrics/LineLength: Line is too long. [96/80]
+  unless ProjectType.included_modules.include?(ProjectTypesRelations::Patches::ProjectTypePatch)
+                                                                                ^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/project_type_patch.rb:66:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+lib/project_types_relations/patches/project_patch.rb:23:5: C: Style/Documentation: Missing top-level module documentation comment.
+    module ProjectPatch
+    ^^^^^^
+lib/project_types_relations/patches/project_patch.rb:25:34: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        base.extend(ClassMethods)  
+                                 ^^
+lib/project_types_relations/patches/project_patch.rb:26:45: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        base.send(:include, InstanceMethods)    
+                                            ^^^^
+lib/project_types_relations/patches/project_patch.rb:29:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_patch.rb:31:81: C: Metrics/LineLength: Line is too long. [87/80]
+          has_many :projects_relations, foreign_key: :project_id, dependent: :destroy  
+                                                                                ^^^^^^^
+lib/project_types_relations/patches/project_patch.rb:31:86: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+          has_many :projects_relations, foreign_key: :project_id, dependent: :destroy  
+                                                                                     ^^
+lib/project_types_relations/patches/project_patch.rb:34:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_patch.rb:35:7: C: Style/Documentation: Missing top-level module documentation comment.
+      module ClassMethods 
+      ^^^^^^
+lib/project_types_relations/patches/project_patch.rb:35:26: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      module ClassMethods 
+                         ^
+lib/project_types_relations/patches/project_patch.rb:37:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_patch.rb:38:7: C: Style/Documentation: Missing top-level module documentation comment.
+      module InstanceMethods
+      ^^^^^^
+lib/project_types_relations/patches/project_patch.rb:46:81: C: Metrics/LineLength: Line is too long. [88/80]
+  unless Project.included_modules.include?(ProjectTypesRelations::Patches::ProjectPatch)
+                                                                                ^^^^^^^^
+lib/project_types_relations/patches/project_patch.rb:49:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+lib/project_types_relations/patches/projects_project_type_patch.rb:23:5: C: Style/Documentation: Missing top-level module documentation comment.
+    module ProjectsProjectTypePatch
+    ^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:29:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_project_type_patch.rb:32:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_project_type_patch.rb:35:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_project_type_patch.rb:36:7: C: Style/Documentation: Missing top-level module documentation comment.
+      module ClassMethods  
+      ^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:36:26: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      module ClassMethods  
+                         ^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:38:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_project_type_patch.rb:39:7: C: Style/Documentation: Missing top-level module documentation comment.
+      module InstanceMethods
+      ^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:40:7: C: Layout/AccessModifierIndentation: Indent access modifiers like private.
+      private
+      ^^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:41:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_project_type_patch.rb:42:7: C: Metrics/AbcSize: Assignment Branch Condition size for clean_up is too high. [20.49/15]
+      def clean_up ...
+      ^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:44:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_project_type_patch.rb:45:9: C: Style/GuardClause: Use a guard clause instead of wrapping the code inside a conditional expression.
+        unless project.projects_project_type.nil?
+        ^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:46:54: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+          project.projects_project_type.attributes = {project_type_id: project_type_id}
+                                                     ^
+lib/project_types_relations/patches/projects_project_type_patch.rb:46:81: C: Metrics/LineLength: Line is too long. [87/80]
+          project.projects_project_type.attributes = {project_type_id: project_type_id}
+                                                                                ^^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:46:87: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+          project.projects_project_type.attributes = {project_type_id: project_type_id}
+                                                                                      ^
+lib/project_types_relations/patches/projects_project_type_patch.rb:47:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_project_type_patch.rb:48:54: C: Layout/SpaceAroundOperators: Operator && should be surrounded by a single space.
+          if project.projects_project_type.changed?  && ProjectsRelation.where(project_id: project_id).present?
+                                                     ^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:48:81: C: Metrics/LineLength: Line is too long. [111/80]
+          if project.projects_project_type.changed?  && ProjectsRelation.where(project_id: project_id).present?
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:51:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/projects_project_type_patch.rb:55:12: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        end 
+           ^
+lib/project_types_relations/patches/projects_project_type_patch.rb:56:8: W: Lint/DefEndAlignment: end at 56, 7 is not aligned with def at 42, 6.
+       end  
+       ^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:56:11: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+       end  
+          ^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:57:6: W: Lint/EndAlignment: end at 57, 5 is not aligned with module at 39, 6.
+     end
+     ^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:64:81: C: Metrics/LineLength: Line is too long. [112/80]
+  unless ProjectsProjectType.included_modules.include?(ProjectTypesRelations::Patches::ProjectsProjectTypePatch)
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:65:81: C: Metrics/LineLength: Line is too long. [96/80]
+    ProjectsProjectType.send(:include, ProjectTypesRelations::Patches::ProjectsProjectTypePatch)
+                                                                                ^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/projects_project_type_patch.rb:67:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+lib/project_types_relations/patches/project_types_controller_patch.rb:23:5: C: Style/Documentation: Missing top-level module documentation comment.
+    module ProjectTypesControllerPatch
+    ^^^^^^
+lib/project_types_relations/patches/project_types_controller_patch.rb:24:30: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      def self.included(base) 
+                             ^
+lib/project_types_relations/patches/project_types_controller_patch.rb:28:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_types_controller_patch.rb:34:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_types_controller_patch.rb:35:7: C: Style/Documentation: Missing top-level module documentation comment.
+      module ClassMethods  
+      ^^^^^^
+lib/project_types_relations/patches/project_types_controller_patch.rb:35:26: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      module ClassMethods  
+                         ^^
+lib/project_types_relations/patches/project_types_controller_patch.rb:37:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_types_controller_patch.rb:38:7: C: Style/Documentation: Missing top-level module documentation comment.
+      module InstanceMethods 
+      ^^^^^^
+lib/project_types_relations/patches/project_types_controller_patch.rb:38:29: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      module InstanceMethods 
+                            ^
+lib/project_types_relations/patches/project_types_controller_patch.rb:43:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_types_controller_patch.rb:45:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+lib/project_types_relations/patches/project_types_controller_patch.rb:47:81: C: Metrics/LineLength: Line is too long. [140/80]
+          params.require(:project_type).permit(:name, :description, :identifier, :is_public, :default_user_role_id, :related_to, :position )
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/project_types_controller_patch.rb:47:139: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+          params.require(:project_type).permit(:name, :description, :identifier, :is_public, :default_user_role_id, :related_to, :position )
+                                                                                                                                          ^
+lib/project_types_relations/patches/project_types_controller_patch.rb:56:81: C: Metrics/LineLength: Line is too long. [118/80]
+  unless ProjectTypesController.included_modules.include?(ProjectTypesRelations::Patches::ProjectTypesControllerPatch)
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/project_types_relations/patches/project_types_controller_patch.rb:57:81: C: Metrics/LineLength: Line is too long. [102/80]
+    ProjectTypesController.send(:include, ProjectTypesRelations::Patches::ProjectTypesControllerPatch)
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^
+test/test_helper.rb:26:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "minitest/reporters"
+        ^^^^^^^^^^^^^^^^^^^^
+test/test_helper.rb:28:1: C: Layout/LeadingCommentSpace: Missing space after #.
+#require "minitest/rails/capybara"
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/test_helper.rb:29:9: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+require "mocha/mini_test"
+        ^^^^^^^^^^^^^^^^^
+test/test_helper.rb:32:7: C: Style/ClassAndModuleChildren: Use nested module/class definitions instead of compact style.
+class ProjectsRelation::TestCase
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/test_helper.rb:33:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/test_helper.rb:34:61: W: Lint/UnusedMethodArgument: Unused method argument - class_names. If it's necessary, use _ or _class_names as an argument name to indicate that it won't be used.
+  def self.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                            ^^^^^^^^^^^
+test/test_helper.rb:34:72: C: Layout/SpaceAroundEqualsInParameterDefault: Surrounding space missing in default value assignment.
+  def self.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                       ^^
+test/test_helper.rb:36:81: W: Lint/UselessAssignment: Useless assignment to variable - class_names.
+      ActiveRecord::FixtureSet.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                ^^^^^^^^^^^
+test/test_helper.rb:36:81: C: Metrics/LineLength: Line is too long. [96/80]
+      ActiveRecord::FixtureSet.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                ^^^^^^^^^^^^^^^^
+test/test_helper.rb:36:93: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+      ActiveRecord::FixtureSet.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                            ^
+test/test_helper.rb:38:79: W: Lint/UselessAssignment: Useless assignment to variable - class_names.
+      ActiveRecord::Fixtures.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                              ^^^^^^^^^^^
+test/test_helper.rb:38:81: C: Metrics/LineLength: Line is too long. [94/80]
+      ActiveRecord::Fixtures.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                ^^^^^^^^^^^^^^
+test/test_helper.rb:38:91: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+      ActiveRecord::Fixtures.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                          ^
+test/test_helper.rb:41:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/test_helper.rb:44:7: C: Style/ClassAndModuleChildren: Use nested module/class definitions instead of compact style.
+class ProjectType::TestCase
+      ^^^^^^^^^^^^^^^^^^^^^
+test/test_helper.rb:45:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/test_helper.rb:46:61: W: Lint/UnusedMethodArgument: Unused method argument - class_names. If it's necessary, use _ or _class_names as an argument name to indicate that it won't be used.
+  def self.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                            ^^^^^^^^^^^
+test/test_helper.rb:46:72: C: Layout/SpaceAroundEqualsInParameterDefault: Surrounding space missing in default value assignment.
+  def self.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                       ^^
+test/test_helper.rb:48:81: W: Lint/UselessAssignment: Useless assignment to variable - class_names.
+      ActiveRecord::FixtureSet.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                ^^^^^^^^^^^
+test/test_helper.rb:48:81: C: Metrics/LineLength: Line is too long. [96/80]
+      ActiveRecord::FixtureSet.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                ^^^^^^^^^^^^^^^^
+test/test_helper.rb:48:93: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+      ActiveRecord::FixtureSet.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                            ^
+test/test_helper.rb:50:79: W: Lint/UselessAssignment: Useless assignment to variable - class_names.
+      ActiveRecord::Fixtures.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                              ^^^^^^^^^^^
+test/test_helper.rb:50:81: C: Metrics/LineLength: Line is too long. [94/80]
+      ActiveRecord::Fixtures.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                ^^^^^^^^^^^^^^
+test/test_helper.rb:50:91: C: Layout/SpaceAroundOperators: Surrounding space missing for operator =.
+      ActiveRecord::Fixtures.create_fixtures(fixtures_directory, table_names, class_names ={})
+                                                                                          ^
+test/test_helper.rb:53:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/test_helper.rb:54:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+test/integration/layout_test.rb:30:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/integration/layout_test.rb:31:81: C: Metrics/LineLength: Line is too long. [150/80]
+  ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:project_types, :projects_project_types])
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/integration/layout_test.rb:31:109: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+  ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:project_types, :projects_project_types])
+                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/integration/layout_test.rb:38:36: C: Layout/SpaceAfterComma: Space missing after comma.
+    assert_select '.projects.box a','Private child of eCookbook'
+                                   ^
+test/integration/layout_test.rb:40:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/integration/layout_test.rb:41:4: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+   def test_existence_of_related_projects_in_project_settings ...
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/integration/layout_test.rb:42:4: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+    log_user('admin', 'admin')
+   ^
+test/integration/layout_test.rb:46:81: C: Metrics/LineLength: Line is too long. [85/80]
+    assert_select "input[type=checkbox][name='projects_relation[related_project][]']"
+                                                                                ^^^^^
+test/integration/layout_test.rb:47:3: W: Lint/DefEndAlignment: end at 47, 2 is not aligned with def at 41, 3.
+  end
+  ^^^
+test/integration/layout_test.rb:48:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/integration/layout_test.rb:54:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    assert_select "#project_type_related_to", 1
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/integration/layout_test.rb:56:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/integration/layout_test.rb:57:5: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+    def test_existence_of_related_projects_in_project_types_index ...
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/integration/layout_test.rb:58:5: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+    log_user('admin', 'admin')
+    
+test/integration/layout_test.rb:59:5: W: Lint/UselessAssignment: Useless assignment to variable - project_type. Did you mean project_types_path?
+    project_type = ProjectType.find(1)
+    ^^^^^^^^^^^^
+test/integration/layout_test.rb:62:19: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    assert_select ".relation", 3
+                  ^^^^^^^^^^^
+test/integration/layout_test.rb:63:3: W: Lint/DefEndAlignment: end at 63, 2 is not aligned with def at 57, 4.
+  end
+  ^^^
+test/integration/layout_test.rb:64:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/integration/layout_test.rb:65:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/integration/layout_test.rb:66:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/integration/layout_test.rb:67:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+test/unit/projects_relation_test.rb:7:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/projects_relation_test.rb:8:75: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  # plugin_fixtures: This is the method we monkey-patched into the various 
+                                                                          ^
+test/unit/projects_relation_test.rb:9:74: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  # TestCase classes so that we could interact with Redmine's fixtures as 
+                                                                         ^
+test/unit/projects_relation_test.rb:11:67: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  # The usage of plugin_fixtures requires some code in the plugins 
+                                                                  ^
+test/unit/projects_relation_test.rb:13:3: C: Layout/LeadingCommentSpace: Missing space after #.
+  #plugin_fixtures :project_types, :projects_project_types
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/projects_relation_test.rb:15:81: C: Metrics/LineLength: Line is too long. [155/80]
+  ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:project_types, :projects_project_types])
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/projects_relation_test.rb:15:114: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+  ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:project_types, :projects_project_types])
+                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/projects_relation_test.rb:16:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/projects_relation_test.rb:17:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  test "should save a related project where project types are well related" do
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/projects_relation_test.rb:18:3: C: Layout/IndentationWidth: Use 2 (not 3) spaces for indentation.
+     projects_relation = ProjectsRelation.new(project_id: 1, related_project: 3)
+  ^^^
+test/unit/projects_relation_test.rb:21:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/projects_relation_test.rb:22:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  test "should not save a related project where project types are non related" do
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/projects_relation_test.rb:22:81: C: Metrics/LineLength: Line is too long. [81/80]
+  test "should not save a related project where project types are non related" do
+                                                                                ^
+test/unit/projects_relation_test.rb:23:3: C: Layout/IndentationWidth: Use 2 (not 3) spaces for indentation.
+     projects_relation = ProjectsRelation.new(project_id: 1, related_project: 2)
+  ^^^
+test/unit/projects_relation_test.rb:26:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/projects_relation_test.rb:27:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  test "should not save a related project where the leading project has no project type" do
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/projects_relation_test.rb:27:81: C: Metrics/LineLength: Line is too long. [91/80]
+  test "should not save a related project where the leading project has no project type" do
+                                                                                ^^^^^^^^^^^
+test/unit/projects_relation_test.rb:28:3: C: Layout/IndentationWidth: Use 2 (not 3) spaces for indentation.
+     projects_relation = ProjectsRelation.new(project_id: 5, related_project: 1)
+  ^^^
+test/unit/projects_relation_test.rb:31:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/projects_relation_test.rb:32:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  test "should not save a related project where both the leading project and the choosen one have no project type" do
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/projects_relation_test.rb:32:81: C: Metrics/LineLength: Line is too long. [117/80]
+  test "should not save a related project where both the leading project and the choosen one have no project type" do
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/projects_relation_test.rb:33:3: C: Layout/IndentationWidth: Use 2 (not 3) spaces for indentation.
+     projects_relation = ProjectsRelation.new(project_id: 5, related_project: 4)
+  ^^^
+test/unit/project_type_patch_test.rb:4:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.
+test/unit/project_type_patch_test.rb:5:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+ fixtures :projects, :members, :member_roles, :roles, :users
+^
+test/unit/project_type_patch_test.rb:7:2: C: Layout/LeadingCommentSpace: Missing space after #.
+ #plugin_fixtures :project_types, :projects_project_types
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:8:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/project_type_patch_test.rb:9:81: C: Metrics/LineLength: Line is too long. [154/80]
+ ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:project_types, :projects_project_types])
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:9:113: C: Style/SymbolArray: Use %i or %I for an array of symbols.
+ ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:project_types, :projects_project_types])
+                                                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:10:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/project_type_patch_test.rb:11:3: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+  test "should not save double assigned project types" do ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:11:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  test "should not save double assigned project types" do
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:12:36: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    projecttype0 = ProjectType.new(:name => "ZeroProjectType")
+                                   ^^^^^^^^
+test/unit/project_type_patch_test.rb:12:45: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    projecttype0 = ProjectType.new(:name => "ZeroProjectType")
+                                            ^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:14:36: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    projecttype1 = ProjectType.new(:name => "FirstProjectType", :related_to => projecttype0.id)
+                                   ^^^^^^^^
+test/unit/project_type_patch_test.rb:14:45: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    projecttype1 = ProjectType.new(:name => "FirstProjectType", :related_to => projecttype0.id)
+                                            ^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:14:65: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    projecttype1 = ProjectType.new(:name => "FirstProjectType", :related_to => projecttype0.id)
+                                                                ^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:14:81: C: Metrics/LineLength: Line is too long. [95/80]
+    projecttype1 = ProjectType.new(:name => "FirstProjectType", :related_to => projecttype0.id)
+                                                                                ^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:16:36: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    projecttype2 = ProjectType.new(:name => "SecondProjectType", :related_to => projecttype0.id)
+                                   ^^^^^^^^
+test/unit/project_type_patch_test.rb:16:45: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    projecttype2 = ProjectType.new(:name => "SecondProjectType", :related_to => projecttype0.id)
+                                            ^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:16:66: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    projecttype2 = ProjectType.new(:name => "SecondProjectType", :related_to => projecttype0.id)
+                                                                 ^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:16:81: C: Metrics/LineLength: Line is too long. [96/80]
+    projecttype2 = ProjectType.new(:name => "SecondProjectType", :related_to => projecttype0.id)
+                                                                                ^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:17:32: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    assert !projecttype2.save, "Saved the project type with an already existing project type relation."
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:17:81: C: Metrics/LineLength: Line is too long. [103/80]
+    assert !projecttype2.save, "Saved the project type with an already existing project type relation."
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:19:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/project_type_patch_test.rb:20:3: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+  test "should not save a relation to itself" do ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:20:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  test "should not save a relation to itself" do
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:21:36: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    projecttype0 = ProjectType.new(:name => "ZeroProjectType")
+                                   ^^^^^^^^
+test/unit/project_type_patch_test.rb:21:45: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    projecttype0 = ProjectType.new(:name => "ZeroProjectType")
+                                            ^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:23:33: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    assert !projecttype0.update(:related_to => projecttype0.id)
+                                ^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:25:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/unit/project_type_patch_test.rb:26:3: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+  test "should not save a relation which is not a project type" do ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:26:8: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+  test "should not save a relation which is not a project type" do
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:27:36: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    projecttype0 = ProjectType.new(:name => "ZeroProjectType", :related_to => 99)
+                                   ^^^^^^^^
+test/unit/project_type_patch_test.rb:27:45: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    projecttype0 = ProjectType.new(:name => "ZeroProjectType", :related_to => 99)
+                                            ^^^^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:27:64: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+    projecttype0 = ProjectType.new(:name => "ZeroProjectType", :related_to => 99)
+                                                               ^^^^^^^^^^^^^^
+test/unit/project_type_patch_test.rb:27:81: C: Metrics/LineLength: Line is too long. [81/80]
+    projecttype0 = ProjectType.new(:name => "ZeroProjectType", :related_to => 99)
+                                                                                ^
+test/unit/project_type_patch_test.rb:30:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:21:1: C: Metrics/ClassLength: Class has too many lines. [103/100]
+class ProjectsControllerPatchTest < ActionController::TestCase ...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:22:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body beginning.
+test/functional/projects_controller_patch_test.rb:23:1: C: Layout/IndentationWidth: Use 2 (not 1) spaces for indentation.
+ fixtures :projects, :members, :member_roles, :roles, :users
+^
+test/functional/projects_controller_patch_test.rb:25:2: C: Layout/LeadingCommentSpace: Missing space after #.
+ #plugin_fixtures :project_types, :projects_project_types
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:26:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:27:81: C: Metrics/LineLength: Line is too long. [110/80]
+ ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [])
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:28:81: C: Metrics/LineLength: Line is too long. [144/80]
+ ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types_relations).directory + '/test/fixtures/', [:projects_relations])
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:36:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "new projects should not display the relation to field" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:42:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:43:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "projects settings should display the relation to field" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:45:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   get :settings, :id => 1
+                  ^^^^^^
+test/functional/projects_controller_patch_test.rb:49:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:50:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "no relation choice set should be displayed when no project type is chosen" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:50:81: C: Metrics/LineLength: Line is too long. [84/80]
+ test "no relation choice set should be displayed when no project type is chosen" do
+                                                                                ^^^^
+test/functional/projects_controller_patch_test.rb:52:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   get :settings, :id => 4
+                  ^^^^^^
+test/functional/projects_controller_patch_test.rb:55:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+   assert_select "label", {count: 1, text: "Related to"}   
+                 ^^^^^^^
+test/functional/projects_controller_patch_test.rb:55:27: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+   assert_select "label", {count: 1, text: "Related to"}   
+                          ^
+test/functional/projects_controller_patch_test.rb:55:27: C: Style/BracesAroundHashParameters: Redundant curly braces around a hash parameter.
+   assert_select "label", {count: 1, text: "Related to"}   
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:55:44: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+   assert_select "label", {count: 1, text: "Related to"}   
+                                           ^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:55:56: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+   assert_select "label", {count: 1, text: "Related to"}   
+                                                       ^
+test/functional/projects_controller_patch_test.rb:55:57: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+   assert_select "label", {count: 1, text: "Related to"}   
+                                                        ^^^
+test/functional/projects_controller_patch_test.rb:58:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "no relation choice set should be displayed when there is no relation with the project type" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:58:81: C: Metrics/LineLength: Line is too long. [101/80]
+ test "no relation choice set should be displayed when there is no relation with the project type" do
+                                                                                ^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:60:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   get :settings, :id => 5
+                  ^^^^^^
+test/functional/projects_controller_patch_test.rb:63:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+   assert_select "label", {count: 1, text: "Related to"}  
+                 ^^^^^^^
+test/functional/projects_controller_patch_test.rb:63:27: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+   assert_select "label", {count: 1, text: "Related to"}  
+                          ^
+test/functional/projects_controller_patch_test.rb:63:27: C: Style/BracesAroundHashParameters: Redundant curly braces around a hash parameter.
+   assert_select "label", {count: 1, text: "Related to"}  
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:63:44: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+   assert_select "label", {count: 1, text: "Related to"}  
+                                           ^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:63:56: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+   assert_select "label", {count: 1, text: "Related to"}  
+                                                       ^
+test/functional/projects_controller_patch_test.rb:63:57: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+   assert_select "label", {count: 1, text: "Related to"}  
+                                                        ^^
+test/functional/projects_controller_patch_test.rb:65:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:66:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "should show the relation choice set when the chosen project type has a relation" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:66:81: C: Metrics/LineLength: Line is too long. [90/80]
+ test "should show the relation choice set when the chosen project type has a relation" do
+                                                                                ^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:68:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   get :settings, :id => 1
+                  ^^^^^^
+test/functional/projects_controller_patch_test.rb:72:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:73:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "update displayed choice set when project type selection is changed" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:75:18: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   post :update, :id => 1, project: { 
+                 ^^^^^^
+test/functional/projects_controller_patch_test.rb:75:38: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+   post :update, :id => 1, project: { 
+                                     ^
+test/functional/projects_controller_patch_test.rb:76:19: C: Layout/IndentHash: Use 2 spaces for indentation in a hash, relative to the start of the line where the left curly brace is.
+                  projects_project_type_attributes: { id: 1, ...
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:77:30: C: Layout/AlignHash: Align the elements of a hash literal if they span more than one line.
+                             project_type_id: nil        
+                             ^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:77:50: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                             project_type_id: nil        
+                                                 ^^^^^^^^
+test/functional/projects_controller_patch_test.rb:78:28: C: Layout/MultilineHashBraceLayout: Closing hash brace must be on the same line as the last hash element when opening brace is on the same line as the first hash element.
+                           }}
+                           ^
+test/functional/projects_controller_patch_test.rb:78:29: C: Layout/MultilineHashBraceLayout: Closing hash brace must be on the line after the last hash element when opening brace is on a separate line from the first hash element.
+                           }}
+                            ^
+test/functional/projects_controller_patch_test.rb:78:29: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                           }}
+                            ^
+test/functional/projects_controller_patch_test.rb:80:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   get :settings, :id => 1
+                  ^^^^^^
+test/functional/projects_controller_patch_test.rb:82:76: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+   assert_select 'input[name=?]', 'projects_relation[related_project][]', 0 
+                                                                           ^
+test/functional/projects_controller_patch_test.rb:83:18: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+   assert_select "label", {count: 1, text: "Related to"}  
+                 ^^^^^^^
+test/functional/projects_controller_patch_test.rb:83:27: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+   assert_select "label", {count: 1, text: "Related to"}  
+                          ^
+test/functional/projects_controller_patch_test.rb:83:27: C: Style/BracesAroundHashParameters: Redundant curly braces around a hash parameter.
+   assert_select "label", {count: 1, text: "Related to"}  
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:83:44: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+   assert_select "label", {count: 1, text: "Related to"}  
+                                           ^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:83:56: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+   assert_select "label", {count: 1, text: "Related to"}  
+                                                       ^
+test/functional/projects_controller_patch_test.rb:83:57: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+   assert_select "label", {count: 1, text: "Related to"}  
+                                                        ^^
+test/functional/projects_controller_patch_test.rb:85:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:86:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "update existing projects relations" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:88:18: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   post :update, :id => 1, project: { 
+                 ^^^^^^
+test/functional/projects_controller_patch_test.rb:88:38: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+   post :update, :id => 1, project: { 
+                                     ^
+test/functional/projects_controller_patch_test.rb:89:19: C: Layout/IndentHash: Use 2 spaces for indentation in a hash, relative to the start of the line where the left curly brace is.
+                  projects_project_type_attributes: { id: 1, ...
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:90:30: C: Layout/AlignHash: Align the elements of a hash literal if they span more than one line.
+                             project_type_id: 1        
+                             ^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:90:48: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                             project_type_id: 1        
+                                               ^^^^^^^^
+test/functional/projects_controller_patch_test.rb:91:28: C: Layout/MultilineHashBraceLayout: Closing hash brace must be on the same line as the last hash element when opening brace is on the same line as the first hash element.
+                           }}
+                           ^
+test/functional/projects_controller_patch_test.rb:91:29: C: Layout/MultilineHashBraceLayout: Closing hash brace must be on the line after the last hash element when opening brace is on a separate line from the first hash element.
+                           }}
+                            ^
+test/functional/projects_controller_patch_test.rb:91:29: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                           }}
+                            ^
+test/functional/projects_controller_patch_test.rb:93:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   get :settings, :id => 1
+                  ^^^^^^
+test/functional/projects_controller_patch_test.rb:95:76: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+   assert_select 'input[name=?]', 'projects_relation[related_project][]', 2 
+                                                                           ^
+test/functional/projects_controller_patch_test.rb:97:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:98:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "create a new projects relation" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:100:46: C: Layout/SpaceAfterComma: Space missing after comma.
+   assert_difference('ProjectsRelation.count',1) do
+                                             ^
+test/functional/projects_controller_patch_test.rb:101:21: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook'},
+                    ^^^^^^
+test/functional/projects_controller_patch_test.rb:101:40: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook'},
+                                       ^
+test/functional/projects_controller_patch_test.rb:101:81: C: Metrics/LineLength: Line is too long. [84/80]
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook'},
+                                                                                ^^^^
+test/functional/projects_controller_patch_test.rb:101:83: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook'},
+                                                                                  ^
+test/functional/projects_controller_patch_test.rb:102:30: C: Layout/AlignHash: Align the elements of a hash literal if they span more than one line.
+                             projects_relation: {project_id: 1, related_project: ['','3']}
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:102:49: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+                             projects_relation: {project_id: 1, related_project: ['','3']}
+                                                ^
+test/functional/projects_controller_patch_test.rb:102:81: C: Metrics/LineLength: Line is too long. [90/80]
+                             projects_relation: {project_id: 1, related_project: ['','3']}
+                                                                                ^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:102:85: C: Layout/SpaceAfterComma: Space missing after comma.
+                             projects_relation: {project_id: 1, related_project: ['','3']}
+                                                                                    ^
+test/functional/projects_controller_patch_test.rb:102:90: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                             projects_relation: {project_id: 1, related_project: ['','3']}
+                                                                                         ^
+test/functional/projects_controller_patch_test.rb:105:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   get :settings, :id => 1
+                  ^^^^^^
+test/functional/projects_controller_patch_test.rb:107:81: C: Metrics/LineLength: Line is too long. [89/80]
+   assert_select 'input[name=?][value=?]', 'projects_relation[related_project][]', '3', 1
+                                                                                ^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:109:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:110:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "update project type should delete the projects relations" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:112:46: C: Layout/SpaceAfterComma: Space missing after comma.
+   assert_difference('ProjectsRelation.count',1) do
+                                             ^
+test/functional/projects_controller_patch_test.rb:113:21: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
+                    ^^^^^^
+test/functional/projects_controller_patch_test.rb:113:40: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
+                                       ^
+test/functional/projects_controller_patch_test.rb:113:81: C: Metrics/LineLength: Line is too long. [83/80]
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
+                                                                                ^^^
+test/functional/projects_controller_patch_test.rb:114:75: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+                                        projects_project_type_attributes: {id: 1, project_type_id: 1}},
+                                                                          ^
+test/functional/projects_controller_patch_test.rb:114:81: C: Metrics/LineLength: Line is too long. [103/80]
+                                        projects_project_type_attributes: {id: 1, project_type_id: 1}},
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:114:101: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                                        projects_project_type_attributes: {id: 1, project_type_id: 1}},
+                                                                                                    ^
+test/functional/projects_controller_patch_test.rb:114:102: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                                        projects_project_type_attributes: {id: 1, project_type_id: 1}},
+                                                                                                     ^
+test/functional/projects_controller_patch_test.rb:115:31: C: Layout/AlignHash: Align the elements of a hash literal if they span more than one line.
+                              projects_relation: {project_id: 1, related_project: ['','3']}
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:115:50: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+                              projects_relation: {project_id: 1, related_project: ['','3']}
+                                                 ^
+test/functional/projects_controller_patch_test.rb:115:81: C: Metrics/LineLength: Line is too long. [91/80]
+                              projects_relation: {project_id: 1, related_project: ['','3']}
+                                                                                ^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:115:86: C: Layout/SpaceAfterComma: Space missing after comma.
+                              projects_relation: {project_id: 1, related_project: ['','3']}
+                                                                                     ^
+test/functional/projects_controller_patch_test.rb:115:91: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                              projects_relation: {project_id: 1, related_project: ['','3']}
+                                                                                          ^
+test/functional/projects_controller_patch_test.rb:118:46: C: Layout/SpaceAfterComma: Space missing after comma.
+   assert_difference('ProjectsRelation.count',-1) do
+                                             ^
+test/functional/projects_controller_patch_test.rb:119:21: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
+                    ^^^^^^
+test/functional/projects_controller_patch_test.rb:119:40: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
+                                       ^
+test/functional/projects_controller_patch_test.rb:119:81: C: Metrics/LineLength: Line is too long. [83/80]
+     patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
+                                                                                ^^^
+test/functional/projects_controller_patch_test.rb:120:75: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+                                        projects_project_type_attributes: {id: 1, project_type_id: nil}},
+                                                                          ^
+test/functional/projects_controller_patch_test.rb:120:81: C: Metrics/LineLength: Line is too long. [105/80]
+                                        projects_project_type_attributes: {id: 1, project_type_id: nil}},
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:120:103: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                                        projects_project_type_attributes: {id: 1, project_type_id: nil}},
+                                                                                                      ^
+test/functional/projects_controller_patch_test.rb:120:104: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                                        projects_project_type_attributes: {id: 1, project_type_id: nil}},
+                                                                                                       ^
+test/functional/projects_controller_patch_test.rb:121:31: C: Layout/AlignHash: Align the elements of a hash literal if they span more than one line.
+                              projects_relation: {project_id: 1, related_project: ['','3']}                      
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:121:50: C: Layout/SpaceInsideHashLiteralBraces: Space inside { missing.
+                              projects_relation: {project_id: 1, related_project: ['','3']}                      
+                                                 ^
+test/functional/projects_controller_patch_test.rb:121:81: C: Metrics/LineLength: Line is too long. [113/80]
+                              projects_relation: {project_id: 1, related_project: ['','3']}                      
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:121:86: C: Layout/SpaceAfterComma: Space missing after comma.
+                              projects_relation: {project_id: 1, related_project: ['','3']}                      
+                                                                                     ^
+test/functional/projects_controller_patch_test.rb:121:91: C: Layout/SpaceInsideHashLiteralBraces: Space inside } missing.
+                              projects_relation: {project_id: 1, related_project: ['','3']}                      
+                                                                                          ^
+test/functional/projects_controller_patch_test.rb:121:92: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                              projects_relation: {project_id: 1, related_project: ['','3']}                      
+                                                                                           ^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:124:19: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+   get :settings, :id => 1
+                  ^^^^^^
+test/functional/projects_controller_patch_test.rb:128:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+test/functional/projects_controller_patch_test.rb:129:7: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+ test "delete a project should delete the respective projects relations" do
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:132:37: C: Layout/SpaceAfterComma: Space missing after comma.
+   assert_difference('Project.count',-1) do
+                                    ^
+test/functional/projects_controller_patch_test.rb:133:23: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+     delete :destroy, :id => 3, :confirm => 1
+                      ^^^^^^
+test/functional/projects_controller_patch_test.rb:133:33: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+     delete :destroy, :id => 3, :confirm => 1
+                                ^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:134:47: C: Layout/LeadingCommentSpace: Missing space after #.
+     assert_redirected_to admin_projects_path #'/admin/projects'
+                                              ^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:137:65: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+   assert_equal 0, ProjectsRelation.where(project_id: 3).count, "projects relation still exists"
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:137:81: C: Metrics/LineLength: Line is too long. [96/80]
+   assert_equal 0, ProjectsRelation.where(project_id: 3).count, "projects relation still exists"
+                                                                                ^^^^^^^^^^^^^^^^
+test/functional/projects_controller_patch_test.rb:140:1: C: Layout/EmptyLines: Extra blank line detected.
+test/functional/projects_controller_patch_test.rb:140:1: C: Layout/EmptyLinesAroundClassBody: Extra empty line detected at class body end.
+test/functional/projects_controller_patch_test.rb:141:4: C: Layout/TrailingBlankLines: Final newline missing.
+end
+   
+app/models/projects_relation.rb:19:1: C: Style/Documentation: Missing top-level class documentation comment.
+class ProjectsRelation < ActiveRecord::Base
+^^^^^
+app/models/projects_relation.rb:21:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:27:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:30:7: C: Style/RedundantSelf: Redundant self detected.
+      self.where('project_id=? OR related_project=?', project.id, project.id)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:32:8: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+      ( relations_down?(project) ? relations_down(project) : relations_up(project) ) if relations?(project)
+       ^
+app/models/projects_relation.rb:32:81: C: Metrics/LineLength: Line is too long. [107/80]
+      ( relations_down?(project) ? relations_down(project) : relations_up(project) ) if relations?(project)
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:32:83: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+      ( relations_down?(project) ? relations_down(project) : relations_up(project) ) if relations?(project)
+                                                                                  ^
+app/models/projects_relation.rb:32:86: C: Style/IfInsideElse: Convert if nested inside else to elsif.
+      ( relations_down?(project) ? relations_down(project) : relations_up(project) ) if relations?(project)
+                                                                                     ^^
+app/models/projects_relation.rb:35:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:39:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:43:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:47:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:49:81: C: Metrics/LineLength: Line is too long. [81/80]
+    ProjectsRelation.where(related_project: project.id) if relations_up?(project)
+                                                                                ^
+app/models/projects_relation.rb:51:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:55:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:57:47: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    # Find out from where the method call came 
+                                              ^
+app/models/projects_relation.rb:60:14: C: Style/RedundantSelf: Redundant self detected.
+      return self.pluck(:related_project).include?(other_project.id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:62:5: C: Style/GuardClause: Use a guard clause instead of wrapping the code inside a conditional expression.
+    if caller_methods.include?('up_assigned_projects')
+    ^^
+app/models/projects_relation.rb:63:14: C: Style/RedundantSelf: Redundant self detected.
+      return self.pluck(:project_id).include?(other_project.id)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:66:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:68:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:69:3: C: Metrics/AbcSize: Assignment Branch Condition size for validate_related_project is too high. [23.85/15]
+  def validate_related_project ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:69:3: C: Metrics/CyclomaticComplexity: Cyclomatic complexity for validate_related_project is too high. [8/6]
+  def validate_related_project ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:69:3: C: Metrics/MethodLength: Method has too many lines. [18/10]
+  def validate_related_project ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:69:3: C: Metrics/PerceivedComplexity: Perceived complexity for validate_related_project is too high. [11/7]
+  def validate_related_project ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:73:81: C: Metrics/LineLength: Line is too long. [100/80]
+      projects_project_type_id = ProjectsProjectType.find_by(project_id: project_id).project_type_id
+                                                                                ^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:75:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:79:81: C: Metrics/LineLength: Line is too long. [119/80]
+      given_related_projects_project_type_id = ProjectsProjectType.find_by(project_id: related_project).project_type_id
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:81:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:82:8: C: Style/NumericPredicate: Use projects_project_type_id.zero? instead of projects_project_type_id == 0.
+    if projects_project_type_id == 0 || projects_project_type_id.nil?
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:85:81: C: Metrics/LineLength: Line is too long. [103/80]
+      expected_related_projects_project_type_id = ProjectType.find(projects_project_type_id).related_to
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^
+app/models/projects_relation.rb:87:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/models/projects_relation.rb:88:5: C: Style/GuardClause: Use a guard clause instead of wrapping the code inside a conditional expression.
+    if (expected_related_projects_project_type_id.nil? && given_related_projects_project_type_id.nil?) || expected_related_projects_project_type_id != given_related_projects_project_type_id
+    ^^
+app/models/projects_relation.rb:88:81: C: Metrics/LineLength: Line is too long. [189/80]
+    if (expected_related_projects_project_type_id.nil? && given_related_projects_project_type_id.nil?) || expected_related_projects_project_type_id != given_related_projects_project_type_id
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:19:1: C: Metrics/ModuleLength: Module has too many lines. [103/100]
+module ProjectsRelationsHelper ...
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:19:1: C: Style/Documentation: Missing top-level module documentation comment.
+module ProjectsRelationsHelper
+^^^^^^
+app/helpers/projects_relations_helper.rb:20:3: C: Metrics/AbcSize: Assignment Branch Condition size for related_projects_multiselect is too high. [18.79/15]
+  def related_projects_multiselect(project_id, choices, label,options={}) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:20:3: C: Metrics/MethodLength: Method has too many lines. [17/10]
+  def related_projects_multiselect(project_id, choices, label,options={}) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:20:62: C: Layout/SpaceAfterComma: Space missing after comma.
+  def related_projects_multiselect(project_id, choices, label,options={})
+                                                             ^
+app/helpers/projects_relations_helper.rb:20:63: W: Lint/UnusedMethodArgument: Unused method argument - options. If it's necessary, use _ or _options as an argument name to indicate that it won't be used.
+  def related_projects_multiselect(project_id, choices, label,options={})
+                                                              ^^^^^^^
+app/helpers/projects_relations_helper.rb:20:70: C: Layout/SpaceAroundEqualsInParameterDefault: Surrounding space missing in default value assignment.
+  def related_projects_multiselect(project_id, choices, label,options={})
+                                                                     ^
+app/helpers/projects_relations_helper.rb:21:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:22:81: C: Metrics/LineLength: Line is too long. [93/80]
+    related_projects = ProjectsRelation.where(project_id: project_id).pluck(:related_project)
+                                                                                ^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:25:17: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+    content_tag("label", l(label) ) +
+                ^^^^^^^
+app/helpers/projects_relations_helper.rb:25:34: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+    content_tag("label", l(label) ) +
+                                 ^
+app/helpers/projects_relations_helper.rb:26:24: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      hidden_field_tag("projects_relation[related_project][]", '').html_safe +
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:32:14: C: Layout/FirstParameterIndentation: Indent the first parameter one step more than the start of the previous line.
+             "projects_relation[related_project][]",
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:32:14: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+             "projects_relation[related_project][]",
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:35:14: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+             :id => nil
+             ^^^^^^
+app/helpers/projects_relations_helper.rb:36:12: C: Layout/ClosingParenthesisIndentation: Indent ) the same as the start of the line where ( is.
+           ) + text.to_s,
+           ^
+app/helpers/projects_relations_helper.rb:37:11: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+          :class => 'inline' #'block'
+          ^^^^^^^^^
+app/helpers/projects_relations_helper.rb:37:30: C: Layout/LeadingCommentSpace: Missing space after #.
+          :class => 'inline' #'block'
+                             ^^^^^^^^
+app/helpers/projects_relations_helper.rb:38:10: C: Layout/ClosingParenthesisIndentation: Indent ) the same as the start of the line where ( is.
+         )
+         ^
+app/helpers/projects_relations_helper.rb:41:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:42:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:43:3: C: Layout/EmptyLineBetweenDefs: Use empty lines between method definitions.
+  def create_multi_related_projects(record_set, parameters)
+  ^^^
+app/helpers/projects_relations_helper.rb:44:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      record_set.delete_all
+  ^^^^
+app/helpers/projects_relations_helper.rb:45:9: C: Layout/IndentationConsistency: Inconsistent indentation detected.
+        parameters[:related_project].each do |i| ...
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:46:9: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+            if !i.empty?
+        ^^^^
+app/helpers/projects_relations_helper.rb:46:13: C: Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
+            if !i.empty?
+            ^^
+app/helpers/projects_relations_helper.rb:46:13: C: Style/NegatedIf: Favor unless over if for negative conditions.
+            if !i.empty? ...
+            ^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:47:34: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+              record_set.create!( related_project: i)
+                                 ^
+app/helpers/projects_relations_helper.rb:51:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:52:3: C: Metrics/MethodLength: Method has too many lines. [17/10]
+  def related_projects_choice_set(project_id) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:53:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:54:57: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+    projects_project_type = ProjectsProjectType.find_by( project_id: project_id )
+                                                        ^
+app/helpers/projects_relations_helper.rb:54:80: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+    projects_project_type = ProjectsProjectType.find_by( project_id: project_id )
+                                                                               ^
+app/helpers/projects_relations_helper.rb:54:81: C: Metrics/LineLength: Line is too long. [81/80]
+    projects_project_type = ProjectsProjectType.find_by( project_id: project_id )
+                                                                                ^
+app/helpers/projects_relations_helper.rb:55:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:59:52: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+        related_project_type_id = ProjectType.find( project_type_id ).related_to
+                                                   ^
+app/helpers/projects_relations_helper.rb:59:68: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+        related_project_type_id = ProjectType.find( project_type_id ).related_to
+                                                                   ^
+app/helpers/projects_relations_helper.rb:61:59: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+          related_project_ids = ProjectsProjectType.where( project_type_id: related_project_type_id ).pluck( :project_id )
+                                                          ^
+app/helpers/projects_relations_helper.rb:61:81: C: Metrics/LineLength: Line is too long. [122/80]
+          related_project_ids = ProjectsProjectType.where( project_type_id: related_project_type_id ).pluck( :project_id )
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:61:100: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+          related_project_ids = ProjectsProjectType.where( project_type_id: related_project_type_id ).pluck( :project_id )
+                                                                                                   ^
+app/helpers/projects_relations_helper.rb:61:109: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+          related_project_ids = ProjectsProjectType.where( project_type_id: related_project_type_id ).pluck( :project_id )
+                                                                                                            ^
+app/helpers/projects_relations_helper.rb:61:121: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+          related_project_ids = ProjectsProjectType.where( project_type_id: related_project_type_id ).pluck( :project_id )
+                                                                                                                        ^
+app/helpers/projects_relations_helper.rb:62:11: C: Metrics/BlockNesting: Avoid more than 3 levels of block nesting.
+          unless related_project_ids.empty? ...
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:63:34: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+            return Project.where( id: related_project_ids )
+                                 ^
+app/helpers/projects_relations_helper.rb:63:58: C: Layout/SpaceInsideParens: Space inside parentheses detected.
+            return Project.where( id: related_project_ids )
+                                                         ^
+app/helpers/projects_relations_helper.rb:71:5: C: Style/RedundantReturn: Redundant return detected.
+    return nil
+    ^^^^^^
+app/helpers/projects_relations_helper.rb:73:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:74:3: C: Metrics/AbcSize: Assignment Branch Condition size for assigned_project_tree is too high. [26.48/15]
+  def assigned_project_tree(given_project) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:74:3: C: Metrics/MethodLength: Method has too many lines. [17/10]
+  def assigned_project_tree(given_project) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:76:10: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    i = 0 
+         ^
+app/helpers/projects_relations_helper.rb:77:40: C: Style/BlockDelimiters: Avoid using {...} for multi-line blocks.
+    ProjectType.relation_order.collect { |type|
+                                       ^
+app/helpers/projects_relations_helper.rb:78:7: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+      tree[i] = [] 
+      
+app/helpers/projects_relations_helper.rb:78:19: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      tree[i] = [] 
+                  ^
+app/helpers/projects_relations_helper.rb:83:11: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      else 
+          ^
+app/helpers/projects_relations_helper.rb:84:81: C: Metrics/LineLength: Line is too long. [117/80]
+        if up_assigned_projects(given_project, type).present? || down_assigned_projects(given_project, type).present?
+                                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:87:81: C: Metrics/LineLength: Line is too long. [90/80]
+        # Check whether the projects of a project type are up related to the given_project
+                                                                                ^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:88:64: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        tree[i].push(up_assigned_projects(given_project, type)) 
+                                                               ^
+app/helpers/projects_relations_helper.rb:89:81: C: Metrics/LineLength: Line is too long. [92/80]
+        # Check whether the projects of a project type are down related to the given_project
+                                                                                ^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:90:66: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+        tree[i].push(down_assigned_projects(given_project, type)) 
+                                                                 ^
+app/helpers/projects_relations_helper.rb:92:7: C: Style/SelfAssignment: Use self-assignment shorthand +=.
+      i = i + 1
+      ^^^^^^^^^
+app/helpers/projects_relations_helper.rb:93:13: C: Layout/SpaceAroundOperators: Surrounding space missing for operator -.
+      tree[i-1]
+            ^
+app/helpers/projects_relations_helper.rb:94:7: W: Lint/BlockAlignment: } at 94, 6 is not aligned with ProjectType.relation_order.collect { |type| at 77, 4.
+      }
+      ^
+app/helpers/projects_relations_helper.rb:96:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:99:14: C: Layout/SpaceBeforeBlockBraces: Space missing to the left of {.
+    tree.each{ |ar|
+             ^
+app/helpers/projects_relations_helper.rb:99:14: C: Style/BlockDelimiters: Avoid using {...} for multi-line blocks.
+    tree.each{ |ar|
+             ^
+app/helpers/projects_relations_helper.rb:100:14: C: Layout/SpaceBeforeBlockBraces: Space missing to the left of {.
+      ar.each{ |en| }.join(",").html_safe
+             ^
+app/helpers/projects_relations_helper.rb:100:28: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      ar.each{ |en| }.join(",").html_safe
+                           ^^^
+app/helpers/projects_relations_helper.rb:101:27: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+    }.join("\n").html_safe 
+                          ^
+app/helpers/projects_relations_helper.rb:103:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:104:3: C: Metrics/MethodLength: Method has too many lines. [11/10]
+  def down_assigned_projects(project, type)    ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:104:44: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+  def down_assigned_projects(project, type)   
+                                           ^^^
+app/helpers/projects_relations_helper.rb:105:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      tag = content_tag :p, 
+  ^^^^
+app/helpers/projects_relations_helper.rb:105:28: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+      tag = content_tag :p, 
+                           ^
+app/helpers/projects_relations_helper.rb:106:19: C: Layout/AlignParameters: Align the parameters of a method call if they span more than one line.
+                  type.projects.to_a.collect{|p| ...
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:106:45: C: Layout/SpaceBeforeBlockBraces: Space missing to the left of {.
+                  type.projects.to_a.collect{|p|
+                                            ^
+app/helpers/projects_relations_helper.rb:106:45: C: Layout/SpaceInsideBlockBraces: Space between { and | missing.
+                  type.projects.to_a.collect{|p|
+                                            ^^
+app/helpers/projects_relations_helper.rb:107:19: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+                  if project.relations_down? 
+                  
+app/helpers/projects_relations_helper.rb:107:19: C: Style/Next: Use next to skip iteration.
+                  if project.relations_down? 
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:107:45: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                  if project.relations_down? 
+                                            ^
+app/helpers/projects_relations_helper.rb:109:21: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+                        link_to p, 
+                    ^^^^
+app/helpers/projects_relations_helper.rb:109:35: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                        link_to p, 
+                                  ^
+app/helpers/projects_relations_helper.rb:110:25: C: Layout/AlignParameters: Align the parameters of a method definition if they span more than one line.
+                        project_path(p), 
+                        ^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:110:41: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                        project_path(p), 
+                                        ^
+app/helpers/projects_relations_helper.rb:111:25: C: Layout/AlignParameters: Align the parameters of a method definition if they span more than one line.
+                        :class => p.css_classes
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:111:25: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+                        :class => p.css_classes
+                        ^^^^^^^^^
+app/helpers/projects_relations_helper.rb:113:22: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                  end   
+                     ^^^
+app/helpers/projects_relations_helper.rb:114:34: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+                  }.compact.join(", ").html_safe  
+                                 ^^^^
+app/helpers/projects_relations_helper.rb:114:49: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                  }.compact.join(", ").html_safe  
+                                                ^^
+app/helpers/projects_relations_helper.rb:115:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:116:14: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      tag != "<p></p>" ? tag : nil
+             ^^^^^^^^^
+app/helpers/projects_relations_helper.rb:118:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:119:3: C: Metrics/MethodLength: Method has too many lines. [11/10]
+  def up_assigned_projects(project, type) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:120:3: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+      tag = content_tag :p,
+  ^^^^
+app/helpers/projects_relations_helper.rb:121:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:122:19: C: Layout/AlignParameters: Align the parameters of a method call if they span more than one line.
+                  type.projects.to_a.collect{|p| ...
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:122:45: C: Layout/SpaceBeforeBlockBraces: Space missing to the left of {.
+                  type.projects.to_a.collect{|p|
+                                            ^
+app/helpers/projects_relations_helper.rb:122:45: C: Layout/SpaceInsideBlockBraces: Space between { and | missing.
+                  type.projects.to_a.collect{|p|
+                                            ^^
+app/helpers/projects_relations_helper.rb:123:19: C: Layout/IndentationWidth: Use 2 (not 0) spaces for indentation.
+                  if project.relations_up? 
+                  
+app/helpers/projects_relations_helper.rb:123:19: C: Style/Next: Use next to skip iteration.
+                  if project.relations_up? 
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:123:43: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                  if project.relations_up? 
+                                          ^
+app/helpers/projects_relations_helper.rb:125:21: C: Layout/IndentationWidth: Use 2 (not 4) spaces for indentation.
+                        link_to p, 
+                    ^^^^
+app/helpers/projects_relations_helper.rb:125:35: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                        link_to p, 
+                                  ^
+app/helpers/projects_relations_helper.rb:126:25: C: Layout/AlignParameters: Align the parameters of a method definition if they span more than one line.
+                        project_path(p), 
+                        ^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:126:41: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                        project_path(p), 
+                                        ^
+app/helpers/projects_relations_helper.rb:127:25: C: Layout/AlignParameters: Align the parameters of a method definition if they span more than one line.
+                        :class => p.css_classes
+                        ^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/projects_relations_helper.rb:127:25: C: Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
+                        :class => p.css_classes
+                        ^^^^^^^^^
+app/helpers/projects_relations_helper.rb:129:22: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+                  end    
+                     ^^^^
+app/helpers/projects_relations_helper.rb:130:34: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+                  }.compact.join(", ").html_safe
+                                 ^^^^
+app/helpers/projects_relations_helper.rb:131:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:132:14: C: Style/StringLiterals: Prefer single-quoted strings when you don't need string interpolation or special symbols.
+      tag != "<p></p>" ? tag : nil
+             ^^^^^^^^^
+app/helpers/projects_relations_helper.rb:134:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:138:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:142:1: C: Layout/TrailingWhitespace: Trailing whitespace detected.
+app/helpers/projects_relations_helper.rb:145:58: C: Layout/TrailingBlankLines: Final newline missing.
+ProjectsController.send(:helper, ProjectsRelationsHelper)
+                                                         
+
+23 files inspected, 517 offenses detected
