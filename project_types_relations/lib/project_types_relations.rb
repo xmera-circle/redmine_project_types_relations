@@ -28,3 +28,6 @@ require 'project_types_relations/patches/project_types_controller_patch'
 # Plugins hook listener
 require 'project_types_relations/hooks/view_projects_form_hook_listener'
 require 'project_types_relations/hooks/view_projects_show_right_hook_listener'
+require 'project_types_relations/hooks/view_project_types_form_middle_hook_listener'
+require 'project_types_relations/hooks/view_project_types_table_header_hook_listener'
+require 'project_types_relations/hooks/view_project_types_table_data_hook_listener'

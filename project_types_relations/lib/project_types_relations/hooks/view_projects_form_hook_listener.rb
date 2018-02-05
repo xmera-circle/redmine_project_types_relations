@@ -1,4 +1,4 @@
-# Redmine plugin for xmera:isms called Custom Footer Plugin
+# Redmine plugin for xmera:isms called Project Types Relations Plugin
 #
 # Copyright (C) 2017-18 Liane Hampe <liane.hampe@xmera.de>
 #
@@ -16,8 +16,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-# Hooks the partial for new footer and its CSS
+# Hooks the partial for project types relations
 class ViewProjectsFormHookListener < Redmine::Hook::ViewListener
     render_on :view_projects_form, 
-              partial: 'projects_relations/form'
+              partial: 'projects/choice_set'
 end

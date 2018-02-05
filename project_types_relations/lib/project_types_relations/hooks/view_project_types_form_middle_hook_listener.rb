@@ -16,6 +16,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
-  render_on :view_projects_show_right, :partial => "projects/assigned_projects" 
+# Hooks the partial for project types
+class ViewProjectTypesFormMiddleHookListener < Redmine::Hook::ViewListener
+    render_on :view_project_types_form_middle, 
+              partial: 'project_types/related'
 end

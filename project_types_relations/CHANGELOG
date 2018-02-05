@@ -1,9 +1,0 @@
-0.1.3 (2017-12-03):
-	* labels from Objekt-Typ adjusted to Objekttyp and from In untergordneter Beziehung zu to untergordneter Objekttyp
-0.1.2 (2017-11-26):
-	* requires redmine 3.3.2 or higher
-0.1.1 (2017-05-03):
-	* adds assigned resource box to projects overview
-	* renames all project related labels to object
-0.1.0 (2017-04-28):
-	* initial alpha version

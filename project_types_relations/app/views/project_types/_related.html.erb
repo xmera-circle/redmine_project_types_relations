@@ -1,3 +1,4 @@
+<%
 # Redmine plugin for xmera:isms called Project Types Relations Plugin
 #
 # Copyright (C) 2017-18 Liane Hampe <liane.hampe@xmera.de>
@@ -15,7 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+%>
 
-class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
-  render_on :view_projects_show_right, :partial => "projects/assigned_projects" 
-end
+<p><%= label(:project_types_relations, :related_to,l(:label_related_to))%><%= f.collection_select(:related_to, ProjectType.all.collect, :id, :name, :include_blank => "--- #{l(:actionview_instancetag_blank_option)} ---" )%></p>
