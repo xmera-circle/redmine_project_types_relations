@@ -23,44 +23,56 @@ require "#{Redmine::Plugin.directory}/project_types_relations/app/helpers/projec
 module ProjectTypesRelations
   module Patches
     module ProjectsControllerPatch
-    unloadable
-    include ProjectsRelationsHelper
-    
-    def update
-       @project.safe_attributes = params[:project]
-       if @project.save
-         if params[:project][:projects_project_type_attributes]
-           @project.update(project_params) 
-           @project.project_types_default_values
-         end
-         unless params[:projects_relation].nil? || @project.projects_project_type.previous_changes.present?
-          @projects_relations = ProjectsRelation.where(project_id: @project.id)
-          create_multi_related_projects(@projects_relations, projects_relation_params)
-         end
-         respond_to do |format|
-           format.html {
-            flash[:notice] = l(:notice_successful_update)
-            redirect_to settings_project_path(@project)
-           }
-           format.api  { render_api_ok }
-         end
-       else
-        respond_to do |format|
-           format.html {
-            settings
-            render :action => 'settings'
-           }
-           format.api  { render_validation_errors(@project) }
+      unloadable
+      include ProjectsRelationsHelper
+      
+      def self.included(base) # :nodoc:
+        base.send(:include, InstanceMethods)
+          
+        base.class_eval do
+          unloadable # Send unloadable so it will not be unloaded in development
+            
+          # Core Extensions
+          alias_method_chain :update, :project_types_relations
         end
       end
-    end
-        
-    private
-        
-     def projects_relation_params
-       params.require(:projects_relation).permit(:project_id, :related_project => [])
-     end
       
+      module InstanceMethods 
+        def update_with_project_types_relations
+         @project.safe_attributes = params[:project]
+          if @project.save
+            if params[:project][:projects_project_type_attributes]
+              @project.update(project_params) 
+              @project.project_types_default_values
+            end
+            unless params[:projects_relation].nil? || @project.projects_project_type.previous_changes.present?
+             @projects_relations = ProjectsRelation.where(project_id: @project.id)
+             create_multi_related_projects(@projects_relations, projects_relation_params)
+            end
+            respond_to do |format|
+              format.html {
+               flash[:notice] = l(:notice_successful_update)
+               redirect_to settings_project_path(@project)
+              }
+              format.api  { render_api_ok }
+            end
+          else
+            respond_to do |format|
+               format.html {
+                settings
+                render :action => 'settings'
+               }
+               format.api  { render_validation_errors(@project) }
+            end
+          end
+        end
+        
+        private
+            
+         def projects_relation_params
+           params.require(:projects_relation).permit(:project_id, :related_project => [])
+         end
+      end
     end
   end
 end
@@ -68,6 +80,6 @@ end
 # Apply patch
 Rails.configuration.to_prepare do
   unless ProjectsController.included_modules.include?(ProjectTypesRelations::Patches::ProjectsControllerPatch)
-    ProjectsController.send(:prepend, ProjectTypesRelations::Patches::ProjectsControllerPatch)
+    ProjectsController.send(:include, ProjectTypesRelations::Patches::ProjectsControllerPatch)
   end
 end
