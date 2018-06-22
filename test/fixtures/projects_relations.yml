@@ -1,0 +1,4 @@
+projects_relation_001:
+  id: 1
+  project_id: 3
+  related_project: 5

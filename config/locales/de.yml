@@ -1,0 +1,17 @@
+# German strings go here for Rails i18n
+de:
+  # Labels
+  label_related_to: Untergeordneter Objekttyp
+  field_related_project: Untergeordnetes Objekt
+  label_related_to: Untergeordneter Objekttyp
+  field_related_to: Untergeordneter Objekttyp
+  label_projects_relation: In Beziehung zu
+  label_assigned_projects: Zugewiesene Objekte
+  
+  # Error messages
+  error_validate_related_project: gehört nicht zum untergeordneten Objekttyp des zugrundeliegenden Objektes
+  error_validate_relation: kann nicht zu sich selbst in Beziehung stehen
+  error_validate_is_project_type: muss ein existierender Objekttyp sein
+  
+  # Messaging
+  message_related_projects_choice_set: --Es gibt keine Auswahl!--
