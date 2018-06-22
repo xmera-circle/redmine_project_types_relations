@@ -1,0 +1,18 @@
+# English strings go here for Rails i18n
+en:
+  # Labels
+  
+  label_related_project: Supordinated object
+  field_related_project: Supordinated object
+  label_related_to: Supordinated object type
+  field_related_to: Supordinated object type
+  label_projects_relation: Related to
+  label_assigned_projects: Assigned Objects
+  
+  # Error messsages
+  error_validate_related_project: belongs not to the supordinated object type of the underlying object
+  error_validate_relation: can't be in relation to itself
+  error_validate_is_project_type: needs to be an existing object type
+  
+  # Messaging
+  message_related_projects_choice_set: --There is no choice set!--
