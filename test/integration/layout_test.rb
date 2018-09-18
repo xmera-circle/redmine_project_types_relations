@@ -28,7 +28,8 @@ class LayoutTest < Redmine::IntegrationTest
            :members,
            :enabled_modules
   
-  ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:project_types, :projects_project_types])
+  ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:projects_project_types])
+  ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types_relations).directory + '/test/fixtures/', [:project_types, :projects_relations])
 
   def test_existence_of_assigned_project_in_project_overview
     log_user('jsmith', 'jsmith')

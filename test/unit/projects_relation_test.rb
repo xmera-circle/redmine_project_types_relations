@@ -12,7 +12,8 @@ class ProjectsRelationTest < ActiveSupport::TestCase
   # test_helper.rb
   #plugin_fixtures :project_types, :projects_project_types
 
-  ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:project_types, :projects_project_types])
+  ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:projects_project_types])
+  ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types_relations).directory + '/test/fixtures/', [:project_types])
   
   test "should save a related project where project types are well related" do
      projects_relation = ProjectsRelation.new(project_id: 1, related_project: 3)

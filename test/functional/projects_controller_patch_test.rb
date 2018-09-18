@@ -24,7 +24,6 @@ class ProjectsControllerPatchTest < ActionController::TestCase
 
  #plugin_fixtures :project_types, :projects_project_types
  
- ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [])
  ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types_relations).directory + '/test/fixtures/', [:projects_relations])
  # Default setting
  def setup
