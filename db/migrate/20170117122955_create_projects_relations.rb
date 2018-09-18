@@ -17,10 +17,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 class CreateProjectsRelations < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :projects_relations do |t|
       t.integer :project_id, :default => 0, :null => false
       t.integer :related_project, :default => 0, :null => true
     end
   end
+  
+  def self.down
+    drop_table :projects_relations
+  end
+  
 end
