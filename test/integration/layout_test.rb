@@ -17,8 +17,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 require File.expand_path('../../test_helper', __FILE__)
-
-class LayoutTest < Redmine::IntegrationTest
+# Considers a namespace for LayoutTest since it might get superclass mismatches when using 
+# the class name more than once.
+class ProjectTypesRelations::LayoutTest < ProjectTypesRelations::Test::IntegrationTest
   include Redmine::I18n
   fixtures :projects, :trackers, :issue_statuses, :issues,
            :enumerations, :users, :issue_categories,
@@ -26,11 +27,11 @@ class LayoutTest < Redmine::IntegrationTest
            :roles,
            :member_roles,
            :members,
-           :enabled_modules
+           :enabled_modules,
+           :projects_project_types,
+           :project_types,
+           :projects_relations
   
-  ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:projects_project_types])
-  ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types_relations).directory + '/test/fixtures/', [:project_types, :projects_relations])
-
   def test_existence_of_assigned_project_in_project_overview
     log_user('jsmith', 'jsmith')
     project = Project.find(3)

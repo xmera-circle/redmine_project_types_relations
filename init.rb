@@ -31,9 +31,10 @@ Redmine::Plugin.register :project_types_relations do
   name 'Project Types Relations Plugin'
   author 'Liane Hampe'
   description 'This is a plugin for setting project types in relation to each other.'
-  version '0.2.0'
+  version '0.2.1'
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
+  dependencies 'project_types'
   
   # Redmine version dependency
   requires_redmine '3.3.2'

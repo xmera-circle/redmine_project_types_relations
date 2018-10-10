@@ -1,13 +1,8 @@
 require File.expand_path('../../test_helper', __FILE__)
 
-class ProjectTypePatchTest < ActiveSupport::TestCase
+class ProjectTypePatchTest < ProjectTypesRelations::Test::UnitTest
 
- fixtures :projects, :members, :member_roles, :roles, :users
-
- #plugin_fixtures :project_types, :projects_project_types
- 
- ProjectType::TestCase.create_fixtures(Redmine::Plugin.find(:project_types).directory + '/test/fixtures/', [:projects_project_types])
- ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types_relations).directory + '/test/fixtures/', [:project_types])
+ fixtures :projects, :members, :member_roles, :roles, :users, :projects_project_types, :project_types
  
   test "should not save double assigned project types" do
     projecttype0 = ProjectType.new(:name => "ZeroProjectType")

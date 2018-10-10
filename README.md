@@ -1,7 +1,7 @@
 Project Types Relations Plugin
 ==============================
 
-The current version of Project Types Relations Plugin is **0.2.0**.
+The current version of Project Types Relations Plugin is **0.2.1**.
 
 Project Types Relations is a plugin for xmera:isms based on Redmine. 
 It allows to define individual relations between project types.
@@ -9,7 +9,7 @@ It allows to define individual relations between project types.
 Initial development was for xmera e.K. and it is released as open source.
 Project home: <http://#>
 
-Project Types Plugin is distributed under GNU General Public License v2 (GPL).  
+Project Types Relations Plugin is distributed under GNU General Public License v2 (GPL).  
 Redmine is a flexible project management web application, released under the terms of the GNU General Public License v2 (GPL) at <http://www.redmine.org/>
 
 Further information about the GPL license can be found at
@@ -43,8 +43,8 @@ Before installing ensure that the Redmine instance is stopped.
 1. Run a migration with: `RAILS_ENV=production rake redmine:plugins:migrate NAME=project_types`
 1. Restart the web server.
 
-Uninstalling DMSF Modifications
--------------------------------
+Uninstalling
+------------
 
 Before uninstalling the Project Types Plugin, please ensure that the Redmine instance is stopped.
 
@@ -52,7 +52,7 @@ Before uninstalling the Project Types Plugin, please ensure that the Redmine ins
 1. ``RAILS_ENV=production rake redmine:plugins:migrate VERSION= 0 NAME=project_types`
 1. `rm plugins/project_types -Rf`
 
-After these steps re-start your instance of Redmine.
+After these steps restart your instance of Redmine.
 
 Contributing
 ------------

@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require_dependency 'projects_controller'
+#require_dependency 'projects_controller'
 require "#{Redmine::Plugin.directory}/project_types_relations/app/helpers/projects_relations_helper"
 
 
@@ -26,19 +26,19 @@ module ProjectTypesRelations
       unloadable
       include ProjectsRelationsHelper
       
-      def self.included(base) # :nodoc:
-        base.send(:include, InstanceMethods)
-          
-        base.class_eval do
-          unloadable # Send unloadable so it will not be unloaded in development
-            
-          # Core Extensions
-          alias_method_chain :update, :project_types_relations
-        end
-      end
+      # def self.included(base) # :nodoc:
+        # base.send(:include, InstanceMethods)
+#           
+        # base.class_eval do
+          # unloadable # Send unloadable so it will not be unloaded in development
+#             
+          # # Core Extensions
+          # alias_method_chain :update, :project_types_relations
+        # end
+      # end
       
-      module InstanceMethods 
-        def update_with_project_types_relations
+      #module InstanceMethods 
+        def update#_with_project_types_relations
          @project.safe_attributes = params[:project]
           if @project.save
             if params[:project][:projects_project_type_attributes]
@@ -72,7 +72,7 @@ module ProjectTypesRelations
          def projects_relation_params
            params.require(:projects_relation).permit(:project_id, :related_project => [])
          end
-      end
+      #end
     end
   end
 end
@@ -80,6 +80,6 @@ end
 # Apply patch
 Rails.configuration.to_prepare do
   unless ProjectsController.included_modules.include?(ProjectTypesRelations::Patches::ProjectsControllerPatch)
-    ProjectsController.send(:include, ProjectTypesRelations::Patches::ProjectsControllerPatch)
+    ProjectsController.prepend(ProjectTypesRelations::Patches::ProjectsControllerPatch)
   end
 end

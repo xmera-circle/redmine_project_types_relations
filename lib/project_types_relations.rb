@@ -19,6 +19,7 @@
 # Project Types Relations Libraries
 
 # Plugins patches
+require 'project_types_relations/patches/plugin_patch'
 require 'project_types_relations/patches/project_patch'
 require 'project_types_relations/patches/project_type_patch'
 require 'project_types_relations/patches/projects_project_type_patch'
@@ -31,3 +32,8 @@ require 'project_types_relations/hooks/view_projects_show_right_hook_listener'
 require 'project_types_relations/hooks/view_project_types_form_middle_hook_listener'
 require 'project_types_relations/hooks/view_project_types_table_header_hook_listener'
 require 'project_types_relations/hooks/view_project_types_table_data_hook_listener'
+
+# Plugins test
+# The files in lib/project_types_relations/test do not need to be required here since 
+# the plugins test_helper.rb refers to Rails test_helper.rb instead of the Redmine 
+# test_helper.rb file.

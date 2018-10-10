@@ -18,20 +18,11 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
-class ProjectsControllerPatchTest < ActionController::TestCase
+class ProjectsControllerPatchTest < ProjectTypesRelations::Test::TestCase
+  tests ProjectsController
 
- fixtures :projects, :members, :member_roles, :roles, :users
-
- #plugin_fixtures :project_types, :projects_project_types
+ fixtures :projects, :members, :member_roles, :roles, :users, :project_types, :projects_relations, :projects_project_types
  
- ProjectsRelation::TestCase.create_fixtures(Redmine::Plugin.find(:project_types_relations).directory + '/test/fixtures/', [:projects_relations])
- # Default setting
- def setup
-   @controller = ProjectsController.new
-   @request.session[:user_id] = nil
-   Setting.default_language = 'en'
- end
-
  test "new projects should not display the relation to field" do
    @request.session[:user_id] = 1 # admin
    get :new
@@ -107,19 +98,19 @@ class ProjectsControllerPatchTest < ActionController::TestCase
  end
  
  test "update project type should delete the projects relations" do
-   @request.session[:user_id] = 1 # admin
+   @request.session[:user_id] = 1 # admin  
    assert_difference('ProjectsRelation.count',1) do
      patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
                                         projects_project_type_attributes: {id: 1, project_type_id: 1}},
                               projects_relation: {project_id: 1, related_project: ['','3']}
      assert_redirected_to '/projects/ecookbook/settings'
-   end
+   end 
    assert_difference('ProjectsRelation.count',-1) do
      patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
                                         projects_project_type_attributes: {id: 1, project_type_id: nil}},
                               projects_relation: {project_id: 1, related_project: ['','3']}                      
      assert_redirected_to '/projects/ecookbook/settings'
-   end
+   end   
    get :settings, :id => 1
    assert_response :success
    assert_select 'input[name=?]', 'projects_relation[related_project][]', 0
