@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-#require_dependency 'projects_controller'
+require 'projects_controller'
 require "#{Redmine::Plugin.directory}/project_types_relations/app/helpers/projects_relations_helper"
 
 

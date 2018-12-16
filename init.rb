@@ -16,17 +16,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require 'redmine'
+require 'project_types_relations'
 
-# Refers to the plugins list of requirements
-require_dependency File.dirname(__FILE__) + '/lib/project_types_relations.rb'
-require File.expand_path(File.dirname(__FILE__) + '/app/helpers/projects_relations_helper')
-
-ActionDispatch::Callbacks.to_prepare do
-  ProjectsController.send :helper, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
-end
-
-# Plugin registration
 Redmine::Plugin.register :project_types_relations do
   name 'Project Types Relations Plugin'
   author 'Liane Hampe'
@@ -47,3 +38,6 @@ Redmine::Plugin.register :project_types_relations do
   end
 end
 
+ActionDispatch::Callbacks.to_prepare do
+  ProjectsController.send :helper, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
+end
