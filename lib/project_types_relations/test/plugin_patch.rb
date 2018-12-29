@@ -1,6 +1,6 @@
-# Redmine plugin for xmera:isms called Project Types Plugin.
+# Redmine plugin for xmera called Project Types Plugin.
 #
-# Copyright (C) 2017-18 Liane Hampe <liane.hampe@xmera.de>
+# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 module ProjectTypesRelations
-  module Patches
+  module Test
     module PluginPatch
        
        module ClassMethods
@@ -46,7 +46,7 @@ end
 
 # Apply patch
 Rails.configuration.to_prepare do
-  unless Redmine::Plugin.included_modules.include?(ProjectTypesRelations::Patches::PluginPatch)
-    Redmine::Plugin.prepend(ProjectTypesRelations::Patches::PluginPatch)
+  unless Redmine::Plugin.included_modules.include?(ProjectTypesRelations::Test::PluginPatch)
+    Redmine::Plugin.prepend(ProjectTypesRelations::Test::PluginPatch)
   end
 end
