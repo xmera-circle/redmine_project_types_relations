@@ -17,7 +17,12 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 #require 'projects_controller'
-#require "#{Redmine::Plugin.directory}/project_types_relations/app/helpers/projects_relations_helper"
+# if Redmine::Plugin.registered_plugins[:xmera_ms].nil?
+  # #require "#{Redmine::Plugin.directory}/project_types_relations/app/helpers/projects_relations_helper"
+  # require_dependency 'projects_relations_helper'
+# else
+  # require_dependency
+# end
 
 
 module ProjectTypesRelations
