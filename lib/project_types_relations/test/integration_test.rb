@@ -1,9 +1,14 @@
-# encoding: utf-8
-## Redmine plugin for Document Management System "Features"
+# Redmine plugin for xmera called Project Types Relations Plugin.
+#
+# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>
+#
+# The code below is taken from:
 #
 # Copyright © 2011    Vít Jonáš <vit.jonas@gmail.com>
 # Copyright © 2012    Daniel Munn <dan.munn@munnster.co.uk>
-# Copyright © 2011-18 Karel Pičman <karel.picman@kontron.com>
+# Copyright © 2011-15 Karel Pičman <karel.picman@kontron.com>
+#
+# and extended by Liane Hampe. 
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License

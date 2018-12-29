@@ -1,12 +1,14 @@
-# Redmine plugin for xmera:isms called Project Types Relations Plugin
+# Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-18 Liane Hampe <liane.hampe@xmera.de>
+# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>
 #
 # The code below is taken from:
 #
 # Copyright © 2011    Vít Jonáš <vit.jonas@gmail.com>
 # Copyright © 2012    Daniel Munn <dan.munn@munnster.co.uk>
 # Copyright © 2011-15 Karel Pičman <karel.picman@kontron.com>
+#
+# and extended by Liane Hampe. 
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -30,8 +32,11 @@ module ProjectTypesRelations
       # Ultimately it allows for better integration without blowing redmine fixtures up,
       # and allowing us to supplement redmine fixtures if we need to.
       #
-      # @note The method requires the PluginPatch where dependencies are defined and the
-      #       repective definition when registering the plugin in init.rb.
+      # @param table_names [Symbol] A comma separated list of table names for which there
+      #   is a fixtures file with the same name.
+      # @note The method requires the PluginPatch (lib/patches/plugin_patch.rb) where 
+      #   dependencies are defined and the repective definition when registering 
+      #   the plugin in init.rb.
       def fixtures(*table_names)
         # Allows to create fixtures for each test case independent of previously defined
         # fixtures in other test cases with the same names.
