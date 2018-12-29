@@ -28,19 +28,18 @@
 module ProjectTypesRelations
   module Patches
     module ProjectsControllerPatch
-      unloadable
       #include ProjectsRelationsHelper
-      helper :projects_relations
-      # def self.included(base) # :nodoc:
+      
+       def self.included(base) # :nodoc:
         # base.send(:include, InstanceMethods)
 #           
-        # base.class_eval do
+         base.class_eval do
           # unloadable # Send unloadable so it will not be unloaded in development
-#             
+         helper :projects_relations    
           # # Core Extensions
           # alias_method_chain :update, :project_types_relations
-        # end
-      # end
+         end
+       end
       
       #module InstanceMethods 
         def update#_with_project_types_relations
