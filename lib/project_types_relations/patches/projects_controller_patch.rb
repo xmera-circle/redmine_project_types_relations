@@ -29,8 +29,8 @@ module ProjectTypesRelations
   module Patches
     module ProjectsControllerPatch
       unloadable
-      include ProjectsRelationsHelper
-      
+      #include ProjectsRelationsHelper
+      helper :projects_relations
       # def self.included(base) # :nodoc:
         # base.send(:include, InstanceMethods)
 #           
