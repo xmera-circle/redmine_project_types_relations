@@ -16,67 +16,51 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-#require 'projects_controller'
-# if Redmine::Plugin.registered_plugins[:xmera_ms].nil?
-  # #require "#{Redmine::Plugin.directory}/project_types_relations/app/helpers/projects_relations_helper"
-  # require_dependency 'projects_relations_helper'
-# else
-  # require_dependency
-# end
-
 
 module ProjectTypesRelations
   module Patches
     module ProjectsControllerPatch
-      #include ProjectsRelationsHelper
       
-       def self.included(base) # :nodoc:
-        # base.send(:include, InstanceMethods)
-#           
-         base.class_eval do
-          # unloadable # Send unloadable so it will not be unloaded in development
-         helper :projects_relations    
-          # # Core Extensions
-          # alias_method_chain :update, :project_types_relations
-         end
-       end
-      
-      #module InstanceMethods 
-        def update#_with_project_types_relations
-         @project.safe_attributes = params[:project]
-          if @project.save
-            if params[:project][:projects_project_type_attributes]
-              @project.update(project_params) 
-              @project.project_types_default_values
-            end
-            unless params[:projects_relation].nil? || @project.projects_project_type.previous_changes.present?
-             @projects_relations = ProjectsRelation.where(project_id: @project.id)
-             create_multi_related_projects(@projects_relations, projects_relation_params)
-            end
-            respond_to do |format|
-              format.html {
-               flash[:notice] = l(:notice_successful_update)
-               redirect_to settings_project_path(@project)
-              }
-              format.api  { render_api_ok }
-            end
-          else
-            respond_to do |format|
-               format.html {
-                settings
-                render :action => 'settings'
-               }
-               format.api  { render_validation_errors(@project) }
-            end
+      def self.included(base) # :nodoc:   
+        base.class_eval do
+          helper :projects_relations    
+        end
+      end
+
+      def update
+        @project.safe_attributes = params[:project]
+        if @project.save
+          if params[:project][:projects_project_type_attributes]
+            @project.update(project_params) 
+            @project.project_types_default_values
+          end
+          unless params[:projects_relation].nil? || @project.projects_project_type.previous_changes.present?
+            @projects_relations = ProjectsRelation.where(project_id: @project.id)
+            create_multi_related_projects(@projects_relations, projects_relation_params)
+          end
+          respond_to do |format|
+            format.html {
+            flash[:notice] = l(:notice_successful_update)
+            redirect_to settings_project_path(@project)
+            }
+            format.api  { render_api_ok }
+          end
+        else
+          respond_to do |format|
+            format.html {
+            settings
+            render :action => 'settings'
+            }
+            format.api  { render_validation_errors(@project) }
           end
         end
+      end
         
-        private
+      private
             
-         def projects_relation_params
-           params.require(:projects_relation).permit(:project_id, :related_project => [])
-         end
-      #end
+       def projects_relation_params
+         params.require(:projects_relation).permit(:project_id, :related_project => [])
+       end
     end
   end
 end
