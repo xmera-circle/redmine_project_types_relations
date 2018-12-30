@@ -25,7 +25,6 @@ Redmine::Plugin.register :project_types_relations do
   version '0.2.1'
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about' 
-  directory "#{Redmine::Plugin.directory}/xmera_ms/plugins/project_types_relations" unless Redmine::Plugin.registered_plugins[:xmera_ms].nil?  
   # The attribute dependencies comes from lib/test/plugin_path.rb and is necessary
   # for testing purposes.
   dependencies 'project_types'
