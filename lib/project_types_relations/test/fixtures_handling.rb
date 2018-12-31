@@ -42,16 +42,13 @@ module ProjectTypesRelations
         # fixtures in other test cases with the same names.
         # This is especially helpful when running tests successively 
         # as with 'redmine:plugins:test'.
-        ActiveRecord::FixtureSet.reset_cache
-        
-        dir = File.join( File.dirname(__FILE__), '../../../test/fixtures')
-        #dir = File.join(Redmine::Plugin.directory, 'xmera_ms/plugins/project_types_relations/test/fixtures')
+        ActiveRecord::FixtureSet.reset_cache       
+        dir = File.expand_path("../../../test/fixtures", File.dirname(__FILE__))
         dependencies = Redmine::Plugin.dependencies(:project_types_relations)
         # Gives an array of dirs of dependent plugins which are installed
         dep_dirs =  dependencies.map do |dependent|
                       if Redmine::Plugin.installed?(dependent)
-                        #File.join(Redmine::Plugin.directory,"#{dependent}/test/fixtures")
-                        File.join(File.dirname(__FILE__),"../../../../#{dependent}/test/fixtures")
+                        File.expand_path("../../../../#{dependent}/test/fixtures", File.dirname(__FILE__))
                       end
                     end.compact
         # Creates the fixtures of the plugin and its dependencies as long as there are fixture files.
