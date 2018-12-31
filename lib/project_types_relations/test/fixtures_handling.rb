@@ -64,6 +64,7 @@ module ProjectTypesRelations
             if File.exist?("#{dir}/#{name}.yml")  
               ActiveRecord::FixtureSet.create_fixtures(dir, name)          
             else
+              byebug
               ActiveRecord::FixtureSet.create_fixtures(dep_dir, name) if  File.exist?("#{dep_dir}/#{name}.yml")
             end
           end
