@@ -50,7 +50,8 @@ module ProjectTypesRelations
         # Gives an array of dirs of dependent plugins which are installed
         dep_dirs =  dependencies.map do |dependent|
                       if Redmine::Plugin.installed?(dependent)
-                        File.join(Redmine::Plugin.directory,"#{dependent}/test/fixtures")
+                        #File.join(Redmine::Plugin.directory,"#{dependent}/test/fixtures")
+                        File.join(Redmine::Plugin.directory,"xmera_ms/plugins/#{dependent}/test/fixtures")
                       end
                     end.compact
         # Creates the fixtures of the plugin and its dependencies as long as there are fixture files.
