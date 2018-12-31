@@ -24,7 +24,7 @@ module ProjectTypesRelations
          # Allows to define dependent plugins within the
          # plugin register block
          Redmine::Plugin.def_field :dependencies
-         
+         byebug
          # Finds the dependent plugins of a given plugin.
          # @param plugin_name [Symbol]
          # @return [Array] the dependent plugins names.
