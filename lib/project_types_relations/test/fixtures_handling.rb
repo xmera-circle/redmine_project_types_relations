@@ -45,7 +45,7 @@ module ProjectTypesRelations
         ActiveRecord::FixtureSet.reset_cache
         
         #dir = File.join( File.dirname(__FILE__), '../../../test/fixtures')
-        dir = File.join(Rails.root, '/test/fixtures')
+        dir = File.join(Redmine::Plugin.directory, 'project_types_relations/test/fixtures')
         dependencies = Redmine::Plugin.dependencies(:project_types_relations)
         # Gives an array of dirs of dependent plugins which are installed
         dep_dirs =  dependencies.map do |dependent|
@@ -64,7 +64,6 @@ module ProjectTypesRelations
             if File.exist?("#{dir}/#{name}.yml")  
               ActiveRecord::FixtureSet.create_fixtures(dir, name)          
             else
-              byebug
               ActiveRecord::FixtureSet.create_fixtures(dep_dir, name) if  File.exist?("#{dep_dir}/#{name}.yml")
             end
           end
