@@ -45,7 +45,7 @@ module ProjectTypesRelations
         ActiveRecord::FixtureSet.reset_cache
         
         #dir = File.join( File.dirname(__FILE__), '../../../test/fixtures')
-        dir = File.join(Redmine::Plugin.directory, 'project_types_relations/test/fixtures')
+        dir = File.join(Redmine::Plugin.directory, 'xmera_ms/plugins/project_types_relations/test/fixtures')
         dependencies = Redmine::Plugin.dependencies(:project_types_relations)
         # Gives an array of dirs of dependent plugins which are installed
         dep_dirs =  dependencies.map do |dependent|
