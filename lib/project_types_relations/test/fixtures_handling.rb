@@ -44,7 +44,8 @@ module ProjectTypesRelations
         # as with 'redmine:plugins:test'.
         ActiveRecord::FixtureSet.reset_cache
         
-        dir = File.join( File.dirname(__FILE__), '../../../test/fixtures')
+        #dir = File.join( File.dirname(__FILE__), '../../../test/fixtures')
+        dir = File.join(Rails.root, '/test/fixtures')
         dependencies = Redmine::Plugin.dependencies(:project_types_relations)
         # Gives an array of dirs of dependent plugins which are installed
         dep_dirs =  dependencies.map do |dependent|
