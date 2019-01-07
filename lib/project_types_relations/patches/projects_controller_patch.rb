@@ -20,12 +20,6 @@
 module ProjectTypesRelations
   module Patches
     module ProjectsControllerPatch
-      
-      def self.included(base) # :nodoc:   
-        base.class_eval do
-          helper :projects_relations    
-        end
-      end
 
       def update
         @project.safe_attributes = params[:project]

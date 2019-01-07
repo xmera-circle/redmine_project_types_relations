@@ -18,6 +18,7 @@
 
 require File.expand_path('../../test_helper', __FILE__)
 
+
 class ProjectsControllerPatchTest < ProjectTypesRelations::Test::TestCase
   tests ProjectsController
 

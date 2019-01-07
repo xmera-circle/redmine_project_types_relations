@@ -40,7 +40,9 @@ Redmine::Plugin.register :project_types_relations do
   end
 end
 
-# Sends helper files directly into ProjectsController
+# Sends helper file directly into ProjectsController
 ActionDispatch::Callbacks.to_prepare do
   ProjectsController.send :helper, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
+  ProjectsController.send :include, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
 end
+
