@@ -18,14 +18,16 @@
 
 class CreateProjectsRelations < ActiveRecord::Migration
   def self.up
-    create_table :projects_relations do |t|
-      t.integer :project_id, :default => 0, :null => false
-      t.integer :related_project, :default => 0, :null => true
+    unless table_exists?(:projects_relations)
+      create_table :projects_relations do |t|
+        t.integer :project_id, :default => 0, :null => false
+        t.integer :related_project, :default => 0, :null => true
+      end
     end
   end
   
   def self.down
-    drop_table :projects_relations
+    drop_table :projects_relations if table_exists?(:projects_relations)
   end
   
 end

@@ -1,7 +1,7 @@
 Project Types Relations Plugin
 ==============================
 
-The current version of Project Types Relations Plugin is **0.2.2**.
+The current version of Project Types Relations Plugin is **0.2.3**.
 
 Project Types Relations is a plugin for xmera:isms based on Redmine. 
 It allows to define individual relations between project types.

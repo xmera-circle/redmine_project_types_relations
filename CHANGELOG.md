@@ -1,6 +1,14 @@
 Changelog for Project Types Relations
 =====================================
 
+0.2.3 *2019-01-14*
+------------------
+
+		Migrations
+
+* [MODIFIED]: Modifies migration files to avoid errors of mysql2 when running migration more than once.
+
+
 0.2.2 *2019-01-03*
 ------------------
 

@@ -18,10 +18,10 @@
 
 class AddIndexToProjectsRelations < ActiveRecord::Migration
   def self.up
-    add_index :projects_relations, :project_id
+    add_index :projects_relations, :project_id unless index_exists?(:projects_relations, :project_id)
   end
   
   def self.down
-    remove_index :projects_relations, :project_id
+    remove_index :projects_relations, :project_id if index_exists?(:projects_relations, :project_id)
   end
 end

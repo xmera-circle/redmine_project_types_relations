@@ -18,10 +18,10 @@
 
 class AddRelationColumnToProjectTypes < ActiveRecord::Migration
   def up
-    add_column :project_types, :related_to, :integer
+    add_column :project_types, :related_to, :integer unless column_exists?(:project_types, :related_to)
   end
   
   def down
-    remove_column :project_types, :related_to
+    remove_column :project_types, :related_to if column_exists?(:project_types, :related_to)
   end
 end
