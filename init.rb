@@ -22,7 +22,7 @@ Redmine::Plugin.register :project_types_relations do
   name 'Project Types Relations Plugin'
   author 'Liane Hampe'
   description 'This is a plugin for setting project types in relation to each other.'
-  version '0.2.3'
+  version '0.2.2'
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about' 
   # The attribute dependencies comes from lib/test/plugin_path.rb and is necessary
