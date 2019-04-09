@@ -24,9 +24,7 @@ module ProjectTypesRelations
       def self.included(base)
         base.extend(ClassMethods)  
         base.send(:include, InstanceMethods)    
-        base.class_eval do
-          unloadable
-    
+        base.class_eval do   
           # Associations
           has_many :projects_relations, foreign_key: :project_id, dependent: :destroy  
         end

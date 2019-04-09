@@ -24,9 +24,7 @@ module ProjectTypesRelations
       def self.included(base) # :nodoc:
         base.extend(ClassMethods)
         base.send(:include, InstanceMethods)
-        base.class_eval do
-          unloadable # Send unloadable so it will not be unloaded in development
-          
+        base.class_eval do     
           # Callbacks
           before_save :clean_up
       

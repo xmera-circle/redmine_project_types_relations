@@ -23,9 +23,7 @@ module ProjectTypesRelations
     module ProjectTypesControllerPatch
       def self.included(base) 
         base.send(:include, InstanceMethods)
-        base.class_eval do
-          unloadable # Send unloadable so it will not be unloaded in development
-                
+        base.class_eval do         
           # Core Extensions
           alias_method_chain :index, :project_type_relation_setting
           alias_method_chain :project_type_params, :related_to_column

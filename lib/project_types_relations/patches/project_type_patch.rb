@@ -26,9 +26,7 @@ module ProjectTypesRelations
         
         base.send(:include, InstanceMethods)
         
-        base.class_eval do
-          unloadable # Send unloadable so it will not be unloaded in development
-    
+        base.class_eval do    
           # Validations
           validates :related_to, :uniqueness => true, :allow_blank => true, :allow_nil => true
           validate :validate_relation, :on => :update
