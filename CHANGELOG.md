@@ -1,6 +1,14 @@
 Changelog for Project Types Relations
 =====================================
 
+## unreleased
+
+### Added
+
+* Redmine 4.1.1 support
+### Changed
+
+* 
 0.2.3 *2019-04-26*
 ------------------
 

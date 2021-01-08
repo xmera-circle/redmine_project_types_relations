@@ -16,33 +16,35 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require_dependency 'project_types_controller'
-
 module ProjectTypesRelations
   module Patches
     module ProjectTypesControllerPatch
       def self.included(base) 
-        base.send(:include, InstanceMethods)
-        base.class_eval do         
-          # Core Extensions
-          alias_method_chain :index, :project_type_relation_setting
-          alias_method_chain :project_type_params, :related_to_column
-        end
+        base.send(:prepend, InstanceMethods)
       end
-      
-      module ClassMethods  
-      end
-      
-      module InstanceMethods 
-        def index_with_project_type_relation_setting
+ 
+      module InstanceMethods
+        ##
+        # Overwrite index action in order to set the class ProjectType
+        #
+        def index
           @project_type = ProjectType
-          index_without_project_type_relation_setting
+          super
         end
         
         private
-        
-        def project_type_params_with_related_to_column
-          params.require(:project_type).permit(:name, :description, :identifier, :is_public, :default_user_role_id, :related_to, :position )
+
+        ##
+        # Overwrite project_type_params in order to add the related_to attribute
+        #
+        def project_type_params
+          params.require(:project_type).permit(:name, 
+                                               :description, 
+                                               :identifier, 
+                                               :is_public, 
+                                               :default_user_role_id, 
+                                               :related_to, 
+                                               :position )
         end
       end
     end
@@ -52,6 +54,6 @@ end
 # Apply patch
 Rails.configuration.to_prepare do
   unless ProjectTypesController.included_modules.include?(ProjectTypesRelations::Patches::ProjectTypesControllerPatch)
-    ProjectTypesController.send(:include, ProjectTypesRelations::Patches::ProjectTypesControllerPatch)
+    ProjectTypesController.send(:prepend, ProjectTypesRelations::Patches::ProjectTypesControllerPatch)
   end
 end

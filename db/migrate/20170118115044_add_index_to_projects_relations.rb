@@ -16,7 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-class AddIndexToProjectsRelations < ActiveRecord::Migration
+class AddIndexToProjectsRelations < ActiveRecord::Migration[4.2]
   def self.up
     add_index :projects_relations, :project_id unless index_exists?(:projects_relations, :project_id)
   end
