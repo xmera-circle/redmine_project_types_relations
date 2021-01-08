@@ -19,7 +19,7 @@
 module ProjectTypesRelations
   module Patches
     module ProjectTypesControllerPatch
-      def self.included(base) 
+      def self.prepended(base) 
         base.send(:prepend, InstanceMethods)
       end
  
@@ -54,6 +54,6 @@ end
 # Apply patch
 Rails.configuration.to_prepare do
   unless ProjectTypesController.included_modules.include?(ProjectTypesRelations::Patches::ProjectTypesControllerPatch)
-    ProjectTypesController.send(:prepend, ProjectTypesRelations::Patches::ProjectTypesControllerPatch)
+    ProjectTypesController.prepend(ProjectTypesRelations::Patches::ProjectTypesControllerPatch)
   end
 end
