@@ -18,9 +18,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %>
 
-<%if @project.relations? %>
+<% if @project.relations? %>
   <div class="projects box">
     <h3><%=l(:label_assigned_projects)%></h3>  
    	<%= render_assigned_project_tree(@project)%>
   </div>
- <% end %>
+<% end %>

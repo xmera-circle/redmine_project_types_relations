@@ -23,6 +23,7 @@ require 'project_types_relations/patches/project_patch'
 require 'project_types_relations/patches/project_type_patch'
 require 'project_types_relations/patches/projects_project_type_patch'
 require 'project_types_relations/patches/projects_controller_patch'
+require 'project_types_relations/integrations/projects_controller_integration_patch'
 require 'project_types_relations/patches/project_types_controller_patch'
 
 # Plugins hook listener

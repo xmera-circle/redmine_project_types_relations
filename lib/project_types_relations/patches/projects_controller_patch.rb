@@ -19,23 +19,11 @@
 module ProjectTypesRelations
   module Patches
     module ProjectsControllerPatch
-      def self.prepended(base) 
-        base.send(:prepend, InstanceMethods)
-      end
-
-      module InstanceMethods
-
         def update
           @project.safe_attributes = params[:project]
           if @project.save
-            if params[:project][:projects_project_type_attributes]
-              @project.update(project_params) 
-              @project.project_types_default_values
-            end
-            unless params[:projects_relation].nil? || @project.projects_project_type.previous_changes.present?
-              @projects_relations = ProjectsRelation.where(project_id: @project.id)
-              create_multi_related_projects(@projects_relations, projects_relation_params)
-            end
+            ProjectTypes::Integrations::ProjectsController.update(params, @project)
+            ProjectTypesRelations::Integrations::ProjectsController.update(params, @project)
             respond_to do |format|
               format.html {
               flash[:notice] = l(:notice_successful_update)
@@ -53,20 +41,13 @@ module ProjectTypesRelations
             end
           end
         end
-          
-        private
-              
-        def projects_relation_params
-          params.require(:projects_relation).permit(:project_id, :related_project => [])
-        end
-      end
     end
   end
 end
 
 # Apply patch
-Rails.configuration.to_prepare do
-  unless ProjectsController.included_modules.include?(ProjectTypesRelations::Patches::ProjectsControllerPatch)
-    ProjectsController.prepend(ProjectTypesRelations::Patches::ProjectsControllerPatch)
-  end
-end
+# ActiveSupport::Reloader.to_prepare do
+#   unless ProjectsController.included_modules.include?(ProjectTypesRelations::Patches::ProjectsControllerPatch)
+#     ProjectsController.prepend(ProjectTypesRelations::Patches::ProjectsControllerPatch)
+#   end
+# end

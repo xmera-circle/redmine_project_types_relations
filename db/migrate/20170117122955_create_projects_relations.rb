@@ -19,9 +19,9 @@
 class CreateProjectsRelations < ActiveRecord::Migration[4.2]
   def self.up
     unless table_exists?(:projects_relations)
-      create_table :projects_relations do |t|
-        t.integer :project_id, :default => 0, :null => false
-        t.integer :related_project, :default => 0, :null => true
+      create_table :projects_relations, id: false do |t|
+        t.integer :project_id, default: 0, null: false
+        t.integer :related_project_id, default: 0, null: false
       end
     end
   end

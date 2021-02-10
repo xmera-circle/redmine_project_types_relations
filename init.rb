@@ -18,7 +18,7 @@
 
 require_dependency 'project_types_relations'
 
-Redmine::Plugin.register :redmine_project_type_relations do
+Redmine::Plugin.register :redmine_project_types_relations do
   name 'Project Types Relations Plugin'
   author 'Liane Hampe'
   description 'This is a plugin for setting project types in relation to each other.'
@@ -38,5 +38,5 @@ end
 ActiveSupport::Reloader.to_prepare do
   ProjectsController.send :helper, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
   ProjectsController.send :include, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
+  ProjectsController.prepend(ProjectTypesRelations::Patches::ProjectsControllerPatch)
 end
-

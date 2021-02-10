@@ -19,19 +19,10 @@
 module ProjectTypesRelations
   module Patches
     module ProjectPatch
-      def self.included(base)
-        base.extend(ClassMethods)  
-        base.send(:include, InstanceMethods)    
-        base.class_eval do   
-          # Associations
+      def self.included(base) 
+        base.class_eval do
           has_many :projects_relations, foreign_key: :project_id, dependent: :destroy  
         end
-      end
-    
-      module ClassMethods 
-      end
-      
-      module InstanceMethods
       end
     end
   end

@@ -21,36 +21,46 @@
 module ProjectTypesRelations
   module Patches
     module ProjectTypePatch 
-      def self.included(base) # :nodoc:
-        base.extend(ClassMethods)
-        
-        base.send(:include, InstanceMethods)
-        
-        base.class_eval do    
-          # Validations
-          validates :related_to, :uniqueness => true, :allow_blank => true, :allow_nil => true
-          validate :validate_relation, :on => :update
+      def self.prepended(base)
+        base.extend ClassMethods     
+        base.prepend InstanceMethods     
+        base.class_eval do
+          validates :related_to, uniqueness: true, allow_blank: true, allow_nil: true
+          validate :validate_relation, on: :update
           validate :validate_is_project_type     
         end
        end
       
-      module ClassMethods 
-      end
+      module ClassMethods; end
       
       module InstanceMethods
         def validate_relation
-          if id == related_to
-            errors.add(:related_to, l(:error_validate_relation))
+            errors.add(:related_to, l(:error_validate_relation)) if related_to_self?
           end
         end
         
         def validate_is_project_type
-          unless related_to.nil? || related_to.blank?
-            unless ProjectType.find_by(id: related_to).is_a?(ProjectType)
+          unless not_related?
+            unless project_type?(related_to)
               errors.add(:related_to, l(:error_validate_is_project_type))
             end
           end
-        end     
+        end
+
+        private
+
+        def related_to_self?
+          id == related_to
+        end        
+
+        def not_related?
+          related_to.nil? || related_to.blank?
+        end
+
+        def project_type?(id)
+          ProjectType.find_by(id: id.to_i)&.is_a?(ProjectType)
+        end
+
       end  
     end
   end
@@ -59,6 +69,6 @@ end
 # Apply patch
 Rails.configuration.to_prepare do
   unless ProjectType.included_modules.include?(ProjectTypesRelations::Patches::ProjectTypePatch)
-    ProjectType.send(:include, ProjectTypesRelations::Patches::ProjectTypePatch)
+    ProjectType.send(:prepend, ProjectTypesRelations::Patches::ProjectTypePatch)
   end
 end

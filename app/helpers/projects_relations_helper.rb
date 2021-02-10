@@ -43,12 +43,12 @@ module ProjectsRelationsHelper
   
  
   def create_multi_related_projects(record_set, parameters)
-      record_set.delete_all
-        parameters[:related_project].each do |i|
-            if !i.empty?
-              record_set.create!( related_project: i)
-            end
+    record_set.delete_all
+    parameters[:related_project].each do |i|
+        if !i.empty?
+          record_set.create!( related_project: i)
         end
+    end
   end
   
   def related_projects_choice_set(project_id)
@@ -143,5 +143,3 @@ module ProjectsRelationsHelper
   end
   
 end
-# To access private helper methods
-ProjectsController.send(:helper, ProjectsRelationsHelper)

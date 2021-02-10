@@ -17,10 +17,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 class ProjectsRelation < ActiveRecord::Base
-  # Associations
   belongs_to :project
 
-  # Validations
   validate :validate_related_project
   
   def self.relations(project)

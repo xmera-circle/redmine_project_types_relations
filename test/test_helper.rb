@@ -29,4 +29,4 @@ require File.expand_path('../../../../test/test_helper', __FILE__)
 require "minitest/reporters"
 Minitest::Reporters.use!
 #require "minitest/rails/capybara"
-require "mocha/mini_test"
+require "mocha/minitest"
