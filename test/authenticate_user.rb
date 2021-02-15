@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+#
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -16,32 +19,35 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-module ProjectTypesRelations
-  module Patches
-    module ProjectPatch
-      def self.prepended(base) 
-        base.extend(ClassMethods)
-        base.prepend(InstanceMethods)
-        base.class_eval do
-          include ProjectTypesRelations::Relations::HostProjects
-          include ProjectTypesRelations::Relations::Enable
-          include ProjectTypesRelations::Associations::HostProjects
-   
-          after_initialize do
-            enable(:hosted_projects) if ProjectTypes.any?
-          end
-        end
-      end
-
-      module ClassMethods; end
-      module InstanceMethods; end
+module RedmineProjectTypesRelations
+  ##
+  # Provide user login test
+  #
+  module AuthenticateUser
+    def log_user(login, password)
+      get_login_page
+      log_user_in(login, password)
+      assert_equal login, User.find(user_session_id).login
     end
-  end
-end
 
-# Apply patch
-Rails.configuration.to_prepare do
-  unless Project.included_modules.include?(ProjectTypesRelations::Patches::ProjectPatch)
-    Project.prepend(ProjectTypesRelations::Patches::ProjectPatch)
+    module_function
+
+    def get_login_page
+      User.anonymous
+      get '/login'
+      assert_nil user_session_id
+      assert_response :success
+    end
+
+    def user_session_id
+      session[:user_id]
+    end
+
+    def log_user_in(login, password)
+      post '/login', params: {
+        username: login,
+        password: password
+      }
+    end
   end
 end

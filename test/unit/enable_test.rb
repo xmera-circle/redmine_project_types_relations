@@ -16,32 +16,28 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-module ProjectTypesRelations
-  module Patches
-    module ProjectPatch
-      def self.prepended(base) 
-        base.extend(ClassMethods)
-        base.prepend(InstanceMethods)
-        base.class_eval do
-          include ProjectTypesRelations::Relations::HostProjects
-          include ProjectTypesRelations::Relations::Enable
-          include ProjectTypesRelations::Associations::HostProjects
-   
-          after_initialize do
-            enable(:hosted_projects) if ProjectTypes.any?
-          end
-        end
-      end
+require File.expand_path('../../test_helper', __FILE__)
 
-      module ClassMethods; end
-      module InstanceMethods; end
+class EnableTest < ActiveSupport::TestCase
+ 
+  def test_klass_should_respond_to_enable
+    assert klass.new.respond_to? :enable
+  end
+
+  def test_klass_should_enable_test_method
+    assert_equal klass.test_method, klass.new.enable(:test_method)
+  end
+
+  private
+
+  def klass
+    Class.new do
+      include ProjectTypesRelations::Relations::Enable
+
+      def self.test_method
+        'success'
+      end
     end
   end
-end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless Project.included_modules.include?(ProjectTypesRelations::Patches::ProjectPatch)
-    Project.prepend(ProjectTypesRelations::Patches::ProjectPatch)
-  end
+  
 end

@@ -1,6 +1,6 @@
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,5 +17,5 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
-  render_on :view_projects_show_right, :partial => "projects/assigned_projects" 
+  render_on :view_projects_show_right, :partial => "projects/associated_projects_tables" 
 end

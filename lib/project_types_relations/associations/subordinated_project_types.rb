@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+#
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -16,12 +19,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-class AddIndexToProjectsRelations < ActiveRecord::Migration[4.2]
-  def self.up
-    add_index :projects_relations, :project_id unless index_exists?(:projects_relations, :project_id)
-  end
-  
-  def self.down
-    remove_index :projects_relations, :project_id if index_exists?(:projects_relations, :project_id)
+module ProjectTypesRelations
+  module Associations
+    module SubordinatedProjectTypes
+      def subordinate_assigned?(id)
+        subordinate_ids.include?(id.to_i)
+      end
+    end
   end
 end

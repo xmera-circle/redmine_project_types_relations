@@ -1,3 +1,4 @@
+<%
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -15,33 +16,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+%>
 
-module ProjectTypesRelations
-  module Patches
-    module ProjectPatch
-      def self.prepended(base) 
-        base.extend(ClassMethods)
-        base.prepend(InstanceMethods)
-        base.class_eval do
-          include ProjectTypesRelations::Relations::HostProjects
-          include ProjectTypesRelations::Relations::Enable
-          include ProjectTypesRelations::Associations::HostProjects
-   
-          after_initialize do
-            enable(:hosted_projects) if ProjectTypes.any?
-          end
-        end
-      end
+</div>
+<%= error_messages_for 'projects' %>
+<div>
 
-      module ClassMethods; end
-      module InstanceMethods; end
-    end
-  end
-end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless Project.included_modules.include?(ProjectTypesRelations::Patches::ProjectPatch)
-    Project.prepend(ProjectTypesRelations::Patches::ProjectPatch)
-  end
-end
+<% if @project.safe_attribute?('host_ids') %>
+  <% unless @project.new_record? %>
+    <fieldset class="box tabular" id="host_projects" >
+      <legend>
+        <%= toggle_checkboxes_link('#host_projects input[type=checkbox]:enabled') %>
+        <%= l(:label_host_project_plural) %>
+      </legend> 
+      <%= host_projects_multiselect(@project.id, available_hosts ) %>
+    </fieldset>
+  <% end %>
+<% end %>

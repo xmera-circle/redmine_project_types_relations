@@ -16,32 +16,20 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-module ProjectTypesRelations
-  module Patches
-    module ProjectPatch
-      def self.prepended(base) 
-        base.extend(ClassMethods)
-        base.prepend(InstanceMethods)
-        base.class_eval do
-          include ProjectTypesRelations::Relations::HostProjects
-          include ProjectTypesRelations::Relations::Enable
-          include ProjectTypesRelations::Associations::HostProjects
-   
-          after_initialize do
-            enable(:hosted_projects) if ProjectTypes.any?
-          end
-        end
+class CreateProjectsRelations < ActiveRecord::Migration[4.2]
+  def self.up
+    unless table_exists?(:projects_relations)
+      create_table :projects_relations do |t|
+        t.integer :guest_id, default: 0, null: false
+        t.integer :host_id, default: 0, null: false
       end
-
-      module ClassMethods; end
-      module InstanceMethods; end
+      unless index_exists?(:projects_relations, [:guest_id,:host_id])
+        add_index :projects_relations, [:guest_id, :host_id], name: 'uniqe_projects_relations', unique: true
+      end
     end
   end
-end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless Project.included_modules.include?(ProjectTypesRelations::Patches::ProjectPatch)
-    Project.prepend(ProjectTypesRelations::Patches::ProjectPatch)
-  end
+  
+  def self.down
+    drop_table :projects_relations if table_exists?(:projects_relations)
+  end 
 end

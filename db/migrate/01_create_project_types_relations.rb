@@ -1,7 +1,6 @@
-<%
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -16,11 +15,21 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-%>
 
-<% if @project.relations? %>
-  <div class="projects box">
-    <h3><%=l(:label_assigned_projects)%></h3>  
-   	<%= render_assigned_project_tree(@project)%>
-  </div>
-<% end %>
+class CreateProjectTypesRelations < ActiveRecord::Migration[4.2]
+  def self.up
+    unless table_exists?(:project_types_relations)
+      create_table :project_types_relations do |t|
+        t.integer :superordinate_id, default: 0, null: false
+        t.integer :subordinate_id, default: 0, null: false
+      end
+      unless index_exists?(:project_types_relations, [:superordinate_id,:subordinate_id])
+        add_index :project_types_relations, [:superordinate_id, :subordinate_id], name: 'unique_project_types_relations', unique: true
+      end
+    end
+  end
+  
+  def self.down
+    drop_table :project_types_relations if table_exists?(:project_types_relations)
+  end 
+end

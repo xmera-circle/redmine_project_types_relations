@@ -1,6 +1,6 @@
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -16,12 +16,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-class AddRelationColumnToProjectTypes < ActiveRecord::Migration[4.2]
-  def up
-    add_column :project_types, :related_to, :integer unless column_exists?(:project_types, :related_to)
-  end
-  
-  def down
-    remove_column :project_types, :related_to if column_exists?(:project_types, :related_to)
-  end
+class ProjectTypesRelation < ActiveRecord::Base
+  belongs_to :superordinate, class_name: 'ProjectType'
+  belongs_to :subordinate, class_name: 'ProjectType'
 end

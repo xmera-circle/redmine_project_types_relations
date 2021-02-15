@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+#
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -16,18 +19,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-class CreateProjectsRelations < ActiveRecord::Migration[4.2]
-  def self.up
-    unless table_exists?(:projects_relations)
-      create_table :projects_relations, id: false do |t|
-        t.integer :project_id, default: 0, null: false
-        t.integer :related_project_id, default: 0, null: false
+module ProjectTypesRelations
+  module Associations
+    module HostProjects
+      def host_assigned?(id)
+        host_ids.include?(id.to_i)
       end
     end
   end
-  
-  def self.down
-    drop_table :projects_relations if table_exists?(:projects_relations)
-  end
-  
 end

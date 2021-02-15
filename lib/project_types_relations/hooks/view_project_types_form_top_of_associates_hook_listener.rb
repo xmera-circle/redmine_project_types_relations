@@ -16,32 +16,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-module ProjectTypesRelations
-  module Patches
-    module ProjectPatch
-      def self.prepended(base) 
-        base.extend(ClassMethods)
-        base.prepend(InstanceMethods)
-        base.class_eval do
-          include ProjectTypesRelations::Relations::HostProjects
-          include ProjectTypesRelations::Relations::Enable
-          include ProjectTypesRelations::Associations::HostProjects
-   
-          after_initialize do
-            enable(:hosted_projects) if ProjectTypes.any?
-          end
-        end
-      end
-
-      module ClassMethods; end
-      module InstanceMethods; end
-    end
-  end
-end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless Project.included_modules.include?(ProjectTypesRelations::Patches::ProjectPatch)
-    Project.prepend(ProjectTypesRelations::Patches::ProjectPatch)
-  end
+# Hooks the partial for project types
+class ViewProjectTypesFormTopOfAssociatesHookListener < Redmine::Hook::ViewListener
+    render_on :view_project_types_form_top_of_associates, 
+              partial: 'project_types/subordinated_project_type'
 end

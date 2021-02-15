@@ -1,6 +1,6 @@
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -21,47 +21,23 @@
 module ProjectTypesRelations
   module Patches
     module ProjectTypePatch 
-      def self.prepended(base)
-        base.extend ClassMethods     
-        base.prepend InstanceMethods     
+      def self.prepended(base) 
+        base.extend(ClassMethods)
+        base.prepend(InstanceMethods)
         base.class_eval do
-          validates :related_to, uniqueness: true, allow_blank: true, allow_nil: true
-          validate :validate_relation, on: :update
-          validate :validate_is_project_type     
+          include ProjectTypesRelations::Relations::SubordinatedProjectTypes
+          include ProjectTypesRelations::Relations::Enable
+          include ProjectTypesRelations::Associations::SubordinatedProjectTypes
+   
+          after_initialize do
+            enable(:subordinated_project_types) if ProjectTypes.any?
+          end
         end
-       end
-      
+      end
+    
       module ClassMethods; end
-      
-      module InstanceMethods
-        def validate_relation
-            errors.add(:related_to, l(:error_validate_relation)) if related_to_self?
-          end
-        end
-        
-        def validate_is_project_type
-          unless not_related?
-            unless project_type?(related_to)
-              errors.add(:related_to, l(:error_validate_is_project_type))
-            end
-          end
-        end
-
-        private
-
-        def related_to_self?
-          id == related_to
-        end        
-
-        def not_related?
-          related_to.nil? || related_to.blank?
-        end
-
-        def project_type?(id)
-          ProjectType.find_by(id: id.to_i)&.is_a?(ProjectType)
-        end
-
-      end  
+    
+      module InstanceMethods; end 
     end
   end
 end

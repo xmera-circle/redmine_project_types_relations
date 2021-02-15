@@ -1,6 +1,6 @@
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,23 +18,23 @@
 
 # Project Types Relations Libraries
 
-# Plugins patches
+# Relations
+require 'project_types_relations/relations/subordinated_project_types'
+require 'project_types_relations/relations/host_projects'
+require 'project_types_relations/relations/enable'
+
+# Patches
 require 'project_types_relations/patches/project_patch'
 require 'project_types_relations/patches/project_type_patch'
-require 'project_types_relations/patches/projects_project_type_patch'
-require 'project_types_relations/patches/projects_controller_patch'
-require 'project_types_relations/integrations/projects_controller_integration_patch'
-require 'project_types_relations/patches/project_types_controller_patch'
 
-# Plugins hook listener
+# Hooks
 require 'project_types_relations/hooks/view_projects_form_hook_listener'
+require 'project_types_relations/hooks/view_layouts_base_html_head_hook_listener'
 require 'project_types_relations/hooks/view_projects_show_right_hook_listener'
-require 'project_types_relations/hooks/view_project_types_form_middle_hook_listener'
+require 'project_types_relations/hooks/view_project_types_form_top_of_associates_hook_listener'
 require 'project_types_relations/hooks/view_project_types_table_header_hook_listener'
 require 'project_types_relations/hooks/view_project_types_table_data_hook_listener'
 
-# Plugins test
-require 'project_types_relations/test/plugin_patch'
-# The files in lib/project_types_relations/test do not need to be required here since 
-# the plugins test_helper.rb refers to Rails test_helper.rb instead of the Redmine 
-# test_helper.rb file.
+# Association
+require 'project_types_relations/associations/subordinated_project_types'
+require 'project_types_relations/associations/host_projects'

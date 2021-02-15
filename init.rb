@@ -1,6 +1,6 @@
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -25,18 +25,12 @@ Redmine::Plugin.register :redmine_project_types_relations do
   version '0.2.2'
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about' 
-  # The attribute dependencies comes from lib/test/plugin_path.rb and is necessary
-  # for testing purposes.
-  dependencies 'project_types'
-  
-  # Redmine version dependency
-  requires_redmine version_or_higher: '3.3.2'
 
+  requires_redmine version_or_higher: '4.1.1'
+  requires_redmine_plugin :redmine_project_types, version_or_higher: '3.0.1'
 end
 
-# Sends helper file directly into ProjectsController
 ActiveSupport::Reloader.to_prepare do
-  ProjectsController.send :helper, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
-  ProjectsController.send :include, ProjectsRelationsHelper unless ProjectsController.included_modules.include? ProjectsRelationsHelper
-  ProjectsController.prepend(ProjectTypesRelations::Patches::ProjectsControllerPatch)
+  ProjectTypesController.helper(SubordinatedProjectTypesHelper) unless ProjectTypesController.included_modules.include? SubordinatedProjectTypesHelper
+  ProjectsController.helper(HostProjectsHelper) unless ProjectsController.included_modules.include? HostProjectsHelper
 end

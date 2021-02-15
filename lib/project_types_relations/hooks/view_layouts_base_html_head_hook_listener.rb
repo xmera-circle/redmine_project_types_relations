@@ -1,7 +1,9 @@
-<%
+# frozen_string_literal: true
+
+#
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-19 Liane Hampe <liane.hampe@xmera.de>.
+# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -16,21 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-%>
 
-<% unless @project.new_record?%>
-
-<%= error_messages_for 'projects_relation' %>
-
-<div class="box tabular">
-	<%= form.fields_for :projects_relation do |type| %>
-		<p> 
-			<% if !related_projects_choice_set(@project.id).nil? %>
-			<%= related_projects_multiselect(@project.id, related_projects_choice_set(@project.id).collect { |t|  [t.name, t.id] },:label_projects_relation)%> 
-			<% else %>
-			<%= type.label(:related_project,l(:label_projects_relation))%>	<%=l(:message_related_projects_choice_set) %> 
-			<% end %>
-		</p>
-	<% end %>
-</div>
-<% end %>
+class ViewLayoutsBaseHtmlHeadHookListener < Redmine::Hook::ViewListener
+  render_on :view_layouts_base_html_head,
+            partial: 'redmine_project_types_relations/redmine_project_types_relations_header_tags'
+end
