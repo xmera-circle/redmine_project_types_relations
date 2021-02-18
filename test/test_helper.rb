@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -25,9 +27,8 @@ require_relative 'load_fixtures'
 require_relative 'authenticate_user'
 require_relative 'create_project_type'
 
-
 # The gem minitest-reporters gives color to the command-line
-require "minitest/reporters"
+require 'minitest/reporters'
 Minitest::Reporters.use!
-#require "minitest/rails/capybara"
-require "mocha/minitest"
+# require "minitest/rails/capybara"
+require 'mocha/minitest'

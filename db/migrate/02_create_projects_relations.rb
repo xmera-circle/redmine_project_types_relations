@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -23,13 +25,13 @@ class CreateProjectsRelations < ActiveRecord::Migration[4.2]
         t.integer :guest_id, default: 0, null: false
         t.integer :host_id, default: 0, null: false
       end
-      unless index_exists?(:projects_relations, [:guest_id,:host_id])
-        add_index :projects_relations, [:guest_id, :host_id], name: 'uniqe_projects_relations', unique: true
+      unless index_exists?(:projects_relations, %i[guest_id host_id])
+        add_index :projects_relations, %i[guest_id host_id], name: 'uniqe_projects_relations', unique: true
       end
     end
   end
-  
+
   def self.down
     drop_table :projects_relations if table_exists?(:projects_relations)
-  end 
+  end
 end

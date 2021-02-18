@@ -32,12 +32,14 @@ module ProjectTypesRelations
             send :include, ProjectTypesRelations::Relations::HostProjects::InstanceMethods
           end
 
-          has_many :projects_relations, foreign_key: :guest_id
-          
-          has_many :hosts, 
-                    through: :projects_relations, 
-                    source: :host, 
-                    autosave: true
+          has_many :projects_relations,
+                   foreign_key: :guest_id,
+                   dependent: :destroy
+
+          has_many :hosts,
+                   through: :projects_relations,
+                   source: :host,
+                   autosave: true
 
           validate :check_integrity_of_relations, on: :update
 
@@ -46,20 +48,19 @@ module ProjectTypesRelations
       end
 
       module InstanceMethods
-
         def guests
-          ProjectsRelation.where(host_id: self.id).map(&:guest)
+          ProjectsRelation.where(host_id: id).map(&:guest).compact
         end
 
         def guest_ids
-          guests.map(&:id)
+          guests&.map(&:id)
         end
 
         private
 
         def check_integrity_of_relations
           return if project_type_id_unchanged? || independent?
- 
+
           errors.add :project_type, l(:error_project_has_guest_projects) if guests.any?
           errors.add :project_type, l(:error_project_has_invalid_host_projects) if deprecated_hosts?
         end
@@ -81,7 +82,7 @@ module ProjectTypesRelations
         # what is not consistend with any of the project's project type subordinates.
         #
         def deprecated_hosts?
-          hosts.none? { |host_project| self.project_type.subordinate_ids.include? host_project.project_type_id }
+          hosts.none? { |host_project| project_type.subordinate_ids.include? host_project.project_type_id }
         end
       end
     end

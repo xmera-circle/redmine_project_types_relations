@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -18,6 +20,6 @@
 
 # Hooks the partial for project types
 class ViewProjectTypesFormTopOfAssociatesHookListener < Redmine::Hook::ViewListener
-    render_on :view_project_types_form_top_of_associates, 
-              partial: 'project_types/subordinated_project_type'
+  render_on :view_project_types_form_top_of_associates,
+            partial: 'project_types/subordinated_project_type'
 end

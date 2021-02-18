@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -17,27 +19,27 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 module HostProjectsHelper
-  def host_projects_multiselect(project_id, choices, _options={})
+  def host_projects_multiselect(_project_id, choices, _options = {})
     return nothing_to_select unless available_hosts?
 
-      hidden_field_tag("project[host_ids][]", '').html_safe +
+    hidden_field_tag('project[host_ids][]', '').html_safe +
       choices.collect do |choice|
         text, value = (choice.is_a?(Array) ? choice : [choice, choice])
         content_tag(
           'label',
           check_box_tag(
-             "project[host_ids][]",
-             value,
-             @project.host_assigned?(value),
-             :id => nil
-           ) + text.to_s,
-          :class => 'inline' #'block'
-         )
+            'project[host_ids][]',
+            value,
+            @project.host_assigned?(value),
+            id: nil
+          ) + text.to_s,
+          class: 'inline' # 'block'
+        )
       end.join.html_safe
   end
 
   def render_associated_projects(project:, category:, label_left:, label_right:)
-    columns = %I[#{label_left} #{label_right} ]
+    columns = %I[#{label_left} #{label_right}]
     create_table(project, category, columns)
   end
 
@@ -87,21 +89,21 @@ module HostProjectsHelper
   end
 
   def create_thead(columns)
-    thead = content_tag :thead do
+    content_tag :thead do
       content_tag :tr do
-        columns.collect { |column| concat content_tag(:th, l(column), class: 'name') }.join().html_safe
+        columns.collect { |column| concat content_tag(:th, l(column), class: 'name') }.join.html_safe
       end
     end
   end
 
   def create_tbody(project, category)
     content_tag :tbody do
-      associate_grouped_by_project_type(project, category).collect { |project_type, associate|
+      associate_grouped_by_project_type(project, category).collect do |project_type, associate|
         content_tag :tr do
           concat content_tag(:td, project_type, class: 'name').to_s.html_safe
           concat content_tag(:td, list_of_associate_links(associate), class: 'name').to_s.html_safe
         end
-      }.join().html_safe
+      end.join.html_safe
     end
   end
 

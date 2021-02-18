@@ -12,19 +12,16 @@ en:
 
   label_assigned_project_plural: Linked projects
 
-  # Fields
   field_related_project: Subordinated project
   field_the_subordinate: The subordinated project type
    
-  # Error messsages
   error_validate_subordinated_project: can't be subordianted to itself
   error_validate_circular_reference: can't choose its superordinate project as subordinate one
   error_validate_self_relation: can't be in relation to itself
   error_validate_is_project_type: needs to be an existing project type
+  error_validate_host_project: does not exist
   error_subordinates_have_projects_assigned: can't be deleted because there are linked projects.
   error_project_has_invalid_host_projects: cannot be changed, because there is at least one linked host project.
   error_project_has_guest_projects: cannot be changed, because there is at least one linked guest project.
 
-
-  # Messaging
   message_nothing_to_select: There is no choice set!

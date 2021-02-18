@@ -18,16 +18,18 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %>
 
-<% if @project.hosts.present? %>
-  <div class="projects box">
-    <h3><%=l(:label_assigned_project_plural)%></h3> 
-    <%= render_associated_projects(project: @project, 
-                                   category: :guests, 
-                                   label_left: :label_superordinated_project_type,
-                                   label_right: :label_guest_project_plural) %>
-   	<%= render_associated_projects(project: @project, 
-                                   category: :hosts, 
-                                   label_left: :label_subordinated_project_type,
-                                   label_right: :label_host_project_plural)%>
-  </div>
+<% if ProjectTypes.any? %>
+  <% if @project.hosts.present? || @project.guests.present?%>
+    <div class="projects box">
+      <h3><%=l(:label_assigned_project_plural)%></h3> 
+      <%= render_associated_projects(project: @project, 
+                                    category: :guests, 
+                                    label_left: :label_superordinated_project_type,
+                                    label_right: :label_guest_project_plural) %>
+      <%= render_associated_projects(project: @project, 
+                                    category: :hosts, 
+                                    label_left: :label_subordinated_project_type,
+                                    label_right: :label_host_project_plural)%>
+    </div>
+  <% end %>
 <% end %>

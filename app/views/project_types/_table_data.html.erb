@@ -18,4 +18,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %>
 
-<td class="relation"><%= type.subordinates&.map(&:name).join(', ') %></td>
+<% if ProjectTypes.any? %>
+  <td class="relation"><%= type.subordinates&.map(&:name).join(', ') %></td>
+<% end %>

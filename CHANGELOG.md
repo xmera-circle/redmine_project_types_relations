@@ -1,14 +1,16 @@
-Changelog for Project Types Relations
-=====================================
+# Changelog for Project Types Relations
 
-## unreleased
+## 1.0.0 - 2021-02-18
 
 ### Added
 
 * Redmine 4.1.1 support
+
 ### Changed
 
-* 
+* association tables
+* Redmine core patches
+
 0.2.3 *2019-04-26*
 ------------------
 

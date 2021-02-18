@@ -32,27 +32,28 @@ module ProjectTypesRelations
             send :include, ProjectTypesRelations::Relations::SubordinatedProjectTypes::InstanceMethods
           end
 
-          has_many :project_types_relations, foreign_key: :superordinate_id
-          
-          has_many :subordinates, 
-                    through: :project_types_relations, 
-                    source: :subordinate, 
-                    autosave: true,
-                    before_remove: :check_existence_of_host_projects,
-                    before_add: :check_reference
+          has_many :project_types_relations,
+                   foreign_key: :superordinate_id,
+                   dependent: :destroy
+
+          has_many :subordinates,
+                   through: :project_types_relations,
+                   source: :subordinate,
+                   autosave: true,
+                   before_remove: :check_existence_of_host_projects,
+                   before_add: :check_reference
 
           safe_attributes :subordinate_ids
         end
       end
 
-
       module InstanceMethods
         def superordinates
-          ProjectTypesRelation.where(subordinate_id: self.id).map(&:superordinate)
+          ProjectTypesRelation.where(subordinate_id: id).map(&:superordinate).compact
         end
 
         def superordinate_ids
-          superordinates.map(&:id)
+          superordinates&.map(&:id)
         end
 
         private
@@ -60,12 +61,12 @@ module ProjectTypesRelations
         def check_existence_of_host_projects(subordinate)
           return unless subordinate.projects.any?
 
-          errors.add :the_subordinate, l(:error_subordinates_have_projects_assigned)
+          errors.add :the_subordinate, l(:error_subordinates_have_projects_assigned, count: subordinate.projects.count)
           raise self
         end
 
         def check_reference(subordinate)
-          check_self_reference(subordinate) || check_circular_reference(subordinate)   
+          check_self_reference(subordinate) || check_circular_reference(subordinate)
         end
 
         def check_self_reference(subordinate)
@@ -78,7 +79,7 @@ module ProjectTypesRelations
         def self_reference?(subordinate)
           return false unless subordinate.present?
 
-          subordinate.id == self.id
+          subordinate.id == id
         end
 
         def check_circular_reference(subordinate)
@@ -95,9 +96,8 @@ module ProjectTypesRelations
         end
 
         def filter_for_superordinate_ids
-          ProjectTypesRelation.where(subordinate_id: self.id).pluck(:superordinate_id)
+          ProjectTypesRelation.where(subordinate_id: id).pluck(:superordinate_id)
         end
-
       end
     end
   end

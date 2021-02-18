@@ -21,7 +21,7 @@
 
 module ProjectTypesRelations
   module Relations
-    module Enable 
+    module Enable
       def enable(name)
         self.class.send name
       end

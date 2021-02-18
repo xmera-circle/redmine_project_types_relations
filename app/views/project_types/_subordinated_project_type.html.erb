@@ -18,14 +18,16 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %>
 
-<%= error_messages_for 'project' %>
+<% if ProjectTypes.any? %>
+  <%= error_messages_for 'project' %>
 
-<% if @project_type.safe_attribute?('subordinate_ids') %>
-  <fieldset class="box tabular" id="subordinated_project_types" >
-    <legend>
-      <%= toggle_checkboxes_link('#subordinated_project_types input[type=checkbox]:enabled') %>
-      <%= l(:label_subordinated_project_type_plural) %>
-    </legend> 
-    <%= subordinated_project_types_multiselect(@project_type.id, available_subordinates ) %>
-  </fieldset>
+  <% if @project_type.safe_attribute?('subordinate_ids') %>
+    <fieldset class="box tabular" id="subordinated_project_types" >
+      <legend>
+        <%= toggle_checkboxes_link('#subordinated_project_types input[type=checkbox]:enabled') %>
+        <%= l(:label_subordinated_project_type_plural) %>
+      </legend> 
+      <%= subordinated_project_types_multiselect(@project_type.id, available_subordinates ) %>
+    </fieldset>
+  <% end %>
 <% end %>

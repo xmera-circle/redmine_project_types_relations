@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -16,26 +18,23 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-
-
 module SubordinatedProjectTypesHelper
-
-  def subordinated_project_types_multiselect(project_type_id, choices, _options={})
+  def subordinated_project_types_multiselect(_project_type_id, choices, _options = {})
     return nothing_to_select unless available_subordinates?
 
-      hidden_field_tag("project_type[subordinate_ids][]", '').html_safe +
+    hidden_field_tag('project_type[subordinate_ids][]', '').html_safe +
       choices.collect do |choice|
         text, value = (choice.is_a?(Array) ? choice : [choice, choice])
         content_tag(
           'label',
           check_box_tag(
-             "project_type[subordinate_ids][]",
-             value,
-             @project_type.subordinate_assigned?(value),
-             :id => nil
-           ) + text.to_s,
-          :class => 'inline' #'block'
-         )
+            'project_type[subordinate_ids][]',
+            value,
+            @project_type.subordinate_assigned?(value),
+            id: nil
+          ) + text.to_s,
+          class: 'inline' # 'block'
+        )
       end.join.html_safe
   end
 
@@ -65,5 +64,4 @@ module SubordinatedProjectTypesHelper
     superordinates = ProjectType.where.not(id: project_type.superordinate_ids)
     project_type.new_record? || superordinates.empty? ? ProjectType : superordinates
   end
-
 end

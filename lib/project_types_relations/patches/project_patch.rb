@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -19,14 +21,14 @@
 module ProjectTypesRelations
   module Patches
     module ProjectPatch
-      def self.prepended(base) 
+      def self.prepended(base)
         base.extend(ClassMethods)
         base.prepend(InstanceMethods)
         base.class_eval do
           include ProjectTypesRelations::Relations::HostProjects
           include ProjectTypesRelations::Relations::Enable
           include ProjectTypesRelations::Associations::HostProjects
-   
+
           after_initialize do
             enable(:hosted_projects) if ProjectTypes.any?
           end
@@ -34,6 +36,7 @@ module ProjectTypesRelations
       end
 
       module ClassMethods; end
+
       module InstanceMethods; end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
 # Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
@@ -17,5 +19,5 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
-  render_on :view_projects_show_right, :partial => "projects/associated_projects_tables" 
+  render_on :view_projects_show_right, partial: 'projects/associated_projects_tables'
 end
