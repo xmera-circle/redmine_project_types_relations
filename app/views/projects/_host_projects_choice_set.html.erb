@@ -24,7 +24,7 @@
   <div>
 
   <% if @project.safe_attribute?('host_ids') %>
-    <% unless @project.new_record? %>
+    <% unless @project.new_record? || @project.project_type.nil? %>
       <fieldset class="box tabular" id="host_projects" >
         <legend>
           <%= toggle_checkboxes_link('#host_projects input[type=checkbox]:enabled') %>

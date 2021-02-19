@@ -62,7 +62,7 @@ module ProjectTypesRelations
           return unless subordinate.projects.any?
 
           errors.add :the_subordinate, l(:error_subordinates_have_projects_assigned, count: subordinate.projects.count)
-          raise self
+          raise ActiveModel::ValidationError, self
         end
 
         def check_reference(subordinate)
@@ -73,7 +73,7 @@ module ProjectTypesRelations
           return unless self_reference?(subordinate)
 
           errors.add :project_type, l(:error_validate_self_relation)
-          raise self
+          raise ActiveModel::ValidationError, self
         end
 
         def self_reference?(subordinate)
@@ -86,7 +86,7 @@ module ProjectTypesRelations
           return unless circular_reference?(subordinate)
 
           errors.add :project_type, l(:error_validate_circular_reference)
-          raise self
+          raise ActiveModel::ValidationError, self
         end
 
         def circular_reference?(subordinate)
