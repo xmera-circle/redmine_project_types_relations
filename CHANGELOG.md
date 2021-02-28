@@ -1,5 +1,14 @@
 # Changelog for Project Types Relations
 
+## 1.0.1 - 2021-02-28
+
+### Changed
+
+* ViewProjectsShowRightHookListener class to allow inheritation by other
+  plugins
+
+* some label
+
 ## 1.0.0 - 2021-02-19
 
 ### Added
