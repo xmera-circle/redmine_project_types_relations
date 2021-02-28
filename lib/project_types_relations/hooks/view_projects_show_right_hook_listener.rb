@@ -18,6 +18,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
-  render_on :view_projects_show_right, partial: 'projects/associated_projects_tables'
+module ProjectTypesRelations
+  module Hooks
+    class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
+      def view_projects_show_right(context={})
+        context[:controller].send :render_to_string, {
+            partial: 'projects/associated_projects_tables',
+            locals: context
+          }
+      end
+    end
+  end
 end
