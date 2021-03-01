@@ -12,7 +12,6 @@ de:
   
   field_the_subordinate: Der untergeordnete Projekttyp
 
-  error_validate_subordinate_project: kann nicht sich selbst untergeordnet sein
   error_validate_circular_reference: kann nicht sein übergeordnets Projekt als untergeordnetes Projekt auswählen
   error_validate_self_relation: kann nicht zu sich selbst in Beziehung stehen
   error_validate_is_project_type: muss ein existierender Projekttyp sein

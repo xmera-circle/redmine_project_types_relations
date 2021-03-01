@@ -19,5 +19,5 @@
 %>
 
 <% if ProjectTypes.any? %>
-  <td class="relation"><%= type.subordinates&.map(&:name).join(', ') %></td>
+  <td class="relation"><%= type&.subordinates&.map(&:name).join(', ') %></td>
 <% end %>

@@ -22,14 +22,13 @@
   </div>
   <%= error_messages_for 'projects' %>
   <div>
-
   <% if @project.safe_attribute?('host_ids') %>
-    <% unless @project.new_record? || @project.project_type.nil? %>
+    <% unless @project.new_record? || @project.project_type_id.nil? %>
       <fieldset class="box tabular" id="host_projects" >
         <legend>
           <%= toggle_checkboxes_link('#host_projects input[type=checkbox]:enabled') %>
           <%= l(:label_host_project_plural) %>
-        </legend> 
+        </legend>
         <%= host_projects_multiselect(@project.id, available_hosts ) %>
       </fieldset>
     <% end %>

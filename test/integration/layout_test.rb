@@ -54,9 +54,9 @@ module ProjectTypesRelations
     def test_existence_of_host_checkboxes_in_project_settings
       project1 = project(id: 3, type: 1)
       log_user('admin', 'admin')
-      get settings_project_path(project1)
+      get settings_project_path(project1.reload)
       assert_response :success
-      assert_select "input[type=checkbox][name='project[host_ids][]']"
+      assert_select '#host_projects'
     end
 
     def test_existence_of_subordinated_project_types
@@ -79,6 +79,7 @@ module ProjectTypesRelations
     def project(id:, type: nil)
       project = Project.find(id.to_i)
       project.project_type_id = type
+      project.save
       project
     end
   end
