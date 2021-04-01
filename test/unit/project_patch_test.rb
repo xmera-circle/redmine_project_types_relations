@@ -24,9 +24,9 @@ module ProjectTypesRelations
   class ProjectPatchTest < ActiveSupport::TestCase
     include Redmine::I18n
     extend ProjectTypesRelations::LoadFixtures
+    include ProjectTypesRelations::ProjectTypeCreator
 
-    fixtures :projects, :members, :member_roles, :roles, :users,
-             :project_types
+    fixtures :projects, :members, :member_roles, :roles, :users
 
     # test 'should have many hosts' do
     #   assert association = Project.reflect_on_association(:hosts)
@@ -34,28 +34,35 @@ module ProjectTypesRelations
     #   assert_equal hosts_options, association&.options
     # end
 
-    # test 'should have many projects_relations' do
-    #   assert association = Project.reflect_on_association(:projects_relations)
-    #   assert_equal :projects_relations, association.name
-    #   assert_equal projects_relations_options, association&.options
-    # end
+    test 'should have many projects_relations' do
+      assert association = Project.reflect_on_association(:projects_relations)
+      assert_equal :projects_relations, association.name
+      assert_equal projects_relations_options, association&.options
+    end
 
     test 'should save guest and host relations of a project' do
-      project(id: 1, type: 1).hosts << [project(id: 2, type: 2), project(id: 3, type: 2)]
-      assert_equal [2, 3], project(id: 1, type: 1).host_ids
+      # project_type3 = project_type(id: 3)
+      # project_type4 = project_type(id: 4)
+      project1 = project(id: 1, type: 3)
+      project2 = project(id: 2, type: 4)
 
-      assert_equal [1], project(id: 3, type: 2).guest_ids
-      assert_equal [project(id: 1, type: 1)], project(id: 2, type: 2).guests
+      project1.hosts << project2
+      assert_equal [2], project1.host_ids
+      assert_equal [project2], project1.hosts
+
+      assert_equal [1], project2.guest_ids
+      assert_equal [project1], project2.guests
     end
 
     test 'should find deprecated hosts before updating the project type of a project' do
-      project_type(id: 1).subordinates << project_type(id: 2)
-      project1 = project(id: 1, type: 1)
-      project2 = project(id: 2, type: 2)
-      project3 = project(id: 3, type: 2)
-      project1.hosts << [project2, project3]
+      project_type(id: 3).subordinates << project_type(id: 4)
+      project1 = project(id: 1, type: 3)
+      project2 = project(id: 2, type: 4)
+
+      project1.hosts << project2
       assert project1.valid?
-      project1.project_type_id = 3
+      project1.project_type_id = 5
+      byebug
       assert_not project1.valid?
       assert_equal [l(:error_project_has_invalid_host_projects)], project1.errors.messages[:project_type]
     end
@@ -82,7 +89,8 @@ module ProjectTypesRelations
     end
 
     def projects_relations_options
-      Hash({ foreign_key: :guest_id })
+      Hash({ foreign_key: :guest_id,
+             dependent: :destroy })
     end
 
     def project(id:, type: nil)
@@ -92,7 +100,7 @@ module ProjectTypesRelations
     end
 
     def project_type(id:)
-      ProjectType.find(id.to_i)
+      find_project_type(id: id)
     end
 
     def errors_for_existing_hosts_and_guests

@@ -29,7 +29,7 @@ module ProjectTypesRelations
       module ClassMethods
         def hosted_projects
           unless included_modules.include?(ProjectTypesRelations::Relations::HostProjects::InstanceMethods)
-            send :include, ProjectTypesRelations::Relations::HostProjects::InstanceMethods
+            send :prepend, ProjectTypesRelations::Relations::HostProjects::InstanceMethods
           end
 
           has_many :projects_relations,
@@ -41,7 +41,8 @@ module ProjectTypesRelations
                    source: :host,
                    autosave: true
 
-          validate :check_integrity_of_relations, on: :update
+        #  validate :check_integrity_of_relations, on: :update
+        validates :project_type_id, relation_integrity: true
 
           safe_attributes :host_ids
         end
@@ -59,21 +60,21 @@ module ProjectTypesRelations
         private
 
         def check_integrity_of_relations
-          return if project_type_id_unchanged? || independent?
+          return if project_type_id_unchanged? || project_independent?
 
-          errors.add :project_type, l(:error_project_has_guest_projects) if guests.any?
-          errors.add :project_type, l(:error_project_has_invalid_host_projects) if deprecated_hosts?
+          errors.add :base, l(:error_project_has_guest_projects) if guests.any?
+          errors.add :base, l(:error_project_has_invalid_host_projects) if deprecated_hosts?
         end
 
         def project_type_id_unchanged?
           !project_type_id_changed?
         end
 
-        def independent?
+        def project_independent?
           hosts.none? && guests.none?
         end
 
-        def dependent?
+        def project_dependent?
           hosts.any? && guests.any?
         end
 
@@ -82,6 +83,8 @@ module ProjectTypesRelations
         # what is not consistend with any of the project's project type subordinates.
         #
         def deprecated_hosts?
+          return unless project_type
+
           hosts.none? { |host_project| project_type.subordinate_ids.include? host_project.project_type_id }
         end
       end

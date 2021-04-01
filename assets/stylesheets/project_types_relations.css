@@ -1,4 +1,5 @@
 /* Project edit form */
-#host_projects {
+#host_projects,
+#subordinated_project_types {
   margin-bottom: 1rem;
 }

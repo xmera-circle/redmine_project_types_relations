@@ -22,3 +22,10 @@ en:
   error_project_has_guest_projects: cannot be changed, because there is at least one linked client project.
 
   message_nothing_to_select: There is no choice set!
+
+  text_subordinated_project_types_provide_service_projects: (provide services)
+
+  text_number_of_related_projects: 
+    zero: 0 related services
+    one:  1 related service
+    other: "%{count} related services"

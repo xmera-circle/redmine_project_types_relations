@@ -21,5 +21,5 @@
 # Hooks the partial for project types relations
 class ViewProjectsFormHookListener < Redmine::Hook::ViewListener
   render_on :view_projects_form,
-            partial: 'projects/host_projects_choice_set'
+            partial: 'projects/relations'
 end

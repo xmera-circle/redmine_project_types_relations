@@ -27,7 +27,9 @@ module ProjectTypesRelations
     include Redmine::I18n
     include ProjectTypesRelations::LoadFixtures
     include ProjectTypesRelations::AuthenticateUser
-    include ProjectTypesRelations::CreateProjectType
+    include ProjectTypesRelations::ProjectTypeCreator
+
+    set_fixture_class project_types: Project
 
     fixtures :projects, :issue_statuses, :issues,
              :enumerations, :issue_categories,

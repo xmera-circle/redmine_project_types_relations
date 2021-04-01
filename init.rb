@@ -33,8 +33,13 @@ Redmine::Plugin.register :redmine_project_types_relations do
 end
 
 ActiveSupport::Reloader.to_prepare do
-  unless ProjectTypesController.included_modules.include? SubordinatedProjectTypesHelper
-    ProjectTypesController.helper(SubordinatedProjectTypesHelper)
+  unless ProjectsController.included_modules.include? SubordinatedProjectTypesHelper
+    ProjectsController.helper(SubordinatedProjectTypesHelper)
   end
-  ProjectsController.helper(HostProjectsHelper) unless ProjectsController.included_modules.include? HostProjectsHelper
+  unless ProjectsController.included_modules.include? HostProjectsHelper
+    ProjectsController.helper(HostProjectsHelper)
+  end
+  unless ProjectsController.included_modules.include? ProjectTypesHelper
+    ProjectsController.helper(ProjectTypesHelper)
+  end
 end

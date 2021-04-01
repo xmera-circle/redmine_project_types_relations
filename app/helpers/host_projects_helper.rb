@@ -19,8 +19,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 module HostProjectsHelper
-  def host_projects_multiselect(_project_id, choices, _options = {})
-    return nothing_to_select unless available_hosts?
+  def host_projects_multiselect(project, choices, _options = {})
+    return nothing_to_select unless available_hosts?(project)
 
     hidden_field_tag('project[host_ids][]', '').html_safe +
       choices.collect do |choice|
@@ -30,7 +30,7 @@ module HostProjectsHelper
           check_box_tag(
             'project[host_ids][]',
             value,
-            @project.host_assigned?(value),
+            project.host_assigned?(value),
             id: nil
           ) + text.to_s,
           class: 'inline' # 'block'
@@ -45,14 +45,27 @@ module HostProjectsHelper
 
   private
 
-  def available_hosts?
-    available_hosts.present?
+  def available_hosts?(project)
+    available_hosts(project).present?
   end
 
-  def available_hosts
-    guests = guests_of(@project)
-    hosts = hosts_of(@project, guests)
-    hosts.collect { |t| [t.name, t.id.to_s] }
+  def available_hosts(project)
+    guests = guests_of(project)
+    hosts = hosts_of(project, guests)
+    hosts.collect { |host| [service_reporting(host), host.id.to_s] }
+  end
+
+  def service_reporting(project)
+    out = +''
+    out << project.name
+    out << report_project_type_name(project)
+    out.html_safe
+  end
+
+  def report_project_type_name(project)
+    tag.em class: 'info' do
+      project.project_type.name
+    end
   end
 
   def nothing_to_select
@@ -75,7 +88,7 @@ module HostProjectsHelper
   end
 
   def scoped_by_project_type(project)
-    project.project_type ? Project.where(project_type_id: project.project_type.subordinate_ids) : Project
+    project.project_type ? Project.projects.active.where(project_type_id: project.project_type.subordinate_ids) : Project
   end
 
   def create_table(project, category, columns)

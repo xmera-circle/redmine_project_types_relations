@@ -21,16 +21,29 @@
 
 module ProjectTypesRelations
   ##
-  # Provide user login test
+  # Create project types since fixtures does not work due to missing
+  # project_type table
   #
-  module CreateProjectType
-    def project_type_create_params(associates)
-      { project_type:
-        { name: 'Lore ipsum',
-          description: 'for testing',
-          is_public: 0,
-          default_member_role_id: 3,
-          position: 4 }.merge(associates) }
+  module ProjectTypeCreator
+    def find_project_type(id:)
+      project_type = ProjectType.find(id)
+      project_type.is_project_type = true
+      project_type.save
+      project_type
+    end
+
+    def project_type_params(name:)
+      { project: project_type_attributes(name: name) }
+    end
+
+    def create_project_type(name:)
+      ProjectType.create(project_type_attributes(name: name))
+    end
+
+    def project_type_attributes(name:)
+      { name: name,
+        identifier: name.parameterize,
+        is_project_type: true }
     end
   end
 end

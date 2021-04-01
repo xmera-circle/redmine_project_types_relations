@@ -19,4 +19,5 @@
 %>
 
 
-  <td class="relation"><%= project&.subordinates&.map(&:name).join(', ') %></td>
+<%= render partial: 'projects/host_projects_choice_set' unless @project.project_type_master? %> 
+<%= render partial: 'project_types/subordinated_project_type' if @project.project_type_master? %>

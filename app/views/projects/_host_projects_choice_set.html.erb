@@ -17,8 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %>
-
-<% if ProjectTypes.any? %>
+  
   </div>
   <%= error_messages_for 'projects' %>
   <div>
@@ -29,8 +28,7 @@
           <%= toggle_checkboxes_link('#host_projects input[type=checkbox]:enabled') %>
           <%= l(:label_host_project_plural) %>
         </legend>
-        <%= host_projects_multiselect(@project.id, available_hosts ) %>
+        <%= host_projects_multiselect(@project, available_hosts(@project) ) %>
       </fieldset>
     <% end %>
   <% end %>
-<% end %>

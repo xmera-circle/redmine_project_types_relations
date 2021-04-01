@@ -21,4 +21,10 @@ de:
   error_project_has_guest_projects: kann nicht geändert werden, weil es noch mind. einen verknüpften Client gibt.
 
   message_nothing_to_select: Es gibt keine Auswahl!
-  
+
+  text_subordinated_project_types_provide_service_projects: (stellen Dienste bereit)
+
+  text_number_of_related_projects: 
+    zero: 0 vebundene Dienste
+    one:  1 verbundener Dienst
+    other: "%{count} verbundene Dienste"

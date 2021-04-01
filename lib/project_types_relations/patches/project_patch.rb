@@ -25,12 +25,15 @@ module ProjectTypesRelations
         base.extend(ClassMethods)
         base.prepend(InstanceMethods)
         base.class_eval do
-          include ProjectTypesRelations::Relations::HostProjects
           include ProjectTypesRelations::Relations::Enable
+          include ProjectTypesRelations::Relations::HostProjects   
           include ProjectTypesRelations::Associations::HostProjects
+          include ProjectTypesRelations::Relations::SubordinatedProjectTypes
+          include ProjectTypesRelations::Associations::SubordinatedProjectTypes
 
           after_initialize do
-            enable(:hosted_projects) if ProjectTypes.any?
+            enable(:hosted_projects)
+            enable(:subordinated_project_types)
           end
         end
       end

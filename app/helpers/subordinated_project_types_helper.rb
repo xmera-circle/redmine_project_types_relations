@@ -19,33 +19,69 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 module SubordinatedProjectTypesHelper
-  def subordinated_project_types_multiselect(_project_type_id, choices, _options = {})
-    return nothing_to_select unless available_subordinates?
+  def subordinated_project_types_multiselect(project_type, choices, _options = {})
+    return nothing_to_select unless available_subordinates?(project_type)
 
-    hidden_field_tag('project_type[subordinate_ids][]', '').html_safe +
+    hidden_field_tag('project[subordinate_ids][]', '').html_safe +
       choices.collect do |choice|
-        text, value = (choice.is_a?(Array) ? choice : [choice, choice])
+        text, obj = (choice.is_a?(Array) ? choice : [choice, choice])
         content_tag(
           'label',
           check_box_tag(
-            'project_type[subordinate_ids][]',
-            value,
-            @project_type.subordinate_assigned?(value),
-            id: nil
+            'project[subordinate_ids][]',
+            obj.id.to_s,
+            project_type.subordinate_assigned?(obj.id.to_s),
+            id: nil,
+            disabled: all_related_projects(project_type, obj) > 0,
           ) + text.to_s,
           class: 'inline' # 'block'
         )
       end.join.html_safe
   end
 
-  def available_subordinates?
-    available_subordinates.present?
+  def available_subordinates?(project_type)
+    available_subordinates(project_type).present?
   end
 
-  def available_subordinates
-    superordinates = superordinates_of(@project_type)
-    subordinates = subordinates_of(@project_type, superordinates)
-    subordinates.collect { |t| [t.name, t.id.to_s] }
+  def available_subordinates(project_type)
+    superordinates = superordinates_of(project_type)
+    subordinates = subordinates_of(project_type, superordinates)
+    subordinates.collect { |subordinate| [ reporting(project_type, subordinate) , subordinate] }
+  end
+
+  def reporting(project_type, subordinate)
+    out = +''
+    out << subordinate.name
+    out << report_number_of_related_projects(project_type, subordinate)
+    out.html_safe
+  end
+  
+  # def report_number_of_assigned_projects(subordinate)
+  #   tag.em class: 'info' do 
+  #     number_of_assigned_projects(subordinate)
+  #   end
+  # end
+
+  def report_number_of_related_projects(project_type, subordinate)
+    tag.em class: 'info' do
+      count = all_related_projects(project_type, subordinate)
+      l(:text_number_of_related_projects, count)
+    end
+  end
+
+  def all_related_projects(project_type, subordinate)
+    count = []
+    assigned_projects(project_type).each do |project|
+      subordinate.relatives.each do |relative|
+        count << number_of_relations(project, relative)
+      end      
+    end
+    count.sum
+  end
+
+  def number_of_relations(project, other)
+    ProjectsRelation.where(guest_id: project.id, host_id: other.id).count
+    #  .or(ProjectsRelation.where(host_id: project.id, guest_id: other.id)).count
   end
 
   def nothing_to_select
@@ -61,7 +97,7 @@ module SubordinatedProjectTypesHelper
   # subordinate at the same time.
   #
   def superordinates_of(project_type)
-    superordinates = ProjectType.where.not(id: project_type.superordinate_ids)
+    superordinates = ProjectType.masters.active.where.not(id: project_type.superordinate_ids)
     project_type.new_record? || superordinates.empty? ? ProjectType : superordinates
   end
 end
