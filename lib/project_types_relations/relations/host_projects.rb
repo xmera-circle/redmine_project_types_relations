@@ -29,7 +29,7 @@ module ProjectTypesRelations
       module ClassMethods
         def hosted_projects
           unless included_modules.include?(ProjectTypesRelations::Relations::HostProjects::InstanceMethods)
-            send :prepend, ProjectTypesRelations::Relations::HostProjects::InstanceMethods
+            send :include, ProjectTypesRelations::Relations::HostProjects::InstanceMethods
           end
 
           has_many :projects_relations,
@@ -41,8 +41,7 @@ module ProjectTypesRelations
                    source: :host,
                    autosave: true
 
-        #  validate :check_integrity_of_relations, on: :update
-        validates :project_type_id, relation_integrity: true
+          validates :project_type_id, relation_integrity: true, on: :update
 
           safe_attributes :host_ids
         end
@@ -50,20 +49,15 @@ module ProjectTypesRelations
 
       module InstanceMethods
         def guests
-          ProjectsRelation.where(host_id: id).map(&:guest).compact
+          ProjectsRelation.guests(id)
         end
 
         def guest_ids
           guests&.map(&:id)
         end
 
-        private
-
-        def check_integrity_of_relations
-          return if project_type_id_unchanged? || project_independent?
-
-          errors.add :base, l(:error_project_has_guest_projects) if guests.any?
-          errors.add :base, l(:error_project_has_invalid_host_projects) if deprecated_hosts?
+        def guests_count
+          guest_ids.count
         end
 
         def project_type_id_unchanged?
@@ -74,18 +68,44 @@ module ProjectTypesRelations
           hosts.none? && guests.none?
         end
 
-        def project_dependent?
-          hosts.any? && guests.any?
-        end
-
         ##
         # A project has deprecated hosts if there is any host having a project_type
-        # what is not consistend with any of the project's project type subordinates.
+        # what is not consistend with any of the subordinates of the new
+        # project type .
         #
-        def deprecated_hosts?
-          return unless project_type
+        #
+        def deprecated_hosts
+          return false unless qualified_to_be_deprecated?
 
-          hosts.none? { |host_project| project_type.subordinate_ids.include? host_project.project_type_id }
+          deprecated = []
+          hosts.select do |host|
+            deprecated << host unless related_project_type?(host)
+          end
+          deprecated
+        end
+
+        def related_project_type?(host)
+          project_type.subordinate_ids.include? host.project_type_id
+        end
+
+        def qualified_to_be_deprecated?
+          hosts.present? || project_type || project_type.subordinates.present?
+        end
+
+        def deprecated_hosts?
+          deprecated_hosts.any?
+        end
+
+        def deprecated_hosts_count
+          deprecated_hosts.count
+        end
+
+        def deprecated_hosts_message
+          l(:error_deprecated_host_projects, count: deprecated_hosts_count)
+        end
+
+        def lost_guests_message
+          l(:error_lost_guest_projects, count: guests_count)
         end
       end
     end

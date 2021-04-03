@@ -28,21 +28,12 @@ module ProjectTypesRelations
 
     fixtures :projects, :members, :member_roles, :roles, :users
 
-    # test 'should have many hosts' do
-    #   assert association = Project.reflect_on_association(:hosts)
-    #   assert_equal :hosts, association.name
-    #   assert_equal hosts_options, association&.options
-    # end
-
-    test 'should have many projects_relations' do
-      assert association = Project.reflect_on_association(:projects_relations)
-      assert_equal :projects_relations, association.name
-      assert_equal projects_relations_options, association&.options
+    def setup
+      project_type(id: 4).subordinates << project_type(id: 5)
+      project_type(id: 6)
     end
 
     test 'should save guest and host relations of a project' do
-      # project_type3 = project_type(id: 3)
-      # project_type4 = project_type(id: 4)
       project1 = project(id: 1, type: 3)
       project2 = project(id: 2, type: 4)
 
@@ -55,29 +46,47 @@ module ProjectTypesRelations
     end
 
     test 'should find deprecated hosts before updating the project type of a project' do
-      project_type(id: 3).subordinates << project_type(id: 4)
-      project1 = project(id: 1, type: 3)
-      project2 = project(id: 2, type: 4)
+      project1 = project(id: 1, type: 4)
+      project2 = project(id: 2, type: 5)
 
       project1.hosts << project2
       assert project1.valid?
-      project1.project_type_id = 5
-      byebug
+
+      project1.project_type_id = 6
       assert_not project1.valid?
-      assert_equal [l(:error_project_has_invalid_host_projects)], project1.errors.messages[:project_type]
+      expected_error_message = [l(:error_deprecated_host_projects, count: 1)]
+      assert_equal expected_error_message, project1.errors.messages[:project_type_id]
     end
 
     test 'should find guests before updating the project type of a project' do
-      project_type(id: 1).subordinates << project_type(id: 2)
-      project1 = project(id: 1, type: 1)
-      project2 = project(id: 2, type: 2)
-      project3 = project(id: 3, type: 2)
+      project_type(id: 5).subordinates << project_type(id: 6)
+      project1 = project(id: 1, type: 4)
+      project2 = project(id: 2, type: 5)
+
+      project1.hosts << [project2]
+      assert project1.valid?
+
+      project2.project_type_id = 6
+      assert_not project2.valid?
+      expected_error_messages = [l(:error_lost_guest_projects, count: 1)]
+      assert_equal expected_error_messages, project2.errors.messages[:project_type_id]
+    end
+
+    test 'should find hosts and guests before updating the project type of a project' do
+      project_type(id: 5).subordinates << project_type(id: 6)
+      project1 = project(id: 1, type: 4)
+      project2 = project(id: 2, type: 5)
+      project3 = project(id: 3, type: 6)
+
       project1.hosts << [project2]
       project2.hosts << [project3]
-      assert project1.save! && project2.save!
-      project2.project_type_id = 3
+      assert project1.valid? && project2.valid?
+
+      project2.project_type_id = 6
       assert_not project2.valid?
-      assert_equal errors_for_existing_hosts_and_guests, project2.errors.messages[:project_type]
+      expected_error_messages = [l(:error_deprecated_host_projects, count: 1),
+                                 l(:error_lost_guest_projects, count: 1)]
+      assert_equal expected_error_messages, project2.errors.messages[:project_type_id]
     end
 
     private
@@ -96,15 +105,12 @@ module ProjectTypesRelations
     def project(id:, type: nil)
       project = Project.find(id.to_i)
       project.project_type_id = type
+      project.save
       project
     end
 
     def project_type(id:)
       find_project_type(id: id)
-    end
-
-    def errors_for_existing_hosts_and_guests
-      [l(:error_project_has_guest_projects), l(:error_project_has_invalid_host_projects)]
     end
   end
 end

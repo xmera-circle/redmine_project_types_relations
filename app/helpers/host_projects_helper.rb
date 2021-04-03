@@ -69,7 +69,7 @@ module HostProjectsHelper
   end
 
   def nothing_to_select
-    tag.em l(:message_nothing_to_select), class: 'nothing-to-select'
+    tag.em l(:text_nothing_to_select), class: 'nothing-to-select'
   end
 
   def hosts_of(project, guests)

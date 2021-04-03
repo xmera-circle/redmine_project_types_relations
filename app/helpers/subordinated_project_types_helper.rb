@@ -32,12 +32,14 @@ module SubordinatedProjectTypesHelper
             obj.id.to_s,
             project_type.subordinate_assigned?(obj.id.to_s),
             id: nil,
-            disabled: all_related_projects(project_type, obj) > 0,
+            disabled: all_related_projects(project_type, obj).positive?
           ) + text.to_s,
           class: 'inline' # 'block'
         )
       end.join.html_safe
   end
+
+  private
 
   def available_subordinates?(project_type)
     available_subordinates(project_type).present?
@@ -46,7 +48,7 @@ module SubordinatedProjectTypesHelper
   def available_subordinates(project_type)
     superordinates = superordinates_of(project_type)
     subordinates = subordinates_of(project_type, superordinates)
-    subordinates.collect { |subordinate| [ reporting(project_type, subordinate) , subordinate] }
+    subordinates.collect { |subordinate| [reporting(project_type, subordinate), subordinate] }
   end
 
   def reporting(project_type, subordinate)
@@ -55,12 +57,6 @@ module SubordinatedProjectTypesHelper
     out << report_number_of_related_projects(project_type, subordinate)
     out.html_safe
   end
-  
-  # def report_number_of_assigned_projects(subordinate)
-  #   tag.em class: 'info' do 
-  #     number_of_assigned_projects(subordinate)
-  #   end
-  # end
 
   def report_number_of_related_projects(project_type, subordinate)
     tag.em class: 'info' do
@@ -74,7 +70,7 @@ module SubordinatedProjectTypesHelper
     assigned_projects(project_type).each do |project|
       subordinate.relatives.each do |relative|
         count << number_of_relations(project, relative)
-      end      
+      end
     end
     count.sum
   end
@@ -85,7 +81,7 @@ module SubordinatedProjectTypesHelper
   end
 
   def nothing_to_select
-    tag.em l(:message_nothing_to_select), class: 'nothing-to-select'
+    tag.em l(:text_nothing_to_select), class: 'nothing-to-select'
   end
 
   def subordinates_of(project_type, superordinates)

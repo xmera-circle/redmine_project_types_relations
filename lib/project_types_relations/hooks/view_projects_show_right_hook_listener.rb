@@ -21,11 +21,11 @@
 module ProjectTypesRelations
   module Hooks
     class ViewProjectsShowRightHookListener < Redmine::Hook::ViewListener
-      def view_projects_show_right(context={})
+      def view_projects_show_right(context = {})
         context[:controller].send :render_to_string, {
-            partial: 'projects/associated_projects_tables',
-            locals: context
-          }
+          partial: 'projects/associated_projects_tables',
+          locals: context
+        }
       end
     end
   end

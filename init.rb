@@ -24,22 +24,18 @@ Redmine::Plugin.register :redmine_project_types_relations do
   name 'Project Types Relations Plugin'
   author 'Liane Hampe'
   description 'This is a plugin for setting project types in relation to each other.'
-  version '1.0.1'
+  version '2.0.0'
   url 'http://example.com/path/to/plugin'
   author_url 'http://example.com/about'
 
   requires_redmine version_or_higher: '4.1.1'
-  requires_redmine_plugin :redmine_project_types, version_or_higher: '3.0.1'
+  requires_redmine_plugin :redmine_project_types, version_or_higher: '4.0.0'
 end
 
 ActiveSupport::Reloader.to_prepare do
   unless ProjectsController.included_modules.include? SubordinatedProjectTypesHelper
     ProjectsController.helper(SubordinatedProjectTypesHelper)
   end
-  unless ProjectsController.included_modules.include? HostProjectsHelper
-    ProjectsController.helper(HostProjectsHelper)
-  end
-  unless ProjectsController.included_modules.include? ProjectTypesHelper
-    ProjectsController.helper(ProjectTypesHelper)
-  end
+  ProjectsController.helper(HostProjectsHelper) unless ProjectsController.included_modules.include? HostProjectsHelper
+  ProjectsController.helper(ProjectTypesHelper) unless ProjectsController.included_modules.include? ProjectTypesHelper
 end

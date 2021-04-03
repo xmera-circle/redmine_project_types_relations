@@ -2,29 +2,25 @@
 en:
   label_subordinated_project_type: Supordinated project type
   label_subordinated_project_type_plural: Supordinated project types
-  label_superordinated_project_type: Superordinated project type
-  label_superordinated_project_type_plural: Superordinated project types
   label_host_project: Service
   label_host_project_plural: Services
   label_guest_project: Guest project
   label_guest_project_plural: Client
   label_assigned_project_plural: Linked projects
-
-  field_the_subordinate: The subordinated project type
    
   error_validate_subordinated_project: can't be subordianted to itself
   error_validate_circular_reference: can't choose its superordinate project as subordinate one
   error_validate_self_relation: can't be in relation to itself
-  error_validate_is_project_type: needs to be an existing project type
-  error_validate_host_project: does not exist
   error_subordinates_have_projects_assigned: can't be deleted because there are linked projects.
-  error_project_has_invalid_host_projects: cannot be changed, because there is at least one linked service project.
-  error_project_has_guest_projects: cannot be changed, because there is at least one linked client project.
+  error_deprecated_host_projects: 
+    one: cannot be changed, because there is 1 linked service project.
+    other: cannot be changed, because there are %{count} linked service projects.
+  error_lost_guest_projects: 
+    one: cannot be changed, because there is 1 linked client project.
+    other: cannot be changed, because there are %{count} linked client projects.
 
-  message_nothing_to_select: There is no choice set!
-
+  text_nothing_to_select: There is no choice set!
   text_subordinated_project_types_provide_service_projects: (provide services)
-
   text_number_of_related_projects: 
     zero: 0 related services
     one:  1 related service

@@ -22,110 +22,145 @@ require File.expand_path('../test_helper', __dir__)
 
 module ProjectTypesRelations
   class ProjectsControllerPatchTest < ActionDispatch::IntegrationTest
-    fixtures :projects, :members, :member_roles, :roles, :users
+    include Redmine::I18n
+    include ProjectTypesRelations::ProjectTypeCreator
+    include ProjectTypesRelations::AuthenticateUser
 
-    #  test "new projects should not display the relation to field" do
-    #    @request.session[:user_id] = 1 # admin
-    #    get :new
-    #    assert_response :success
-    #    assert_select '#projects_relation_related_project_', false
-    #  end
+    fixtures :projects, :issue_statuses, :issues,
+             :enumerations, :issue_categories,
+             :projects_trackers, :trackers,
+             :roles, :member_roles, :members, :users,
+             :custom_fields, :custom_values,
+             :custom_fields_projects, :custom_fields_trackers
 
-    #  test "projects settings should display the relation to field" do
-    #    @request.session[:user_id] = 1 # admin
-    #    get :settings, :id => 1
-    #    assert_response :success
-    #    assert_select '#projects_relation_related_project_'
-    #  end
+    def setup
+      project_type(id: 4).subordinates << project_type(id: 5)
+      project_type(id: 6)
+    end
 
-    #  test "no relation choice set should be displayed when no project type is chosen" do
-    #    @request.session[:user_id] = 1 # admin
-    #    get :settings, :id => 4
-    #    assert_response :success
-    #    assert_select '#projects_relation_related_project_', false
-    #    assert_select "label", {count: 1, text: "Related to"}
-    #  end
+    test 'new projects should not display host projects box' do
+      log_user('jsmith', 'jsmith')
+      get new_project_path
+      assert_response :success
+      assert_select '#host_projects', false
+    end
 
-    #  test "no relation choice set should be displayed when there is no relation with the project type" do
-    #    @request.session[:user_id] = 1 # admin
-    #    get :settings, :id => 5
-    #    assert_response :success
-    #    assert_select '#projects_relation_related_project_', false
-    #    assert_select "label", {count: 1, text: "Related to"}
-    #  end
+    test 'projects settings should display host projects box' do
+      log_user('jsmith', 'jsmith')
+      get settings_project_path(project(id: 1, type: 4))
+      assert_response :success
+      assert_select '#host_projects'
+    end
 
-    #  test "should show the relation choice set when the chosen project type has a relation" do
-    #    @request.session[:user_id] = 1 # admin
-    #    get :settings, :id => 1
-    #    assert_response :success
-    #    assert_select 'input[name=?]', 'projects_relation[related_project][]', 2
-    #  end
+    test 'no hosts choice set should be displayed when no project type is chosen' do
+      log_user('jsmith', 'jsmith')
+      get settings_project_path(project(id: 1))
+      assert_response :success
+      assert_select 'select[name=?]', 'project[project_type_id]' do
+        assert_select 'option[selected=selected]', false
+        assert_select 'option[value=""]'
+      end
+      assert_select '#host_projects', false
+    end
 
-    #  test "update displayed choice set when project type selection is changed" do
-    #    @request.session[:user_id] = 1 # admin
-    #    post :update, :id => 1, project: {
-    #                   projects_project_type_attributes: { id: 1,
-    #                              project_type_id: nil
-    #                            }}
-    #    assert_redirected_to '/projects/ecookbook/settings'
-    #    get :settings, :id => 1
-    #    assert_response :success
-    #    assert_select 'input[name=?]', 'projects_relation[related_project][]', 0
-    #    assert_select "label", {count: 1, text: "Related to"}
-    #  end
+    test 'should not display the hosts choice set when project type has no subordinates' do
+      log_user('jsmith', 'jsmith')
+      get settings_project_path(project(id: 1, type: 6))
+      assert_response :success
+      assert_select '#host_projects'
+      assert_match l(:text_nothing_to_select), response.body
+    end
 
-    #  test "update existing projects relations" do
-    #    @request.session[:user_id] = 1 # admin
-    #    post :update, :id => 1, project: {
-    #                   projects_project_type_attributes: { id: 1,
-    #                              project_type_id: 1
-    #                            }}
-    #    assert_redirected_to '/projects/ecookbook/settings'
-    #    get :settings, :id => 1
-    #    assert_response :success
-    #    assert_select 'input[name=?]', 'projects_relation[related_project][]', 2
-    #  end
+    test 'should show the host choice set when the chosen project type has subordinates' do
+      project1 = project(id: 1, type: 4)
+      project1.hosts << [project(id: 2, type: 5), project(id: 3, type: 5)]
+      log_user('jsmith', 'jsmith')
+      get settings_project_path(project1)
+      assert_response :success
+      # Counts also the hidden field
+      assert_select 'input[name=?]', 'project[host_ids][]', 3
+    end
 
-    #  test "create a new projects relation" do
-    #    @request.session[:user_id] = 1 # admin
-    #    assert_difference('ProjectsRelation.count',1) do
-    #      patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook'},
-    #                              projects_relation: {project_id: 1, related_project: ['','3']}
-    #      assert_redirected_to '/projects/ecookbook/settings'
-    #    end
-    #    get :settings, :id => 1
-    #    assert_response :success
-    #    assert_select 'input[name=?][value=?]', 'projects_relation[related_project][]', '3', 1
-    #  end
+    test 'should update project type only without deprecated hosts and lost guests' do
+      project1 = project(id: 1, type: 4)
+      log_user('jsmith', 'jsmith')
+      patch project_path(project1), params: {
+        project: { project_type_id: '5' }
+      }
+      assert_redirected_to '/projects/ecookbook/settings'
+      get settings_project_path(project1)
+      assert_response :success
+      assert_select 'select[name=?]', 'project[project_type_id]' do
+        assert_select 'option[value="5"][selected=selected]'
+      end
+    end
 
-    #  test "update project type should delete the projects relations" do
-    #    @request.session[:user_id] = 1 # admin
-    #    assert_difference('ProjectsRelation.count',1) do
-    #      patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
-    #                                         projects_project_type_attributes: {id: 1, project_type_id: 1}},
-    #                               projects_relation: {project_id: 1, related_project: ['','3']}
-    #      assert_redirected_to '/projects/ecookbook/settings'
-    #    end
-    #    assert_difference('ProjectsRelation.count',-1) do
-    #      patch :update, :id => 1, project: {name: 'eCookbook', identifier: 'ecookbook',
-    #                                         projects_project_type_attributes: {id: 1, project_type_id: nil}},
-    #                               projects_relation: {project_id: 1, related_project: ['','3']}
-    #      assert_redirected_to '/projects/ecookbook/settings'
-    #    end
-    #    get :settings, :id => 1
-    #    assert_response :success
-    #    assert_select 'input[name=?]', 'projects_relation[related_project][]', 0
-    #  end
+    test 'should not update project type with deprecated hosts and lost guests' do
+      project_type(id: 5).subordinates << project_type(id: 6)
+      project1 = project(id: 1, type: 4)
+      project2 = project(id: 2, type: 5)
+      project1.hosts << project2
 
-    #  test "delete a project should delete the respective projects relations" do
-    #    @request.session[:user_id] = 1 # admin
-    #    assert_equal 1, ProjectsRelation.where(project_id: 3).count
-    #    assert_difference('Project.count',-1) do
-    #      delete :destroy, :id => 3, :confirm => 1
-    #      assert_redirected_to admin_projects_path #'/admin/projects'
-    #    end
-    #    assert_nil Project.find_by(id: 3)
-    #    assert_equal 0, ProjectsRelation.where(project_id: 3).count, "projects relation still exists"
-    #  end
+      log_user('jsmith', 'jsmith')
+      patch project_path(project1), params: {
+        project: { project_type_id: '6' }
+      }
+      assert_response :success
+      assert_select_error "Project Type #{l(:error_deprecated_host_projects, count: 1)}"
+    end
+
+    test 'should update existing hosts' do
+      project1 = project(id: 1, type: 4)
+      project(id: 2, type: 5)
+      project(id: 3, type: 5)
+      log_user('jsmith', 'jsmith')
+      patch project_path(project1), params: {
+        project: { host_ids: ['', '2', '3'] }
+      }
+      assert_redirected_to settings_project_path(project1)
+      get settings_project_path(project1)
+      assert_response :success
+      # Counts also the hidden field
+      assert_select 'input[name=?]', 'project[host_ids][]', 3
+    end
+
+    test 'should should delete the respective hosts when deleting a project' do
+      project1 = project(id: 1, type: 4)
+      project2 = project(id: 2, type: 5)
+      project1.hosts << project2
+
+      log_user('admin', 'admin')
+      # Deletes also the child project
+      assert_difference('Project.projects.count', -2) do
+        delete "/projects/#{project1.identifier}", params: { confirm: 1 }
+      end
+      assert_redirected_to admin_projects_path
+      assert_nil Project.find_by(id: 1)
+      assert_equal 0, ProjectsRelation.where(guest_id: 3).count
+    end
+
+    test 'should disable subordinate check boxes when they have host projects' do
+      project1 = project(id: 1, type: 4)
+      project2 = project(id: 2, type: 5)
+      project1.hosts << project2
+      log_user('admin', 'admin')
+      get settings_project_path(project_type(id: 4))
+      assert_select '#subordinated_project_types' do
+        assert_select 'input[name=?][value="5"][disabled=disabled]', 'project[subordinate_ids][]'
+      end
+    end
+
+    private
+
+    def project_type(id:)
+      find_project_type(id: id)
+    end
+
+    def project(id:, type: nil)
+      project = Project.find(id.to_i)
+      project.project_type_id = type
+      project.save
+      project
+    end
   end
 end

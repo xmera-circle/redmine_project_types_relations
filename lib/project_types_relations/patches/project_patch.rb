@@ -22,13 +22,11 @@ module ProjectTypesRelations
   module Patches
     module ProjectPatch
       def self.prepended(base)
-        base.extend(ClassMethods)
-        base.prepend(InstanceMethods)
         base.class_eval do
           include ProjectTypesRelations::Relations::Enable
-          include ProjectTypesRelations::Relations::HostProjects   
-          include ProjectTypesRelations::Associations::HostProjects
+          include ProjectTypesRelations::Relations::HostProjects
           include ProjectTypesRelations::Relations::SubordinatedProjectTypes
+          include ProjectTypesRelations::Associations::HostProjects
           include ProjectTypesRelations::Associations::SubordinatedProjectTypes
 
           after_initialize do
@@ -37,10 +35,6 @@ module ProjectTypesRelations
           end
         end
       end
-
-      module ClassMethods; end
-
-      module InstanceMethods; end
     end
   end
 end

@@ -61,28 +61,6 @@ module ProjectTypesRelations
       assert_equal [l(:error_validate_circular_reference)], project_type2.errors.messages[:project_type]
     end
 
-    test 'should not change subordinates when they have host projects' do
-  skip 'Rewrite test as functional'
-      project_type1 = project_type(id: 1)
-      project_type2 = project_type(id: 2)
-      project3 = project(id: 3, type: 2)
-      project4 = project(id: 4, type: 1)
-      project_type1.subordinates << project_type2
-      project_type1.relatives << project4
-      project_type2.relatives << project3
-      # Set the relation between two projects which binds the project types to 
-      # each other
-      project4.hosts << project3
-      byebug
-      begin
-        project_type1.subordinate_ids = []
-      rescue ActiveRecord::RecordInvalid
-        return false
-      end
-      assert_equal [l(:error_subordinates_have_projects_assigned, count: 1)],
-                   project_type1.errors.messages[:the_subordinate]
-    end
-
     test 'should have extended safe_attribute_names' do
       assert_equal [], project_type(id: 1).safe_attribute_names - safe_attribute_names
       assert_equal [], safe_attribute_names - project_type(id: 1).safe_attribute_names
@@ -99,9 +77,9 @@ module ProjectTypesRelations
       project.project_type_id = type
       project
     end
-    
+
     ##
-    # Enabled module names are disabled when the user is not allowed to 
+    # Enabled module names are disabled when the user is not allowed to
     # select project module. In this test the current user is anonymous.
     #
     def safe_attribute_names

@@ -2,28 +2,24 @@
 de:
   label_subordinated_project_type: Untergeordneter Projekttyp
   label_subordinated_project_type_plural: Untergeordnete Projekttypen
-  label_superordinated_project_type: Übergeordneter Projekttyp
-  label_superordinated_project_type_plural: Übergeordnete Projekttypen
   label_host_project: Dienst
   label_host_project_plural: Dienste
-  label_guest_project: Client
-  label_guest_project_plural: Client
+  label_guest_project: Klient
+  label_guest_project_plural: Klienten
   label_assigned_project_plural: Verknüpfte Projekte
   
-  field_the_subordinate: Der untergeordnete Projekttyp
-
   error_validate_circular_reference: kann nicht sein übergeordnets Projekt als untergeordnetes Projekt auswählen
   error_validate_self_relation: kann nicht zu sich selbst in Beziehung stehen
-  error_validate_is_project_type: muss ein existierender Projekttyp sein
-  error_validate_host_project: existiert nicht
   error_subordinates_have_projects_assigned: konnte nicht entfernt werden, weil er %{count} verknüpfte Projekte hat.
-  error_project_has_invalid_host_projects: kann nicht geändert werden, weil es noch mind. einen verknüpften Dienst gibt.
-  error_project_has_guest_projects: kann nicht geändert werden, weil es noch mind. einen verknüpften Client gibt.
+  error_deprecated_host_projects: 
+    one: kann nicht geändert werden, weil es noch 1 verknüpften Dienst gibt.
+    other: kann nicht geändert werden, weil es noch %{count} verknüpfte Dienste gibt.
+  error_lost_guest_projects: 
+    one: kann nicht geändert werden, weil es noch 1 verknüpften Klienten gibt.
+    other: kann nicht geändert werden, weil es noch %{count} verknüpfte Klienten gibt.
 
-  message_nothing_to_select: Es gibt keine Auswahl!
-
+  text_nothing_to_select: Es gibt keine Auswahl!
   text_subordinated_project_types_provide_service_projects: (stellen Dienste bereit)
-
   text_number_of_related_projects: 
     zero: 0 vebundene Dienste
     one:  1 verbundener Dienst

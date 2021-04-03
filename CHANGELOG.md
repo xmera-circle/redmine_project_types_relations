@@ -1,5 +1,15 @@
 # Changelog for Project Types Relations
 
+## 2.0.0 - unreleased
+
+### Changed
+
+* the codebase to be compatible with redmine_project_types 4.0.0
+
+### Added
+
+* rubcop configuration file
+
 ## 1.0.1 - 2021-02-28
 
 ### Changed
