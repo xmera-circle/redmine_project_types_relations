@@ -49,7 +49,7 @@ module ProjectTypesRelations
 
       module InstanceMethods
         def guests
-          ProjectsRelation.guests(id)
+          @guests ||= ProjectsRelation.guests(id)
         end
 
         def guest_ids
@@ -75,7 +75,7 @@ module ProjectTypesRelations
         #
         #
         def deprecated_hosts
-          return false unless qualified_to_be_deprecated?
+          return unless qualified_to_be_deprecated?
 
           deprecated = []
           hosts.select do |host|

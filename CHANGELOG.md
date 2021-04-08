@@ -1,10 +1,11 @@
 # Changelog for Project Types Relations
 
-## 2.0.0 - 2021-04-04
+## 2.0.0 - 2021-04-08
 
 ### Changed
 
 * the codebase to be compatible with redmine_project_types 4.0.0
+* some methods to improve performance
 
 ### Added
 

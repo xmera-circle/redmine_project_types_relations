@@ -73,7 +73,7 @@ module HostProjectsHelper
   end
 
   def hosts_of(project, guests)
-    project.new_record? ? guests.sorted : guests.where.not(id: project.id).sorted
+    project.new_record? ? guests.includes(:project_type).sorted : guests.includes(:project_type).where.not(id: project.id).sorted
   end
 
   ##
