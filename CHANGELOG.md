@@ -31,74 +31,65 @@
 * association tables
 * Redmine core patches
 
-0.2.3 *2019-04-26*
-------------------
+## 0.2.3 - 2019-04-26
 
-		Redmine 3.4.10 Support
+### Added
 
+* Redmine 3.4.10 Support
 
+## 0.2.2 - 2019-01-15
 
-0.2.2 *2019-01-15*
-------------------
+### Added
 
-		Requirements
-    Documentation
-    Fixtures
-    Migrations
+* some documentation in init.rb and test files
 
-* [MODIFIED]: Modifies requirement of other files.
-* [ADDED]:    Adds some documentation in init.rb and test files.
-* [MODIFIED]: Reworks the fixture path in fixture_handling.rb.
-* [MODIFIED]: Modifies migration files to avoid errors of mysql2 when running migration more than once.
+### Changed
 
-0.2.1 *2018-19-27*
-------------------
+* fixture path in fixture_handling.rb
+* migration files to avoid errors of mysql2 when running migration more than once
 
-		Redmine 3.4.6 Support
+## 0.2.1 - 2018-19-27
 
-0.2.0 *2018-01-30*
-------------------
+### Added
 
-    Code Refactoring
-    Licence Text
-    Markdown Files
-    Compatability with Redmine 3.4.4
-    
-* [MODIFIED]: Adjusts folders and files to meet a better structure
-              for patching redmine core
-* [ADDED]: Adds the licence text to all relevant files
-* [MODIFIED]: Adjusts the CHANGELOG and README to .md-files
-* [ADDED]: Oses a call hook for the project view
+* Redmine 3.4.6 Support
 
+## 0.2.0 - 2018-01-30
 
-0.1.3 *2017-12-03*
-------------------
+### Added
 
-    Localization
-    
-	* [MODIFIED]: Labels from Objekt-Type adjusted to 'Objekttyp' and from 'In untergordneter Beziehung zu to untergordneter Objekttyp'
+* licence text to all relevant files
+* call hook for project view
 
-0.1.2 *2017-11-26*
-------------------
+### Changed
 
-    Redmine Requirements
-    
+* folders and files to meet a better structure for patching redmine core
+* CHANGELOG and README to *.md files
 
-* [MODIFIED]: Requires redmine 3.3.2 or higher
+## 0.1.3 - 2017-12-03
 
-0.1.1 *2017-05-03*
-------------------
+### Changed
 
-    Extends Projects Overview
-    Localization
-    
-* [ADDED]: adds assigned resource box to projects overview
-* [MODIFIED]: renames all project related labels to object
+* some :de label values
 
-0.1.0 *2017-04-28*
-------------------
+## 0.1.2 - 2017-11-26
 
-    Initital Version
-    
+### Changed
 
-* [ADDED]: initial alpha version
+* requirement for redmine to 3.3.2 or higher
+
+## 0.1.1 - 2017-05-03
+
+### Added
+
+* assigned resource box to projects overview
+
+### Changed
+
+* all project related labels to 'object'
+
+## 0.1.0 - 2017-04-28
+
+### Added
+
+* initial alpha version

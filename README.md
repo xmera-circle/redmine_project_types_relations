@@ -1,5 +1,7 @@
 # Redmine Project Types Relations
 
+Display dependencies between your projects using project types
+
 ![Redmine Plugin Version](https://img.shields.io/badge/Redmine_Plugin-v2.0.0-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v4.x.x-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-development-important)
 
 Redmine Project Types Relations is a plugin which lets the user define relations between projects that are beyond the default project hierarchy tree.
@@ -13,11 +15,11 @@ More information and screenshots can be found at
 
 You need a running Redmine instance in order to install the plugin. If you need help with the installation, please refer to [Redmine.org](https://redmine.org).
 
-Instructions for the installation of this plugin can be found in the [official documentation](https://circle.xmera.de/projects/redmine-project-types/wiki/Documentation).
+Instructions for the installation of this plugin can be found in the [official documentation](https://circle.xmera.de/projects/redmine-project-types-relations/wiki/Documentation).
 
 ## Changelog
 
-All notable changes to this plugin will be reported in the [changelog](https://circle.xmera.de/projects/redmine-project-types/wiki/Changelog) at xmera Circle.
+All notable changes to this plugin will be reported in the [changelog](https://circle.xmera.de/projects/redmine-project-types-relations/wiki/Changelog) at xmera Circle.
 
 ## Licence
 
