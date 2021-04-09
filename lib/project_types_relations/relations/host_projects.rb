@@ -48,11 +48,19 @@ module ProjectTypesRelations
       end
 
       module InstanceMethods
-        def initialize(attributes = nil, *args)
-          super(attributes, args)
-          @guests = []
-        end
-
+        ##
+        # A Project instance may request quite often its guests. This will
+        # happen especially in RelationIntegrityValidator when looking for
+        # lost guests. Therefore, guests are saved in an instance variable.
+        #
+        # @note There is a drawback: When a project has already at least one
+        #  guest and another project sets its hosts with this project then
+        #  it won't be recocnised until the instance is thrown away and created
+        #  newly.
+        #
+        # @return [Array(Project)] An array of guest projects which is empty if
+        #  there are no guests.
+        #
         def guests
           return @guests if @guests.present?
 
