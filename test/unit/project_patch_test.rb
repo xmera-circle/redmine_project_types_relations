@@ -34,13 +34,14 @@ module ProjectTypesRelations
     end
 
     test 'should save guest and host relations of a project' do
-      project1 = project(id: 1, type: 3)
-      project2 = project(id: 2, type: 4)
-
+      project1 = project(id: 1, type: 4)
+      project2 = project(id: 2, type: 5)
       project1.hosts << project2
+      project1.reload
+      project2.reload
+
       assert_equal [2], project1.host_ids
       assert_equal [project2], project1.hosts
-
       assert_equal [1], project2.guest_ids
       assert_equal [project1], project2.guests
     end

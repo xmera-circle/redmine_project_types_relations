@@ -48,8 +48,15 @@ module ProjectTypesRelations
       end
 
       module InstanceMethods
+        def initialize(attributes = nil, *args)
+          super(attributes, args)
+          @guests = []
+        end
+
         def guests
-          @guests ||= ProjectsRelation.guests(id)
+          return @guests if @guests.present?
+
+          @guests = ProjectsRelation.guests(id)
         end
 
         def guest_ids
