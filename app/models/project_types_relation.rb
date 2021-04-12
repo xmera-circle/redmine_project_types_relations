@@ -24,6 +24,8 @@ class ProjectTypesRelation < ActiveRecord::Base
 
   validate :subordinate_relations
 
+  scope :superordinates, ->(id) { where(subordinate_id: id).map(&:superordinate).compact }
+
   private
 
   def subordinate_relations

@@ -41,13 +41,16 @@ module ProjectTypesRelations
                    source: :subordinate,
                    autosave: true
 
+
           safe_attributes :subordinate_ids
         end
       end
 
       module InstanceMethods
         def superordinates
-          ProjectTypesRelation.where(subordinate_id: id).map(&:superordinate).compact
+          return @superordinates if @superordinates.present?
+
+          @superordinates = ProjectTypesRelation.superordinates(id)
         end
 
         def superordinate_ids

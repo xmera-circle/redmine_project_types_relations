@@ -22,5 +22,5 @@ class ProjectsRelation < ActiveRecord::Base
   belongs_to :guest, class_name: 'Project'
   belongs_to :host, class_name: 'Project'
 
-  scope :guests, ->(host_id) { where(host_id: host_id).map(&:guest).compact }
+  scope :guests, ->(id) { where(host_id: id).map(&:guest).compact }
 end
