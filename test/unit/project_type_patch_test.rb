@@ -41,24 +41,20 @@ module ProjectTypesRelations
 
     test 'should not save itself as subordinate relation' do
       project_type1 = project_type(id: 1)
-      begin
-        project_type1.subordinates << project_type1
-      rescue ActiveRecord::RecordInvalid
-        return false
-      end
-      assert_equal [l(:error_validate_self_relation)], project_type1.errors.messages[:project_type]
+      project_type1.subordinates << project_type1
+      expected_message = [l(:error_validate_self_relation)]
+      actual_message = project_type1.errors.messages[:"#{project_type1.name}"]
+      assert_equal expected_message, actual_message
     end
 
     test 'should not save a superordinate as subordinate' do
       project_type1 = project_type(id: 1)
       project_type2 = project_type(id: 2)
       project_type1.subordinates << project_type2
-      begin
-        project_type2.subordinates << project_type1
-      rescue ActiveRecord::RecordInvalid
-        return false
-      end
-      assert_equal [l(:error_validate_circular_reference)], project_type2.errors.messages[:project_type]
+      project_type2.subordinates << project_type1
+      expected_message = [l(:error_validate_circular_reference)]
+      actual_message = project_type2.errors.messages[:"#{project_type1.name}"]
+      assert_equal expected_message, actual_message
     end
 
     test 'should have extended safe_attribute_names' do

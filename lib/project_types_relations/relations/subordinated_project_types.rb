@@ -34,13 +34,15 @@ module ProjectTypesRelations
 
           has_many :project_types_relations,
                    foreign_key: :superordinate_id,
-                   dependent: :destroy
+                   dependent: :destroy,
+                   autosave: true
 
           has_many :subordinates,
                    through: :project_types_relations,
                    source: :subordinate,
+                   before_add: :circular_reference?,
+                   before_remove: :close_relatives?,
                    autosave: true
-
 
           safe_attributes :subordinate_ids
         end
@@ -55,6 +57,52 @@ module ProjectTypesRelations
 
         def superordinate_ids
           superordinates&.map(&:id)
+        end
+
+        def circular_reference?(subordinate)
+          return unless self?(subordinate.id) || subordinate.subordinate_assigned?(id)
+          if self?(subordinate.id)
+            errors.add subordinate.name, l(:error_validate_self_relation)
+          else
+            errors.add subordinate.name, l(:error_validate_circular_reference)
+          end
+          raise ActiveRecord::Rollback
+        end
+
+        ##
+        # Validation needs to take place here since the destroy action
+        # is not recognized in ProjectTypesRelation class.
+        #
+        def close_relatives?(subordinate)
+          found = close_hosts(subordinate)
+          return unless found.present?
+
+          errors.add subordinate.name, l(:error_subordinates_have_projects_assigned, value: close_hosts_message)
+          raise ActiveRecord::Rollback
+        end
+
+        def close_hosts(subordinate)
+          search_close_hosts(load_close_hosts_candidates(subordinate))
+        end
+
+        def load_close_hosts_candidates(subordinate)
+          ProjectType.masters.where(id: [id, subordinate.id]).includes(relatives: :hosts)
+        end
+
+        def search_close_hosts(candidates)
+          candidates = candidates.dup.to_a
+          candidates.reverse! unless candidates.first.id == id
+          first = candidates.first.relatives.map(&:hosts).flatten
+          last = candidates.last.relatives
+          first & last
+        end
+
+        def close_hosts_message
+          l(:error_projects_use_services, value: name)
+        end
+
+        def self?(other_id)
+          id == other_id
         end
       end
     end
