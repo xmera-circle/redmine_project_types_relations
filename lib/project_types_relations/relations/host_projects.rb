@@ -64,7 +64,7 @@ module ProjectTypesRelations
         def guests
           return @guests if @guests.present?
 
-          @guests = ProjectsRelation.guests(id)
+          @guests = ProjectsRelation.guests(id).includes(:guest).map(&:guest)
         end
 
         def guest_ids
