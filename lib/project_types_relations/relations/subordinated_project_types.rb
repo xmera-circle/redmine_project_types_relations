@@ -52,7 +52,7 @@ module ProjectTypesRelations
         def superordinates
           return @superordinates if @superordinates.present?
 
-          @superordinates = ProjectTypesRelation.superordinates(id)
+          @superordinates = ProjectTypesRelation.superordinates(id).includes(:superordinate).map(&:superordinate)
         end
 
         def superordinate_ids

@@ -22,5 +22,5 @@ class ProjectTypesRelation < ActiveRecord::Base
   belongs_to :superordinate, class_name: 'ProjectType'
   belongs_to :subordinate, class_name: 'ProjectType'
 
-  scope :superordinates, ->(id) { where(subordinate_id: id).map(&:superordinate).compact }
+  scope :superordinates, ->(id) { where(subordinate_id: id) }
 end

@@ -1,5 +1,11 @@
 # Changelog for Project Types Relations
 
+## 2.0.1 - 2021-04-14
+
+### Changed
+
+* some methods to improve performance w.r.t. subordinated project types
+
 ## 2.0.0 - 2021-04-08
 
 ### Changed
