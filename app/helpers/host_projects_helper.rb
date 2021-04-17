@@ -20,21 +20,24 @@
 
 module HostProjectsHelper
   def host_projects_multiselect(project, choices, _options = {})
-    return nothing_to_select unless available_hosts?(project)
+    return nothing_to_select unless choices.present?
 
     hidden_field_tag('project[host_ids][]', '').html_safe +
-      choices.collect do |choice|
-        text, value = (choice.is_a?(Array) ? choice : [choice, choice])
-        content_tag(
-          'label',
-          check_box_tag(
-            'project[host_ids][]',
-            value,
-            project.host_assigned?(value),
-            id: nil
-          ) + text.to_s,
-          class: 'inline' # 'block'
-        )
+      choices.collect do |key, values|
+        report_project_type_name(key) +
+        values.collect do |choice|
+          name, id = (choice.is_a?(Array) ? choice : [choice.name, choice.id])
+          content_tag(
+            'label',
+            check_box_tag(
+              'project[host_ids][]',
+              id,
+              project.host_assigned?(id),
+              id: nil
+            ) + name.to_s,
+            class: 'inline' # 'block'
+          )
+        end.join.html_safe
       end.join.html_safe
   end
 
@@ -45,26 +48,26 @@ module HostProjectsHelper
 
   private
 
-  def available_hosts?(project)
-    available_hosts(project).present?
-  end
+  # def available_hosts?(project)
+  #   available_hosts(project).present?
+  # end
 
-  def available_hosts(project)
-    guests = guests_of(project)
-    hosts = hosts_of(project, guests)
-    hosts.collect { |host| [service_reporting(host), host.id.to_s] }
-  end
+  # def available_hosts(project)
+  #   guests = guests_of(project)
+  #   hosts = hosts_of(project, guests)
+  #   hosts.collect { |host| [service_reporting(host), host.id.to_s] }
+  # end
 
-  def service_reporting(project)
-    out = +''
-    out << project.name
-    out << report_project_type_name(project)
-    out.html_safe
-  end
+  # def with_project_type(project)
+  #   out = +''
+  #   out << project.name
+  #   out << report_project_type_name(project)
+  #   out.html_safe
+  # end
 
-  def report_project_type_name(project)
+  def report_project_type_name(name)
     tag.em class: 'info' do
-      project.project_type.name
+      name
     end
   end
 

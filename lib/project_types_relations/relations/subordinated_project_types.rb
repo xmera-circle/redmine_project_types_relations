@@ -56,7 +56,9 @@ module ProjectTypesRelations
         end
 
         def superordinate_ids
-          superordinates&.map(&:id)
+          return @superordinate_ids if @superordinate_ids.present?
+
+          @superordinate_ids = ProjectTypesRelation.superordinates(id).includes(:superordinate).pluck(:superordinate_id)
         end
 
         def circular_reference?(subordinate)

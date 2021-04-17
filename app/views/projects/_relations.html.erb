@@ -18,6 +18,5 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %>
 
-
 <%= render partial: 'projects/host_projects_choice_set' unless @project.project_type_master? %> 
 <%= render partial: 'project_types/subordinated_project_type' if @project.project_type_master? %>

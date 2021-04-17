@@ -27,6 +27,7 @@ require 'project_types_relations/relations/enable'
 
 # Patches
 require 'project_types_relations/patches/project_patch'
+require 'project_types_relations/patches/projects_controller_patch'
 
 # Hooks
 require 'project_types_relations/hooks/view_projects_form_hook_listener'

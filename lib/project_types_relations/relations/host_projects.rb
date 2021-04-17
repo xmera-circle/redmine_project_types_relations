@@ -45,6 +45,11 @@ module ProjectTypesRelations
 
           safe_attributes :host_ids
         end
+
+        def hosts_for_select(project)
+          ids = project.project_type.subordinate_ids
+          Project.projects.active.where(project_type_id: ids).includes(:project_type).select(:id, :name, :project_type_id)
+        end
       end
 
       module InstanceMethods
@@ -68,7 +73,9 @@ module ProjectTypesRelations
         end
 
         def guest_ids
-          guests&.map(&:id)
+          return @guest_ids if @guest_ids.present?
+
+          @guest_ids = ProjectsRelation.guests(id).includes(:guest).pluck(:guest_id)
         end
 
         def guests_count

@@ -24,7 +24,7 @@ module SubordinatedProjectTypesHelper
 
     hidden_field_tag('project[subordinate_ids][]', '').html_safe +
       choices.collect do |choice|
-        name, id = (choice.is_a?(Array) ? choice : [choice, choice])
+        name, id = (choice.is_a?(Array) ? choice : [choice.name, choice.id])
         next if project_type.self?(id) || project_type.superordinate_ids.include?(id)
 
         content_tag(
@@ -45,32 +45,4 @@ module SubordinatedProjectTypesHelper
   def nothing_to_select
     tag.em l(:name_nothing_to_select), class: 'nothing-to-select'
   end
-
-  # def reporting(project_type, subordinate)
-  #   out = +''
-  #   out << subordinate.name
-  #   out << report_number_of_related_projects(project_type, subordinate)
-  #   out.html_safe
-  # end
-
-  # def report_number_of_related_projects(project_type, subordinate)
-  #   tag.em class: 'info' do
-  #     count = all_related_projects(project_type, subordinate)
-  #     l(:name_number_of_related_projects, count)
-  #   end
-  # end
-
-  # def all_related_projects(project_type, subordinate)
-  #   count = []
-  #   assigned_projects(project_type).each do |project|
-  #     subordinate.relatives.each do |relative|
-  #       count << number_of_relations(project, relative)
-  #     end
-  #   end
-  #   count.sum
-  # end
-
-  # def number_of_relations(project, other)
-  #   ProjectsRelation.where(guest_id: project.id, host_id: other.id).count
-  #   #  .or(ProjectsRelation.where(host_id: project.id, guest_id: other.id)).count
 end
