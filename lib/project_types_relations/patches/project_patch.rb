@@ -28,11 +28,6 @@ module ProjectTypesRelations
           include ProjectTypesRelations::Relations::SubordinatedProjectTypes
           include ProjectTypesRelations::Associations::HostProjects
           include ProjectTypesRelations::Associations::SubordinatedProjectTypes
-
-          after_initialize do
-            enable(:hosted_projects)
-            enable(:subordinated_project_types)
-          end
         end
       end
     end

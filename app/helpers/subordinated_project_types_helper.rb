@@ -27,7 +27,14 @@ module SubordinatedProjectTypesHelper
         name, id = (choice.is_a?(Array) ? choice : [choice.name, choice.id])
         next if project_type.self?(id) || project_type.superordinate_ids.include?(id)
 
-        content_tag(
+        render_subordinated_check_box(id, name, project_type)
+      end.join.html_safe
+  end
+
+  private
+
+  def render_subordinated_check_box(id, name, project_type)
+    content_tag(
           'label',
           check_box_tag(
             'project[subordinate_ids][]',
@@ -37,10 +44,7 @@ module SubordinatedProjectTypesHelper
           ) + name.to_s,
           class: 'inline' # 'block'
         )
-      end.join.html_safe
   end
-
-  private
 
   def nothing_to_select
     tag.em l(:name_nothing_to_select), class: 'nothing-to-select'

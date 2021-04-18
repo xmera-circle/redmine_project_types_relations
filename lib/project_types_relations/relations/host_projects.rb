@@ -24,28 +24,23 @@ module ProjectTypesRelations
     module HostProjects
       def self.included(base)
         base.extend ClassMethods
-      end
-
-      module ClassMethods
-        def hosted_projects
-          unless included_modules.include?(ProjectTypesRelations::Relations::HostProjects::InstanceMethods)
-            send :include, ProjectTypesRelations::Relations::HostProjects::InstanceMethods
-          end
-
+        base.include InstanceMethods
+        base.class_eval do
           has_many :projects_relations,
-                   foreign_key: :guest_id,
-                   dependent: :destroy
+                    foreign_key: :guest_id,
+                    dependent: :destroy
 
           has_many :hosts,
                    through: :projects_relations,
-                   source: :host,
-                   autosave: true
+                   source: :host
 
           validates :project_type_id, relation_integrity: true, on: :update
 
           safe_attributes :host_ids
         end
+      end
 
+      module ClassMethods
         def hosts_for_select(project)
           ids = project.project_type.subordinate_ids
           Project.projects.active.where(project_type_id: ids).includes(:project_type).select(:id, :name, :project_type_id)

@@ -24,29 +24,23 @@ module ProjectTypesRelations
     module SubordinatedProjectTypes
       def self.included(base)
         base.extend ClassMethods
-      end
-
-      module ClassMethods
-        def subordinated_project_types
-          unless included_modules.include?(ProjectTypesRelations::Relations::SubordinatedProjectTypes::InstanceMethods)
-            send :include, ProjectTypesRelations::Relations::SubordinatedProjectTypes::InstanceMethods
-          end
-
+        base.include InstanceMethods
+        base.class_eval do
           has_many :project_types_relations,
-                   foreign_key: :superordinate_id,
-                   dependent: :destroy,
-                   autosave: true
+                    foreign_key: :superordinate_id,
+                    dependent: :destroy
 
           has_many :subordinates,
                    through: :project_types_relations,
                    source: :subordinate,
                    before_add: :circular_reference?,
-                   before_remove: :close_relatives?,
-                   autosave: true
+                   before_remove: :close_relatives?
 
           safe_attributes :subordinate_ids
         end
       end
+
+      module ClassMethods; end
 
       module InstanceMethods
         def superordinates
