@@ -1,5 +1,19 @@
 # Changelog for Project Types Relations
 
+## 2.0.2 - 2021-04-19
+
+### Removed
+
+* after_initialize callback in Project patch which was the reason for a memory leak
+
+### Added
+
+* instance variables in ProjectsController#settings in order to improve performance
+
+### Changed
+
+* some further methods to improve performance
+
 ## 2.0.1 - 2021-04-14
 
 ### Changed
