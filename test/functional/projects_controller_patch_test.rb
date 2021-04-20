@@ -131,8 +131,9 @@ module ProjectTypesRelations
 
       log_user('admin', 'admin')
       # Deletes also the child project
+
       assert_difference('Project.projects.count', -2) do
-        delete "/projects/#{project1.identifier}", params: { confirm: 1 }
+        delete "/projects/#{project1.identifier}", params: { confirm: project1.identifier }
       end
       assert_redirected_to admin_projects_path
       assert_nil Project.find_by(id: 1)
