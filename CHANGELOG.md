@@ -1,5 +1,15 @@
 # Changelog for Project Types Relations
 
+## 2.0.3 - unreleased
+
+### Changed
+
+* ProjectsControllerPatchTest to support Redmine 4.2
+
+### Added
+
+* NullProjectType patch and test
+
 ## 2.0.2 - 2021-04-19
 
 ### Removed
