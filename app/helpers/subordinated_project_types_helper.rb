@@ -42,7 +42,7 @@ module SubordinatedProjectTypesHelper
             project_type.subordinate_assigned?(id),
             id: nil
           ) + name.to_s,
-          class: 'inline' # 'block'
+          class: 'floating' # 'block'
         )
   end
 
