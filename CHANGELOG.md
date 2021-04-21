@@ -9,6 +9,7 @@
 ### Added
 
 * NullProjectType patch and test
+* ProjectType patch
 
 ## 2.0.2 - 2021-04-19
 
