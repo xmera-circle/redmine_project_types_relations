@@ -1,6 +1,6 @@
 # Changelog for Project Types Relations
 
-## 2.0.3 - unreleased
+## 2.0.3 - 2021-04-22
 
 ### Changed
 
