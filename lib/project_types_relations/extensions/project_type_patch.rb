@@ -19,9 +19,9 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 module ProjectTypesRelations
-  module Patches
+  module Extensions
     module ProjectTypePatch
-      def self.prepended(base)
+      def self.included(base)
         base.extend(ClassMethods)
       end
 
@@ -36,7 +36,7 @@ end
 
 # Apply patch
 Rails.configuration.to_prepare do
-  unless ProjectType.included_modules.include?(ProjectTypesRelations::Patches::ProjectTypePatch)
-    ProjectType.prepend(ProjectTypesRelations::Patches::ProjectTypePatch)
+  unless ProjectType.included_modules.include?(ProjectTypesRelations::Extensions::ProjectTypePatch)
+    ProjectType.include(ProjectTypesRelations::Extensions::ProjectTypePatch)
   end
 end

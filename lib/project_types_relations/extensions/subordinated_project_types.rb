@@ -20,15 +20,14 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 module ProjectTypesRelations
-  module Relations
+  module Extensions
     module SubordinatedProjectTypes
       def self.included(base)
-        base.extend ClassMethods
         base.include InstanceMethods
         base.class_eval do
           has_many :project_types_relations,
-                    foreign_key: :superordinate_id,
-                    dependent: :destroy
+                   foreign_key: :superordinate_id,
+                   dependent: :destroy
 
           has_many :subordinates,
                    through: :project_types_relations,
@@ -40,9 +39,11 @@ module ProjectTypesRelations
         end
       end
 
-      module ClassMethods; end
-
       module InstanceMethods
+        def subordinate_assigned?(id)
+          subordinate_ids.include?(id.to_i)
+        end
+
         def superordinates
           return @superordinates if @superordinates.present?
 

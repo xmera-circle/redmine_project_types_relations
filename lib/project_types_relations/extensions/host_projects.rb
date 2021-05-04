@@ -20,15 +20,15 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 module ProjectTypesRelations
-  module Relations
+  module Extensions
     module HostProjects
       def self.included(base)
         base.extend ClassMethods
         base.include InstanceMethods
         base.class_eval do
           has_many :projects_relations,
-                    foreign_key: :guest_id,
-                    dependent: :destroy
+                   foreign_key: :guest_id,
+                   dependent: :destroy
 
           has_many :hosts,
                    through: :projects_relations,
@@ -48,6 +48,10 @@ module ProjectTypesRelations
       end
 
       module InstanceMethods
+        def host_assigned?(id)
+          host_ids.include?(id.to_i)
+        end
+        
         ##
         # A Project instance may request quite often its guests. This will
         # happen especially in RelationIntegrityValidator when looking for
