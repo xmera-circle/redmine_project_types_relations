@@ -19,7 +19,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 # Hooks the partial for project types
-class ViewProjectTypesFormTopHookListener < Redmine::Hook::ViewListener
-  render_on :view_project_types_form_top,
-            partial: 'project_types/number_of_assigned_projects'
+module ProjectTypesRelations
+  module Hooks
+    class ViewProjectTypesFormTopHookListener < Redmine::Hook::ViewListener
+      render_on :view_project_types_form_top,
+                partial: 'project_types/number_of_assigned_projects'
+    end
+  end
 end

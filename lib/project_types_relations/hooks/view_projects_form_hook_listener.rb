@@ -22,10 +22,14 @@
 # Hooks the partial for project (types) relations.
 #
 #
-class ViewProjectsFormHook < Redmine::Hook::ViewListener
-  def view_projects_form(context = {})
-    context[:controller].send :render_to_string, {
-      partial: 'projects/relations'
-    }
+module ProjectTypesRelations
+  module Hooks
+    class ViewProjectsFormHook < Redmine::Hook::ViewListener
+      def view_projects_form(context = {})
+        context[:controller].send :render_to_string, {
+          partial: 'projects/relations'
+        }
+      end
+    end
   end
 end

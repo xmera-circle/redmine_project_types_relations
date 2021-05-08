@@ -19,7 +19,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 # Hooks the partial for project types
-class ViewProjectTypesTableHeaderHookListener < Redmine::Hook::ViewListener
-  render_on :view_project_types_table_header,
-            partial: 'project_types/table_header'
+module ProjectTypesRelations
+  module Hooks
+    class ViewProjectTypesTableHeaderHookListener < Redmine::Hook::ViewListener
+      render_on :view_project_types_table_header,
+                partial: 'project_types/table_header'
+    end
+  end
 end
