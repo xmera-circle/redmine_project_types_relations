@@ -1,10 +1,11 @@
 # Changelog for Project Types Relations
 
-## unreleased
+## 2.0.4 - 2021-05-29
 
 ### Changed
 
 * structure in lib dir
+* styling of no data user notice
 
 ## 2.0.3 - 2021-04-22
 

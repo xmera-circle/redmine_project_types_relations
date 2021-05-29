@@ -24,9 +24,9 @@ Redmine::Plugin.register :redmine_project_types_relations do
   name 'Project Types Relations Plugin'
   author 'Liane Hampe'
   description 'This is a plugin for setting project types in relation to each other.'
-  version '2.0.3'
-  url 'http://example.com/path/to/plugin'
-  author_url 'http://example.com/about'
+  version '2.0.4'
+  url 'https://circle.xmera.de/projects/redmine-project-types-relations'
+  author_url 'https://circle.xmera.de/users/5'
 
   requires_redmine version_or_higher: '4.1.1'
   requires_redmine_plugin :redmine_project_types, version_or_higher: '4.0.0'
