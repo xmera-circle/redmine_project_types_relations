@@ -13,6 +13,5 @@ en:
   error_subordinates_have_projects_assigned: can't be deleted, because %{value}
   error_projects_use_services: "there are %{value} projects using this service."
 
-  text_nothing_to_select: There is no choice set!
   text_subordinated_project_types_provide_service_projects: (provide services)
   

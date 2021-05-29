@@ -1,0 +1,21 @@
+project_type_001:
+  id: 7
+  name: name1
+  description: description1
+  is_public: 0
+  is_project_type: true
+
+
+project_type_002:
+  id: 8
+  name: name2
+  description: description2
+  is_public: 1
+  is_project_type: true
+  
+project_type_003:
+  id: 9
+  name: name3
+  description: description3
+  is_public: 0
+  is_project_type: true

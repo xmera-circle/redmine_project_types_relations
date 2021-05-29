@@ -51,7 +51,7 @@ module ProjectTypesRelations
         def host_assigned?(id)
           host_ids.include?(id.to_i)
         end
-        
+
         ##
         # A Project instance may request quite often its guests. This will
         # happen especially in RelationIntegrityValidator when looking for

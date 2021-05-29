@@ -13,6 +13,5 @@ de:
   error_subordinates_have_projects_assigned: konnte nicht entfernt werden, weil %{value}
   error_projects_use_services: "es %{value}-Projekte gibt, die diesen Dienst benutzen."
 
-  text_nothing_to_select: Es gibt keine Auswahl!
   text_subordinated_project_types_provide_service_projects: (stellen Dienste bereit)
   

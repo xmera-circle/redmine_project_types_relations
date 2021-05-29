@@ -68,7 +68,7 @@ module ProjectTypesRelations
       get settings_project_path(project(id: 1, type: 6))
       assert_response :success
       assert_select '#host_projects'
-      assert_match l(:text_nothing_to_select), response.body
+      assert_match l(:label_no_data), response.body
     end
 
     test 'should show the host choice set when the chosen project type has subordinates' do
@@ -106,7 +106,7 @@ module ProjectTypesRelations
         project: { project_type_id: '6' }
       }
       assert_response :success
-      assert_select_error "Project Type #{l(:error_deprecated_host_projects, count: 1)}"
+      assert_select_error "#{l(:label_project_type)} #{l(:error_deprecated_host_projects, count: 1)}"
     end
 
     test 'should update existing hosts' do

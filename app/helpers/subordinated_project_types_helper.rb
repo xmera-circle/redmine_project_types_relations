@@ -20,7 +20,7 @@
 
 module SubordinatedProjectTypesHelper
   def subordinated_project_types_multiselect(project_type, choices, _options = {})
-    return nothing_to_select unless choices.present?
+    return no_data unless choices.present?
 
     hidden_field_tag('project[subordinate_ids][]', '').html_safe +
       choices.collect do |choice|
@@ -46,7 +46,7 @@ module SubordinatedProjectTypesHelper
         )
   end
 
-  def nothing_to_select
-    tag.em l(:name_nothing_to_select), class: 'nothing-to-select'
+  def no_data
+    tag.div l(:label_no_data), class: 'nodata half-width'
   end
 end
