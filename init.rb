@@ -2,7 +2,7 @@
 
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-21 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2017-22 Liane Hampe <liaham@xmera.de>, xmera.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@ Redmine::Plugin.register :redmine_project_types_relations do
   name 'Project Types Relations Plugin'
   author 'Liane Hampe'
   description 'This is a plugin for setting project types in relation to each other.'
-  version '2.0.4'
+  version '2.0.5'
   url 'https://circle.xmera.de/projects/redmine-project-types-relations'
   author_url 'https://circle.xmera.de/users/5'
 
