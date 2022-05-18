@@ -2,14 +2,19 @@
 
 Display dependencies between your projects using project types
 
-![Redmine Plugin Version](https://img.shields.io/badge/Redmine_Plugin-v2.0.4-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v4.x.x-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-development-important)
+![Redmine Plugin Version](https://img.shields.io/badge/Redmine_Plugin-v2.0.4-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v4.x.x-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-release-important)
 
 Redmine Project Types Relations is a plugin which lets the user define relations between projects that are beyond the default project hierarchy tree.
 
 ---
 
-More information and screenshots can be found at
-[xmera Circle - the  community website of xmera](https://circle.xmera.de).
+## Context Information
+
+This plugin is part of a plugin selection aiming to provide the information security management system solution xmera Omnia.
+
+All plugins in the selection are compatible with [Redmine 4](https://redmine.org).
+
+More information about xmera Omnia can be found at [xmera](https://xmera.de).
 
 ## Installation
 
@@ -19,11 +24,11 @@ Instructions for the installation of this plugin can be found in the [official d
 
 ## Changelog
 
-All notable changes to this plugin will be reported in the [changelog](https://circle.xmera.de/projects/redmine-project-types-relations/wiki/Changelog) at xmera Circle.
+All notable changes to this plugin will be reported in the [changelog](https://circle.xmera.de/projects/redmine-project-types-relations/repository/redmine_project_types_relations/entry/CHANGELOG.md).
 
 ## Licence
 
-Copyright (C) 2017-2021 Liane Hampe (<liaham@xmera.de>), xmera.
+Copyright (C) 2017-2022 Liane Hampe (<liaham@xmera.de>), xmera.
 
 This plugin program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
