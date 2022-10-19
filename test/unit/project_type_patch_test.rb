@@ -33,7 +33,7 @@ module ProjectTypesRelations
       project_type2 = project_type(id: 2)
       project_type3 = project_type(id: 3)
       project_type1.subordinates << [project_type2, project_type3]
-      assert_equal [2, 3], project_type1.subordinate_ids
+      assert_equal [2, 3], project_type1.subordinate_ids.sort
 
       assert_equal [1], project_type3.superordinate_ids
       assert_equal [project_type1], project_type2.superordinates
