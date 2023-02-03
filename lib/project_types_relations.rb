@@ -19,11 +19,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 # Extensions
+require_relative 'project_types_relations/extensions/project_patch'
+require_relative 'project_types_relations/extensions/subordinated_project_types'
 require_relative 'project_types_relations/extensions/host_projects'
 require_relative 'project_types_relations/extensions/null_project_type_patch'
-require_relative 'project_types_relations/extensions/project_patch'
-require_relative 'project_types_relations/extensions/project_type_patch'
-require_relative 'project_types_relations/extensions/subordinated_project_types'
 
 # Hooks
 require_relative 'project_types_relations/hooks/view_projects_form_hook_listener'
@@ -40,9 +39,8 @@ require_relative 'project_types_relations/overrides/projects_controller_patch'
 module ProjectTypesRelations
   class << self
     def setup
-      %w[project_type_patch
+      %w[project_patch
          null_project_type_patch
-         project_patch
          projects_controller_patch].each do |patch|
         AdvancedPluginHelper::Patch.register(send(patch))
       end
@@ -54,18 +52,6 @@ module ProjectTypesRelations
 
     private
 
-    # def host_projects_project_patch
-    #   { klass: Project,
-    #     patch: ProjectTypesRelations::Extensions::HostProjects,
-    #     strategy: :include }
-    # end
-
-    # def host_projects_project_types_patch
-    #   { klass: ProjectType,
-    #     patch: ProjectTypesRelations::Extensions::HostProjects,
-    #     strategy: :include }
-    # end
-
     def null_project_type_patch
       { klass: NullProjectType,
         patch: ProjectTypesRelations::Extensions::NullProjectTypePatch,
@@ -75,26 +61,8 @@ module ProjectTypesRelations
     def project_patch
       { klass: Project,
         patch: ProjectTypesRelations::Extensions::ProjectPatch,
-        strategy: :prepend }
-    end
-
-    def project_type_patch
-      { klass: ProjectType,
-        patch: ProjectTypesRelations::Extensions::ProjectTypePatch,
         strategy: :include }
     end
-
-    # def subordinated_project_types_project_patch
-    #   { klass: Project,
-    #     patch: ProjectTypesRelations::Extensions::SubordinatedProjectTypes,
-    #     strategy: :include }
-    # end
-
-    # def subordinated_project_types_project_types_patch
-    #   { klass: ProjectType,
-    #     patch: ProjectTypesRelations::Extensions::SubordinatedProjectTypes,
-    #     strategy: :include }
-    # end
 
     def projects_controller_patch
       { klass: ProjectsController,
