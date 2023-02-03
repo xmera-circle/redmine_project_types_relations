@@ -27,10 +27,3 @@ module ProjectTypesRelations
     end
   end
 end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless NullProjectType.included_modules.include?(ProjectTypesRelations::Extensions::NullProjectTypePatch)
-    NullProjectType.include(ProjectTypesRelations::Extensions::NullProjectTypePatch)
-  end
-end

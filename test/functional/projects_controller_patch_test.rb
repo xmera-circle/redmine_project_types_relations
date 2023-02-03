@@ -77,6 +77,7 @@ module ProjectTypesRelations
       log_user('jsmith', 'jsmith')
       get settings_project_path(project1)
       assert_response :success
+
       # Counts also the hidden field
       assert_select 'input[name=?]', 'project[host_ids][]', 3
     end

@@ -18,7 +18,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require_dependency 'project_types_relations'
+require File.expand_path('lib/project_types_relations', __dir__)
 
 Redmine::Plugin.register :redmine_project_types_relations do
   name 'Project Types Relations Plugin'
@@ -32,10 +32,4 @@ Redmine::Plugin.register :redmine_project_types_relations do
   requires_redmine_plugin :redmine_project_types, version_or_higher: '4.0.0'
 end
 
-ActiveSupport::Reloader.to_prepare do
-  unless ProjectsController.included_modules.include? SubordinatedProjectTypesHelper
-    ProjectsController.helper(SubordinatedProjectTypesHelper)
-  end
-  ProjectsController.helper(HostProjectsHelper) unless ProjectsController.included_modules.include? HostProjectsHelper
-  ProjectsController.helper(ProjectTypesHelper) unless ProjectsController.included_modules.include? ProjectTypesHelper
-end
+ProjectTypesRelations.setup

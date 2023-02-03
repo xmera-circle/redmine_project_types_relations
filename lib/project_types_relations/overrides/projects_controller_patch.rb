@@ -39,10 +39,3 @@ module ProjectTypesRelations
     end
   end
 end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless ProjectsController.included_modules.include?(ProjectTypesRelations::Overrides::ProjectsControllerPatch)
-    ProjectsController.prepend ProjectTypesRelations::Overrides::ProjectsControllerPatch
-  end
-end

@@ -23,6 +23,8 @@ module ProjectTypesRelations
     module ProjectTypePatch
       def self.included(base)
         base.extend(ClassMethods)
+        base.include(ProjectTypesRelations::Extensions::HostProjects)
+        base.include(ProjectTypesRelations::Extensions::SubordinatedProjectTypes)
       end
 
       module ClassMethods
@@ -31,12 +33,5 @@ module ProjectTypesRelations
         end
       end
     end
-  end
-end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless ProjectType.included_modules.include?(ProjectTypesRelations::Extensions::ProjectTypePatch)
-    ProjectType.include(ProjectTypesRelations::Extensions::ProjectTypePatch)
   end
 end

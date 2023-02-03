@@ -19,18 +19,93 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
 # Extensions
-require 'project_types_relations/extensions/null_project_type_patch'
-require 'project_types_relations/extensions/project_patch'
-require 'project_types_relations/extensions/project_type_patch'
+require_relative 'project_types_relations/extensions/host_projects'
+require_relative 'project_types_relations/extensions/null_project_type_patch'
+require_relative 'project_types_relations/extensions/project_patch'
+require_relative 'project_types_relations/extensions/project_type_patch'
+require_relative 'project_types_relations/extensions/subordinated_project_types'
 
 # Hooks
-require 'project_types_relations/hooks/view_projects_form_hook_listener'
-require 'project_types_relations/hooks/view_layouts_base_html_head_hook_listener'
-require 'project_types_relations/hooks/view_projects_show_right_hook_listener'
-require 'project_types_relations/hooks/view_project_types_form_top_hook_listener'
-require 'project_types_relations/hooks/view_project_types_form_top_of_associates_hook_listener'
-require 'project_types_relations/hooks/view_project_types_table_header_hook_listener'
-require 'project_types_relations/hooks/view_project_types_table_data_hook_listener'
+require_relative 'project_types_relations/hooks/view_projects_form_hook_listener'
+require_relative 'project_types_relations/hooks/view_layouts_base_html_head_hook_listener'
+require_relative 'project_types_relations/hooks/view_projects_show_right_hook_listener'
+require_relative 'project_types_relations/hooks/view_project_types_form_top_hook_listener'
+require_relative 'project_types_relations/hooks/view_project_types_form_top_of_associates_hook_listener'
+require_relative 'project_types_relations/hooks/view_project_types_table_header_hook_listener'
+require_relative 'project_types_relations/hooks/view_project_types_table_data_hook_listener'
 
 # Overrides
-require 'project_types_relations/overrides/projects_controller_patch'
+require_relative 'project_types_relations/overrides/projects_controller_patch'
+
+module ProjectTypesRelations
+  class << self
+    def setup
+      %w[project_type_patch
+         null_project_type_patch
+         project_patch
+         projects_controller_patch].each do |patch|
+        AdvancedPluginHelper::Patch.register(send(patch))
+      end
+      AdvancedPluginHelper::Patch.apply do
+        { klass: ProjectTypesRelations,
+          method: :add_helpers }
+      end
+    end
+
+    private
+
+    # def host_projects_project_patch
+    #   { klass: Project,
+    #     patch: ProjectTypesRelations::Extensions::HostProjects,
+    #     strategy: :include }
+    # end
+
+    # def host_projects_project_types_patch
+    #   { klass: ProjectType,
+    #     patch: ProjectTypesRelations::Extensions::HostProjects,
+    #     strategy: :include }
+    # end
+
+    def null_project_type_patch
+      { klass: NullProjectType,
+        patch: ProjectTypesRelations::Extensions::NullProjectTypePatch,
+        strategy: :prepend }
+    end
+
+    def project_patch
+      { klass: Project,
+        patch: ProjectTypesRelations::Extensions::ProjectPatch,
+        strategy: :prepend }
+    end
+
+    def project_type_patch
+      { klass: ProjectType,
+        patch: ProjectTypesRelations::Extensions::ProjectTypePatch,
+        strategy: :include }
+    end
+
+    # def subordinated_project_types_project_patch
+    #   { klass: Project,
+    #     patch: ProjectTypesRelations::Extensions::SubordinatedProjectTypes,
+    #     strategy: :include }
+    # end
+
+    # def subordinated_project_types_project_types_patch
+    #   { klass: ProjectType,
+    #     patch: ProjectTypesRelations::Extensions::SubordinatedProjectTypes,
+    #     strategy: :include }
+    # end
+
+    def projects_controller_patch
+      { klass: ProjectsController,
+        patch: ProjectTypesRelations::Overrides::ProjectsControllerPatch,
+        strategy: :prepend }
+    end
+
+    def add_helpers
+      ProjectsController.helper(SubordinatedProjectTypesHelper)
+      ProjectsController.helper(HostProjectsHelper)
+      ProjectsController.helper(ProjectTypesHelper)
+    end
+  end
+end
