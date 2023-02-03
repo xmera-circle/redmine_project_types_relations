@@ -22,18 +22,9 @@ module ProjectTypesRelations
   module Extensions
     module ProjectPatch
       def self.included(base)
-        base.class_eval do
-          include ProjectTypesRelations::Extensions::HostProjects
-          include ProjectTypesRelations::Extensions::SubordinatedProjectTypes
-        end
+        base.include ProjectTypesRelations::Extensions::HostProjects
+        base.include ProjectTypesRelations::Extensions::SubordinatedProjectTypes
       end
     end
-  end
-end
-
-# Apply patch
-Rails.configuration.to_prepare do
-  unless Project.included_modules.include?(ProjectTypesRelations::Extensions::ProjectPatch)
-    Project.include(ProjectTypesRelations::Extensions::ProjectPatch)
   end
 end
