@@ -18,9 +18,10 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
+# rubocop:disable Rails/OutputSafety
 module SubordinatedProjectTypesHelper
   def subordinated_project_types_multiselect(project_type, choices, _options = {})
-    return no_data unless choices.present?
+    return no_data if choices.blank?
 
     hidden_field_tag('project[subordinate_ids][]', '').html_safe +
       choices.collect do |choice|
@@ -34,19 +35,18 @@ module SubordinatedProjectTypesHelper
   private
 
   def render_subordinated_check_box(id, name, project_type)
-    content_tag(
-          'label',
-          check_box_tag(
-            'project[subordinate_ids][]',
-            id,
-            project_type.subordinate_assigned?(id),
-            id: nil
-          ) + name.to_s,
-          class: 'floating' # 'block'
-        )
+    content_tag('label',
+                check_box_tag(
+                  'project[subordinate_ids][]',
+                  id,
+                  project_type.subordinate_assigned?(id),
+                  id: nil
+                ) + name.to_s,
+                class: 'floating') # 'block'
   end
 
   def no_data
     tag.div l(:label_no_data), class: 'nodata half-width'
   end
 end
+# rubocop:enable Rails/OutputSafety
