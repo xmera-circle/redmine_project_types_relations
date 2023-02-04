@@ -2,7 +2,7 @@
 
 Display dependencies between your projects using project types
 
-![Redmine Plugin Version](https://img.shields.io/badge/Redmine_Plugin-v2.0.6-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v4.x.x-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-release-important)
+![Redmine Plugin Version](https://img.shields.io/badge/Redmine_Plugin-v2.0.7-red) ![Redmine Version](https://img.shields.io/badge/Redmine-v5.0.x-blue) ![Language Support](https://img.shields.io/badge/Languages-en,_de-green) ![Version Stage](https://img.shields.io/badge/Stage-release-important)
 
 Redmine Project Types Relations is a plugin which lets the user define relations between projects that are beyond the default project hierarchy tree.
 
