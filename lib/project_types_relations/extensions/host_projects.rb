@@ -43,7 +43,11 @@ module ProjectTypesRelations
       module ClassMethods
         def hosts_for_select(project)
           ids = project.project_type.subordinate_ids
-          Project.projects.active.where(project_type_id: ids).includes(:project_type).select(:id, :name, :project_type_id)
+          Project
+            .projects.active
+            .where(project_type_id: ids)
+            .includes(:project_type)
+            .select(:id, :name, :project_type_id)
         end
       end
 
@@ -117,9 +121,7 @@ module ProjectTypesRelations
           deprecated_hosts.any?
         end
 
-        def deprecated_hosts_count
-          deprecated_hosts.count
-        end
+        delegate :count, to: :deprecated_hosts, prefix: true
 
         def deprecated_hosts_message
           l(:error_deprecated_host_projects, count: deprecated_hosts_count)
