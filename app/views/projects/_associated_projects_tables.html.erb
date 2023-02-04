@@ -20,7 +20,7 @@
 
   <% if @project.hosts.present? || project.guests.present?%>
     <div class="projects box">
-      <h3><%=l(:label_assigned_project_plural)%></h3> 
+      <h3 class='icon icon-shared'><%=l(:label_assigned_project_plural)%></h3> 
       <%= render_associated_projects(project: @project, 
                                     category: :guests, 
                                     label_left: :label_project_type,
