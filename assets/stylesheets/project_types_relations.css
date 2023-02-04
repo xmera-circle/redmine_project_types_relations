@@ -3,3 +3,8 @@
 #subordinated_project_types {
   margin-bottom: 1rem;
 }
+
+/* Project overview page */
+.projects.box .name {
+  text-align: left;
+}
