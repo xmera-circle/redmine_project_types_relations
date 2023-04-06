@@ -29,7 +29,7 @@ Redmine::Plugin.register :redmine_project_types_relations do
   author_url 'https://circle.xmera.de/users/5'
 
   requires_redmine version_or_higher: '4.1.1'
-  requires_redmine_plugin :redmine_project_types, version_or_higher: '4.0.0'
+  requires_redmine_plugin :redmine_project_types, version_or_higher: '4.2.3'
 end
 
 ProjectTypesRelations.setup
