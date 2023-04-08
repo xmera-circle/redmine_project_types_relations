@@ -2,7 +2,7 @@
 
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-22 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2017-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -77,6 +77,7 @@ module ProjectTypesRelations
       log_user('jsmith', 'jsmith')
       get settings_project_path(project1)
       assert_response :success
+
       # Counts also the hidden field
       assert_select 'input[name=?]', 'project[host_ids][]', 3
     end

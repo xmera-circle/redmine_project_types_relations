@@ -2,7 +2,7 @@
 
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-22 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2017-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -24,7 +24,7 @@
 #
 module ProjectTypesRelations
   module Hooks
-    class ViewProjectsFormHook < Redmine::Hook::ViewListener
+    class ViewProjectsFormHookListener < Redmine::Hook::ViewListener
       def view_projects_form(context = {})
         context[:controller].send :render_to_string, {
           partial: 'projects/relations'

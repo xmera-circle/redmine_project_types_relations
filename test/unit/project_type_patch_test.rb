@@ -2,7 +2,7 @@
 
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-22 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2017-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -79,24 +79,28 @@ module ProjectTypesRelations
     # select project module. In this test the current user is anonymous.
     #
     def safe_attribute_names
-      %w[name
-         description
-         identifier
-         is_public
-         homepage
-         parent_id
-         default_version_id
-         inherit_members
-         project_type_id
-         is_project_type
-         default_assigned_to_id
-         tracker_ids
-         custom_field_values
-         custom_fields
-         issue_custom_field_ids
-         project_custom_field_ids
-         subordinate_ids
-         host_ids]
+      names = %w[name
+                 description
+                 identifier
+                 is_public
+                 homepage
+                 parent_id
+                 default_version_id
+                 inherit_members
+                 project_type_id
+                 is_project_type
+                 default_assigned_to_id
+                 tracker_ids
+                 custom_field_values
+                 custom_fields
+                 issue_custom_field_ids
+                 project_custom_field_ids
+                 subordinate_ids
+                 host_ids]
+
+      return names if Rails.version < '6'
+
+      names | %w[default_issue_query_id]
     end
   end
 end

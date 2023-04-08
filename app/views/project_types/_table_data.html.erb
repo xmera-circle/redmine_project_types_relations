@@ -1,7 +1,7 @@
 <%
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-22 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2017-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -17,6 +17,5 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 %>
-
 
 <td class="relation"><%= project&.subordinates&.map(&:name).join(', ') %></td>

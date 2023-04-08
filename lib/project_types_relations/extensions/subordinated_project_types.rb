@@ -3,7 +3,7 @@
 #
 # Redmine plugin called Project Types Plugin.
 #
-# Copyright (C) 2017-22 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2017-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -58,6 +58,7 @@ module ProjectTypesRelations
 
         def circular_reference?(subordinate)
           return unless self?(subordinate.id) || subordinate.subordinate_assigned?(id)
+
           if self?(subordinate.id)
             errors.add subordinate.name, l(:error_validate_self_relation)
           else
@@ -72,7 +73,7 @@ module ProjectTypesRelations
         #
         def close_relatives?(subordinate)
           found = close_hosts(subordinate)
-          return unless found.present?
+          return if found.blank?
 
           errors.add subordinate.name, l(:error_subordinates_have_projects_assigned, value: close_hosts_message)
           raise ActiveRecord::Rollback

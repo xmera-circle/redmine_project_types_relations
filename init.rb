@@ -2,7 +2,7 @@
 
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-22 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2017-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,24 +18,18 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-require_dependency 'project_types_relations'
+require File.expand_path('lib/project_types_relations', __dir__)
 
 Redmine::Plugin.register :redmine_project_types_relations do
   name 'Project Types Relations Plugin'
   author 'Liane Hampe'
   description 'This is a plugin for setting project types in relation to each other.'
-  version '2.0.6'
+  version '2.0.7'
   url 'https://circle.xmera.de/projects/redmine-project-types-relations'
   author_url 'https://circle.xmera.de/users/5'
 
   requires_redmine version_or_higher: '4.1.1'
-  requires_redmine_plugin :redmine_project_types, version_or_higher: '4.0.0'
+  requires_redmine_plugin :redmine_project_types, version_or_higher: '4.2.3'
 end
 
-ActiveSupport::Reloader.to_prepare do
-  unless ProjectsController.included_modules.include? SubordinatedProjectTypesHelper
-    ProjectsController.helper(SubordinatedProjectTypesHelper)
-  end
-  ProjectsController.helper(HostProjectsHelper) unless ProjectsController.included_modules.include? HostProjectsHelper
-  ProjectsController.helper(ProjectTypesHelper) unless ProjectsController.included_modules.include? ProjectTypesHelper
-end
+ProjectTypesRelations.setup

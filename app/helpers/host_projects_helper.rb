@@ -2,7 +2,7 @@
 
 # Redmine plugin for xmera called Project Types Relations Plugin.
 #
-# Copyright (C) 2017-22 Liane Hampe <liaham@xmera.de>, xmera.
+# Copyright (C) 2017-2023 Liane Hampe <liaham@xmera.de>, xmera Solutions GmbH.
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -18,26 +18,27 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
+# rubocop:disable Rails/OutputSafety
 module HostProjectsHelper
-  def host_projects_multiselect(project, choices, _options = {})    
-    return no_data unless choices.present?
+  def host_projects_multiselect(project, choices, _options = {})
+    return no_data if choices.blank?
 
     hidden_field_tag('project[host_ids][]', '').html_safe +
       choices.collect do |key, values|
         report_project_type_name(key) +
-        values.collect do |choice|
-          name, id = (choice.is_a?(Array) ? choice : [choice.name, choice.id])
-          content_tag(
-            'label',
-            check_box_tag(
-              'project[host_ids][]',
-              id,
-              project.host_assigned?(id),
-              id: nil
-            ) + name.to_s,
-            class: 'inline' # 'block'
-          )
-        end.join.html_safe
+          values.collect do |choice|
+            name, id = (choice.is_a?(Array) ? choice : [choice.name, choice.id])
+            content_tag(
+              'label',
+              check_box_tag(
+                'project[host_ids][]',
+                id,
+                project.host_assigned?(id),
+                id: nil
+              ) + name.to_s,
+              class: 'inline' # 'block'
+            )
+          end.join.html_safe
       end.join.html_safe
   end
 
@@ -59,7 +60,9 @@ module HostProjectsHelper
   end
 
   def hosts_of(project, guests)
-    project.new_record? ? guests.includes(:project_type).sorted : guests.includes(:project_type).where.not(id: project.id).sorted
+    return guests.includes(:project_type).sorted if project.new_record?
+
+    guests.includes(:project_type).where.not(id: project.id).sorted
   end
 
   ##
@@ -74,7 +77,9 @@ module HostProjectsHelper
   end
 
   def scoped_by_project_type(project)
-    project.project_type ? Project.projects.active.where(project_type_id: project.project_type.subordinate_ids) : Project
+    return Project unless project.project_type
+
+    Project.projects.active.where(project_type_id: project.project_type.subordinate_ids)
   end
 
   def create_table(project, category, columns)
@@ -120,3 +125,4 @@ module HostProjectsHelper
     link_to(associate.name, project_path(associate))
   end
 end
+# rubocop:enable Rails/OutputSafety
